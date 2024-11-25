@@ -46,7 +46,7 @@ def inv_dict(d):
 
 
 DEFAULT_BASE_UNIT = "LMC"
-base_units = {'LMC':8, 'mLMC':5, 'bits':2}
+base_units = {'LMC':8, 'mLMC':5, 'Wave':2}
 
 inv_base_units = {}
 base_unit_labels = tuple()
