@@ -1,0 +1,21 @@
+# If you want Electron Cash to appear in a linux app launcher ("start menu"),
+# install this file by doing:
+# sudo desktop-file-install electron-lambda.desktop
+
+[Desktop Entry]
+Comment=Lightweight Lambda Client
+Exec=electron-lambda %u
+GenericName=Lambda Wallet
+Icon=electron-lambda
+Name=Electron lambda
+Categories=Finance;Network;
+StartupNotify=true
+StartupWMClass=electron-lambda
+Terminal=false
+Type=Application
+MimeType=x-scheme-handler/bitcoincash;x-scheme-handler/cashacct;
+Actions=Testnet;
+
+[Desktop Action Testnet]
+Exec=electron-lambda --testnet %u
+Name=Testnet mode
