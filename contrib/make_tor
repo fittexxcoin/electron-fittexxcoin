@@ -43,14 +43,14 @@ if ! [ -r config.status ] ; then
         $EXTRA_FLAGS || fail "Could not configure $pkgname"
 fi
 make -j$WORKER_COUNT || fail "Could not build $pkgname"
-make install || fail "Could not install $pkgname"
+sudo make install || fail "Could not install $pkgname"
 binary="tor"
 if [ "$BUILD_TYPE" = "wine" ] ; then
     binary="tor.exe"
 fi
 host_strip "$here/$pkgname/dist/bin/$binary"
-mkdir -p "$here/../electroncash/tor/bin"
-cp -fpv "$here/$pkgname/dist/bin/$binary" "$here/../electroncash/tor/bin/." || fail "Could not copy the $pkgname binary to its destination"
+mkdir -p "$here/../electronlambda/tor/bin"
+cp -fpv "$here/$pkgname/dist/bin/$binary" "$here/../electronlambda/tor/bin/." || fail "Could not copy the $pkgname binary to its destination"
 $SHA256_PROG "$here/$pkgname/dist/bin/$binary"
-info "$binary has been placed in the 'electroncash' folder."
+info "$binary has been placed in the 'electronlambda' folder."
 popd

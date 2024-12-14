@@ -127,7 +127,7 @@ EOF
             git checkout -b pinned "${PYINSTALLER_COMMIT}^{commit}"
             rm -fv PyInstaller/bootloader/Windows-*/run*.exe || true  # Make sure EXEs that came with repo are deleted -- we rebuild them and need to detect if build failed
             if [ ${PYI_SKIP_TAG:-0} -eq 0 ] ; then
-                echo "const char *ec_tag = \"tagged by Electron-lambda@$GIT_COMMIT_HASH\";" >> ./bootloader/src/pyi_main.c
+                echo "const char *ec_tag = \"tagged by Electron-Cash@$GIT_COMMIT_HASH\";" >> ./bootloader/src/pyi_main.c
             else
                 warn "Skipping PyInstaller tag"
             fi
@@ -177,9 +177,11 @@ EOF
 
         # libsecp256k1, libzbar & libusb
         mkdir -p "$WINEPREFIX"/drive_c/tmp
-        cp "$here"/../../electroncash/*.dll "$WINEPREFIX"/drive_c/tmp/ || fail "Could not copy libraries to their destination"
-        cp libusb/libusb/.libs/libusb-1.0.dll "$WINEPREFIX"/drive_c/tmp/ || fail "Could not copy libusb to its destination"
-        cp "$here"/../../electroncash/tor/bin/tor.exe "$WINEPREFIX"/drive_c/tmp/ || fail "Could not copy tor.exe to its destination"
+        sudo chmod 777 /drive_c/tmp  # Allows full access to everyone (be cautious with this)
+        sudo chown $(whoami):$(whoami) /drive_c/tmp
+        ls -la "$WINEPREFIX"/drive_c/tmp/
+        cp "$here"/*.dll "$WINEPREFIX"/drive_c/tmp/ || fail "Could not copy libraries to their destination"
+        cp "libusb/libusb/.libs/libusb-1.0.dll" "$WINEPREFIX"/drive_c/tmp/ || fail "Could not copy libusb to its destination"
 
         popd  # out of homedir/tmp
         popd  # out of $here
@@ -208,7 +210,7 @@ build_the_app() {
         for i in ./locale/*; do
             dir=$i/LC_MESSAGES
             mkdir -p $dir
-            msgfmt --output-file=$dir/electron-lambda.mo $i/electron-lambda.po || true
+            msgfmt --output-file=$dir/electron-cash.mo $i/electron-cash.po || true
         done
         popd
 
@@ -221,7 +223,7 @@ build_the_app() {
         find -exec touch -d '2000-11-11T11:11:11+00:00' {} +
         popd  # go back to $here
 
-        cp -r "$here"/../electrum-locale/locale "$WINEPREFIX"/drive_c/electroncash/electroncash/
+        cp -r "$here"/../electrum-locale/locale "$WINEPREFIX"/drive_c/electron-lambda/electroncash/
 
         # Install frozen dependencies
         info "Installing frozen dependencies ..."
@@ -232,8 +234,14 @@ build_the_app() {
         # like the isolated build environment pip uses for dependencies.
         PIP_CONSTRAINT="$here/../requirements/build-constraint.txt" $PYTHON -m pip install --no-deps --no-warn-script-location -r "$here"/../deterministic-build/requirements-hw.txt || fail "Failed to install requirements-hw"
 
-        pushd "$WINEPREFIX"/drive_c/electroncash
-        $PYTHON setup.py install || fail "Failed setup.py install"
+        pushd "$WINEPREFIX"/drive_c/electron-lambda
+        export WINEPREFIX="$HOME/.wine"
+        ls "$WINEPREFIX/drive_c"
+        wget https://www.python.org/ftp/python/3.11.8/python-3.11.8-amd64.exe
+        wine python-3.11.8-amd64.exe
+        export PYTHON="wine $WINEPREFIX/drive_c/python3.11.8/python.exe"
+        ls "$WINEPREFIX/drive_c/python3.11.8/python.exe"
+        sudo $PYTHON setup.py install || fail "Failed setup.py install"
         popd
 
         rm -rf dist/
@@ -247,6 +255,7 @@ build_the_app() {
 
         # build standalone and portable versions
         info "Running Pyinstaller to build standalone and portable .exe versions ..."
+        ls -la "C:/electron-lambda"
         ELECTRONCASH_CMDLINE_NAME="$NAME_ROOT" wine "C:/python$PYTHON_VERSION/scripts/pyinstaller.exe" --noconfirm deterministic.spec || fail "Pyinstaller failed"
 
         # rename the output files

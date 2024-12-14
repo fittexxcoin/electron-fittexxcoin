@@ -31,12 +31,12 @@ from . import utils
 from . import gui
 from .custom_objc import *
 
-from electroncash.i18n import _, pgettext
+from electronlambda.i18n import _, pgettext
 
 import socket
 from collections import namedtuple
 
-from electroncash.network import serialize_server, deserialize_server
+from electronlambda.network import serialize_server, deserialize_server
 
 TAG_HELP_STATUS = 112
 TAG_HELP_SERVER = 122

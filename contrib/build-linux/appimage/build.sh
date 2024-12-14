@@ -85,7 +85,8 @@ mkdir "$FRESH_CLONE_DIR/contrib/build-linux/home" || fail "Failed to create home
     --workdir /opt/electroncash/contrib/build-linux/appimage \
     -u $(id -u $USER):$(id -g $USER) \
     electroncash-appimage-builder-img-$DOCKER_SUFFIX \
-    ./_build.sh $REV
+    dos2unix ./_build.sh
+    ./contrib/build-linux/appimage/_build.sh $REV
 ) || fail "Build inside docker container failed"
 
 popd

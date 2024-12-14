@@ -24,11 +24,11 @@ os.chdir('..')
 
 code_directories = [
     'android/app/src/main/python',
-    'electroncash_gui',
-    'ios/ElectronCash/electroncash_gui',  # ios/ElectronCash could contain duplicate files
+    'electronlambda_gui',
+    'ios/ElectronCash/electronlambda_gui',  # ios/ElectronCash could contain duplicate files
                                           # copied by make_ios_project.sh.
-    'electroncash',
-    'electroncash_plugins',
+    'electronlambda',
+    'electronlambda_plugins',
 ]
 file_types = ('*.py', '*.kv')
 
@@ -48,13 +48,13 @@ with open("app.fil", "w") as f:
         print("Found {} files to translate".format(n))
 
 # Generate fresh translation template
-if not os.path.exists('electroncash/locale'):
-    os.mkdir('electroncash/locale')
-cmd = 'xgettext -s --from-code UTF-8 --language Python --no-wrap -f app.fil --keyword=pgettext:1c,2 --keyword=npgettext:1c,2,3 -c --output=electroncash/locale/messages.pot'
+if not os.path.exists('electronlambda/locale'):
+    os.mkdir('electronlambda/locale')
+cmd = 'xgettext -s --from-code UTF-8 --language Python --no-wrap -f app.fil --keyword=pgettext:1c,2 --keyword=npgettext:1c,2,3 -c --output=electronlambda/locale/messages.pot'
 print('Generate template')
 run(cmd)
 
-os.chdir('electroncash')
+os.chdir('electronlambda')
 
 crowdin_identifier = 'electron-lambda'
 crowdin_file_name = 'files[electron-lambda-client/messages.pot]'
@@ -104,7 +104,7 @@ if len(sys.argv) > 1:
 # Convert .po to .mo
 print('Installing')
 os.chdir('..')
-dst_dir= 'electroncash/locale'
+dst_dir= 'electronlambda/locale'
 src_dir = 'contrib/electrum-locale/locale' if use_electrum_locale else dst_dir
 for lang in os.listdir(src_dir):
     if not isdir(join(src_dir, lang)) or lang == "__pycache__":

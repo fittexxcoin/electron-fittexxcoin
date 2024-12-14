@@ -6,8 +6,8 @@
 
 from . import utils
 from . import gui
-from electroncash.i18n import _, language
-from electroncash.address import Address
+from electronlambda.i18n import _, language
+from electronlambda.address import Address
 
 from .uikit_bindings import *
 from .custom_objc import *

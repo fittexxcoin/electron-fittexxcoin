@@ -6,11 +6,11 @@
 #
 from . import utils
 from . import gui
-from electroncash import WalletStorage, Wallet
-from electroncash.util import timestamp_to_datetime
-from electroncash.i18n import _, language
-from electroncash.address import Address, PublicKey
-from electroncash.contacts import Contact
+from electronlambda import WalletStorage, Wallet
+from electronlambda.util import timestamp_to_datetime
+from electronlambda.i18n import _, language
+from electronlambda.address import Address, PublicKey
+from electronlambda.contacts import Contact
 from .uikit_bindings import *
 from .custom_objc import *
 from collections import namedtuple

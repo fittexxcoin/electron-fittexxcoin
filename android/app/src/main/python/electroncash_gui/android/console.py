@@ -8,12 +8,12 @@ import pkgutil
 from shutil import copyfile
 from time import time
 
-from electroncash import commands, daemon, interface, keystore, storage, util
-from electroncash.i18n import _
-from electroncash.storage import WalletStorage
-from electroncash.wallet import (ImportedAddressWallet, ImportedPrivkeyWallet, Standard_Wallet,
+from electronlambda import commands, daemon, interface, keystore, storage, util
+from electronlambda.i18n import _
+from electronlambda.storage import WalletStorage
+from electronlambda.wallet import (ImportedAddressWallet, ImportedPrivkeyWallet, Standard_Wallet,
                                  Wallet, Multisig_Wallet)
-from electroncash.plugins import Plugins, run_hook
+from electronlambda.plugins import Plugins, run_hook
 
 
 CALLBACKS = ["banner", "blockchain_updated", "fee", "interfaces", "new_transaction",
@@ -253,7 +253,7 @@ class AndroidCommands(commands.Commands):
         """
 
         # Speed up startup by not importing test code at module level.
-        from electroncash import tests
+        from electronlambda import tests
         import unittest
 
         suite = unittest.defaultTestLoader.loadTestsFromNames(
@@ -266,7 +266,7 @@ class AndroidCommands(commands.Commands):
 
     def _assert_daemon_running(self):
         if not self.daemon_running:
-            raise Exception("Daemon not running")  # Same wording as in electron-cash script.
+            raise Exception("Daemon not running")  # Same wording as in electron-lambda script.
 
     def _on_callback(self, event, *args):
         if self.gui_callback:

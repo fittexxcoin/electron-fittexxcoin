@@ -1,4 +1,4 @@
-from electroncash.contacts import Contact
+from electronlambda.contacts import Contact
 
 
 def get_contacts(wallet, type_filter=0):

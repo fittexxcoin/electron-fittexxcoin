@@ -47,12 +47,12 @@ from . import wallets
 from . import newwallet  # Do not remove -- needed to declare NewWalletVC to ObjC runtime  (used by storyboard instantiation)
 from .custom_objc import *
 
-from electroncash.i18n import _, set_language, languages
-from electroncash.plugins import run_hook
-from electroncash import WalletStorage, Wallet, Transaction
-from electroncash.address import Address
-from electroncash.util import UserCancelled, print_error, format_satoshis, format_satoshis_plain, PrintError, InvalidPassword, inv_base_units
-import electroncash.web as web
+from electronlambda.i18n import _, set_language, languages
+from electronlambda.plugins import run_hook
+from electronlambda import WalletStorage, Wallet, Transaction
+from electronlambda.address import Address
+from electronlambda.util import UserCancelled, print_error, format_satoshis, format_satoshis_plain, PrintError, InvalidPassword, inv_base_units
+import electronlambda.web as web
 
 class WalletFileNotFound(Exception):
     pass
@@ -160,7 +160,7 @@ class ElectrumGui(PrintError):
 
     def __init__(self, config):
         ElectrumGui.gui = self
-        self.appName = 'Electron-lambda'
+        self.appName = 'Electron-Lambda'
         self.appDomain = 'com.c3-soft.ElectronCash'
         self.set_language()
 
@@ -1155,7 +1155,7 @@ class ElectrumGui(PrintError):
         key = self.wallet.invoices.add(pr)
         status = self.wallet.invoices.get_status(key)
         #self.invoice_list.update()
-        from electroncash.paymentrequest import PR_PAID
+        from electronlambda.paymentrequest import PR_PAID
         if status == PR_PAID:
             self.show_message("invoice already paid", onOk = lambda: self.do_clear_send())
             return
@@ -1491,7 +1491,7 @@ class ElectrumGui(PrintError):
         if self.daemon_is_running(): return
         wd = wallets.WalletsMgr.wallets_dir()
         if wd: utils.cleanup_wallet_dir(wd)  # on newer iOS for some reason *.tmp.PID remain..
-        import electroncash.daemon as ed
+        import electronlambda.daemon as ed
         try:
             # Force remove of lock file so the code below cuts to the chase and starts a new daemon without
             # uselessly trying to connect to one that doesn't exist anyway.
@@ -1562,8 +1562,8 @@ class ElectrumGui(PrintError):
         def DoIt_Seed_Or_Keystore() -> None:
             nonlocal waitDlg
             try:
-                from electroncash import keystore
-                from electroncash.wallet import Standard_Wallet
+                from electronlambda import keystore
+                from electronlambda.wallet import Standard_Wallet
 
                 k = have_keystore
 
@@ -1571,7 +1571,7 @@ class ElectrumGui(PrintError):
                     k = keystore.from_seed(wallet_seed, seed_ext, False)
                     has_xpub = isinstance(k, keystore.Xpub)
                     if has_xpub:
-                        from electroncash.bitcoin import xpub_type
+                        from electronlambda.bitcoin import xpub_type
                         t1 = xpub_type(k.xpub)
                     if has_xpub and t1 not in ['standard']:
                         def compl() -> None: onFailure(_('Wrong key type') + ": '%s'"%t1)
@@ -1609,8 +1609,8 @@ class ElectrumGui(PrintError):
         def DoIt_Imported() -> None:
             nonlocal waitDlg
             try:
-                from electroncash import keystore
-                from electroncash.wallet import ImportedAddressWallet, ImportedPrivkeyWallet
+                from electronlambda import keystore
+                from electronlambda.wallet import ImportedAddressWallet, ImportedPrivkeyWallet
 
                 path = os.path.join(wallets.WalletsMgr.wallets_dir(), wallet_name)
                 storage = WalletStorage(path, manual_upgrades=True)
@@ -2263,7 +2263,7 @@ class ElectrumGui(PrintError):
         if isinstance(txn, bytes):
             txn = txn.decode('utf-8')
             print("Warning: show_ext_txn got bytes instead of a str for the txn.. this may be bad...")
-        from electroncash.transaction import tx_from_str, Transaction
+        from electronlambda.transaction import tx_from_str, Transaction
         from . import txdetail
         try:
             if not self.wallet:

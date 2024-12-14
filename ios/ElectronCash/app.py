@@ -5,12 +5,12 @@
 # MIT License
 #
 import os
-from electroncash_gui.ios_native.monkeypatches import MonkeyPatches, PatchedSimpleConfig
-from electroncash.util import set_verbosity
-from electroncash_gui.ios_native import ElectrumGui
-from electroncash_gui.ios_native.utils import call_later, get_user_dir, cleanup_tmp_dir, is_debug_build, NSLogSuppress, NSLog
-from electroncash.simple_config import SimpleConfig
-from electroncash.networks import set_mainnet, set_testnet
+from electronlambda_gui.ios_native.monkeypatches import MonkeyPatches, PatchedSimpleConfig
+from electronlambda.util import set_verbosity
+from electronlambda_gui.ios_native import ElectrumGui
+from electronlambda_gui.ios_native.utils import call_later, get_user_dir, cleanup_tmp_dir, is_debug_build, NSLogSuppress, NSLog
+from electronlambda.simple_config import SimpleConfig
+from electronlambda.networks import set_mainnet, set_testnet
 
 # NB: This is called from appdelegate.py "application_didFinishLaunchingWithOptions_"
 def main():
@@ -48,7 +48,7 @@ def _printStats(config_options):
     def thrdfunc(config_options):
         # lazy init of SSL
         import ssl, sys
-        from electroncash import version, ecc_fast, schnorr
+        from electronlambda import version, ecc_fast, schnorr
         NSLog("Electron Cash lib version: %s (using server protocol: %s)", version.PACKAGE_VERSION, version.PROTOCOL_VERSION)
         NSLog("Python version: %s", ' '.join(sys.version.split('\n')))
         NSLog("OpenSSL version: %s", ssl.OPENSSL_VERSION)

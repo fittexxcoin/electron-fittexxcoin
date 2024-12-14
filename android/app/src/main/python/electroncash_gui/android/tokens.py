@@ -1,10 +1,10 @@
 from typing import Any, Dict, Optional, Set
 
-from electroncash import address, bitcoin
-from electroncash.simple_config import SimpleConfig
-from electroncash.token import OutputData, Structure, Capability
-from electroncash.token_meta import TokenMeta
-from electroncash.wallet import TokenSendSpec
+from electronlambda import address, bitcoin
+from electronlambda.simple_config import SimpleConfig
+from electronlambda.token import OutputData, Structure, Capability
+from electronlambda.token_meta import TokenMeta
+from electronlambda.wallet import TokenSendSpec
 
 TYPE_ADDRESS = 0
 

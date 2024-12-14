@@ -34,10 +34,10 @@ else
 fi
 
 function info {
-    printf "${MSG_INFO}  ${1}\n"
+    printf "${MSG_INFO}  ${1}*"
 }
 function fail {
-    printf "${MSG_ERROR}  ${1}\n" >&2
+    printf "${MSG_ERROR}  ${1}*" >&2
 
     if [ -r /.dockerenv ] ; then
         if [ -t 1 ] ; then
@@ -124,17 +124,17 @@ function retry() {
   return $result
 }
 
-function gcc_with_triplet()
-{
+function gcc_with_triplet() {
     TRIPLET="$1"
     CMD="$2"
     shift 2
-    if [ -n "$TRIPLET" ] ; then
+    if [ -n "$TRIPLET" ] && [ "$CMD" != "strip" ]; then
         "$TRIPLET-$CMD" "$@"
     else
         "$CMD" "$@"
     fi
 }
+
 
 function gcc_host()
 {
@@ -210,7 +210,7 @@ if [ "$GIT_REPO" != "$DEFAULT_GIT_REPO" ]; then
     info "Picked up override from env: GIT_REPO=${GIT_REPO}"
 fi
 export GIT_DIR_NAME=`basename $GIT_REPO`
-export PACKAGE="Electron-lambda"  # Modify this if you like -- Windows, MacOS & Linux srcdist build scripts read this, while AppImage has it hard-coded
+export PACKAGE="Electron-Lambda"  # Modify this if you like -- Windows, MacOS & Linux srcdist build scripts read this, while AppImage has it hard-coded
 export PYI_SKIP_TAG="${PYI_SKIP_TAG:-0}" # Set this to non-zero to make PyInstaller skip tagging the bootloader
 export DEFAULT_UBUNTU_MIRROR="http://archive.ubuntu.com/ubuntu/"
 export UBUNTU_MIRROR="${UBUNTU_MIRROR:-$DEFAULT_UBUNTU_MIRROR}"

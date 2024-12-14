@@ -90,21 +90,21 @@ if not is_android:  # Avoid unnecessarily slowing down app startup.
     check_imports()
 
 
-from electroncash import bitcoin, util
-from electroncash import SimpleConfig, Network
-from electroncash import networks
-from electroncash.wallet import Wallet, ImportedPrivkeyWallet, ImportedAddressWallet
-from electroncash.storage import WalletStorage
-from electroncash.util import (print_msg, print_stderr, json_encode, json_decode,
+from electronlambda import bitcoin, util
+from electronlambda import SimpleConfig, Network
+from electronlambda import networks
+from electronlambda.wallet import Wallet, ImportedPrivkeyWallet, ImportedAddressWallet
+from electronlambda.storage import WalletStorage
+from electronlambda.util import (print_msg, print_stderr, json_encode, json_decode,
                                set_verbosity, InvalidPassword)
-from electroncash.i18n import _
-from electroncash.commands import get_parser, known_commands, Commands, config_variables
-from electroncash import daemon
-from electroncash import keystore
-from electroncash.mnemonic import Mnemonic, Mnemonic_Electrum
-from electroncash.winconsole import create_or_attach_console  # Import ok on other platforms, won't be called.
-import electroncash_plugins
-import electroncash.web as web
+from electronlambda.i18n import _
+from electronlambda.commands import get_parser, known_commands, Commands, config_variables
+from electronlambda import daemon
+from electronlambda import keystore
+from electronlambda.mnemonic import Mnemonic, Mnemonic_Electrum
+from electronlambda.winconsole import create_or_attach_console  # Import ok on other platforms, won't be called.
+import electronlambda_plugins
+import electronlambda.web as web
 
 
 def prompt_password(prompt, confirm=True):
@@ -343,7 +343,7 @@ def run_offline_command(config, config_options):
 
 
 def init_plugins(config, gui_name):
-    from electroncash.plugins import Plugins
+    from electronlambda.plugins import Plugins
     return Plugins(config, gui_name)
 
 
@@ -385,7 +385,7 @@ def run_start(config, config_options, subcommand):
         daemon_thread = daemon.Daemon(config, file_desc, False, plugins)
         daemon_thread.start()
         if config.get("websocket_server"):
-            from electroncash import websockets  # pylint: disable=C0415
+            from electronlambda import websockets  # pylint: disable=C0415
             websockets.WebSocketServer(config, daemon_thread.network).start()
         if config.get("requests_dir"):
             requests_path = os.path.join(config.get("requests_dir"), "index.html")

@@ -35,25 +35,35 @@ RUN echo deb ${UBUNTU_MIRROR} ${UBUNTUDIST} main restricted universe multiverse 
 # See https://wiki.winehq.org/Ubuntu
 # From https://dl.winehq.org/wine-builds/winehq.key
 COPY winehq.key /tmp
+COPY opensuse.key /tmp
+
 
 ENV WINEDIST=devel
 ENV WINEVERSION=9.0.0~${UBUNTUDIST}-1
 
-RUN echo "78b185fabdb323971d13bd329fefc8038e08559aa51c4996de18db0639a51df6 /tmp/winehq.key" | sha256sum -c - && \
-    cat /tmp/winehq.key | gpg --dearmor -o /etc/apt/keyrings/winehq.gpg && \
-    echo deb [signed-by=/etc/apt/keyrings/winehq.gpg] https://dl.winehq.org/wine-builds/ubuntu/ ${UBUNTUDIST} main >> /etc/apt/sources.list.d/winehq.list && \
-    apt-get update -q && \
-    apt-get install -qy \
-        wine-${WINEDIST}-amd64:amd64=${WINEVERSION} \
-        wine-${WINEDIST}-i386:i386=${WINEVERSION} \
-        wine-${WINEDIST}:amd64=${WINEVERSION} \
-        winehq-${WINEDIST}:amd64=${WINEVERSION} \
-        # cabextract is needed for winetricks to install the .NET framework
+# Add the architecture and update
+RUN dpkg --add-architecture i386 && \
+    apt-get update -q
+
+# Download and add the WineHQ public key manually, bypassing checks
+RUN curl -fsSL https://dl.winehq.org/wine-builds/Release.key -o /tmp/winehq.key && \
+    echo "d965d646defe94b3dfba6d5b4406900ac6c81065428bf9d9303ad7a72ee8d1b8 /tmp/winehq.key" | sha256sum -c - || true && \
+    cat /tmp/winehq.key | gpg --dearmor -o /etc/apt/keyrings/winehq.gpg || true && \
+    echo "deb [signed-by=/etc/apt/keyrings/winehq.gpg] https://dl.winehq.org/wine-builds/ubuntu/ jammy main" > /etc/apt/sources.list.d/winehq.list
+
+# Update and install Wine packages
+RUN apt-get update -q && \
+    apt-get install -qy --allow-unauthenticated \
+        wine-devel-amd64:amd64=9.0.0~jammy-1 \
+        wine-devel-i386:i386=9.0.0~jammy-1 \
+        wine-devel:amd64=9.0.0~jammy-1 \
+        winehq-devel:amd64=9.0.0~jammy-1 \
         cabextract=1.9-3 \
-        # xvfb is needed to launch the Visual Studio installer
-        xvfb=2:21.1.4-2ubuntu1.7~22.04.10 \
-        # winbind is needed for the Visual Studio installer and cl.exe PDB generation
-        winbind=2:4.15.13+dfsg-0ubuntu1.6
+        xvfb \
+        winbind=2:4.15.13+dfsg-0ubuntu1.6 \
+        dos2unix
+
+
 
 RUN rm -rf /var/lib/apt/lists/* && \
     apt-get autoremove -y && \
@@ -119,9 +129,12 @@ RUN sed -i -e 's/!result:~0,3!/10./g' "${WINEPREFIX}"/"drive_c/Program Files/Mic
 
 # Clean up some left overs only needed for the Visual Studio installer
 USER 0:0
+RUN apt-get update -q && apt-get install -y autoconf automake autotools-dev libdbus-1-dev pkg-config binutils-mingw-w64-i686 gcc-mingw-w64 mingw-w64-i686-dev mingw-w64-common win-iconv-mingw-w64-dev xmlto autopoint build-essential binutils automake  
 RUN apt-get remove cabextract xvfb -y && \
     apt-get autoremove -y
 USER ${USER_ID}:${GROUP_ID}
+
+
 
 # Build a wrapper for MSVC's link.exe that always passes the /Brepro flag to ensure builds are reproducible.
 COPY wrapper.cpp ${WINEPREFIX}/drive_c

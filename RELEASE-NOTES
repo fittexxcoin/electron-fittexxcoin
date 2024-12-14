@@ -613,7 +613,7 @@ and there is no warning message.
   which causes EC to render fonts badly if using emojis or unicode) (cculianu)
 * AppImage: Upgrade to Ubuntu 16.04 as base #1489 (Axel Gembe)
 * Build: Protect against PGP keyserver poisoning attack #1487 (Axel Gembe)
-* Added electroncash.se server to servers.json (Georg Engelman)
+* Added electronlambda.se server to servers.json (Georg Engelman)
 * TxDialog: Allow various fields to be selected by mouse. (cculianu)
 * TxDialog: Added the "Mined in block" field to the dialog. (cculianu)
 * Localization: The app now defaults to the system language on Windows, Mac and
@@ -957,7 +957,7 @@ and there is no warning message.
   self-signed. Servers can now use wildcard certs or switch from self-signed to
   CA-signed without losing users! (cculianu)
 - Update criptolayer server. #1874 (imaginaryusername)
-- Add electroncash.de block explorer. #1920 (Axel Gembe)
+- Add electronlambda.de block explorer. #1920 (Axel Gembe)
 - Network: Show problematic pinned certificates and allow unpinning. #1919 (Axel
   Gembe)
 - Update plugin for Satochip hardware wallet to support latest firmware v0.11.
@@ -1143,7 +1143,7 @@ and there is no warning message.
 - OSX Fix: Allow for Mojave+ dark mode to work (requires Qt 5.15.2) (Calin Culianu)
 - NSIS: Wait for the uninstaller to finish #2184 (Axel Gembe)
 - NSIS: Ensure the process is not running when (un)installing #2184 (Axel Gembe)
-- Servers: Add electroncash.de scalenet server #2186 (Axel Gembe)
+- Servers: Add electronlambda.de scalenet server #2186 (Axel Gembe)
 - Servers: Fix indentation #2187 (Axel Gembe)
 - Build: Use git version with patch for CVE-2021-21300 #2191 (Axel Gembe)
 - setup.py: Fix typo #2192 (Axel Gembe)
@@ -1161,7 +1161,7 @@ and there is no warning message.
 - Shorten boolean expression, use double quotes #2209 (Daniel Gonzalez Gasull)
 - Style changes (from backport), small refactorings #2211 (Daniel Gonzalez Gasull)
 - Fix PR 2211 #2218 (agilewalker)
-- Add electrs.electroncash.de #2222 (Georg Engelmann)
+- Add electrs.electronlambda.de #2222 (Georg Engelmann)
 - Removed unreachable line of code #2224 #2234 (Daniel Gonzalez Gasull)
 - OpenSSL: Update to version 1.1.1k #2225 (Axel Gembe)
 - Python: Update to version 3.8.9 #2226 (Axel Gembe)
@@ -1274,7 +1274,7 @@ and there is no warning message.
 
 - LNS: Fix crash in multiple_result_picker (cculianu)
 - LNS: Make the web3 dependencies optional #2441. This allows distro packages
-  to not have to pull them in to provide electron-cash. (cculianu)
+  to not have to pull them in to provide electron-lambda. (cculianu)
 - LNS: Fix to the "add to contacts" button + misc code nits (cculianu)
 - Qt: Disable destroyed_print_error unless a static flag is set. This fixes
   some of the crash issues seen on Windows. (cculianu)
@@ -1347,7 +1347,7 @@ and there is no warning message.
 - Add basic test for jsonPaymentProtocol #2511 (Jonas Lundqvist)
 - Trigger on Master branch + Add GitHub Action badge to README #2513 (Jonas Lundqvist)
 - Fixed typo in main_window.py "unnused" -> "unused", plus whitespace nits (cculianu)
-- Update electroncash.de servers #2516 (Georg Engelmann)
+- Update electronlambda.de servers #2516 (Georg Engelmann)
 - Remove python 3.6 from github workflow and/or tox.ini (cculianu)
 - Added Melory's LMC Explorer to the list of block explorers (cculianu)
 - Add chipnet.bch.ninja to servers_chipnet.json #2520 (kzKallisti)

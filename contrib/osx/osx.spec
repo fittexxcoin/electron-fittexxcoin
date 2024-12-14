@@ -3,9 +3,9 @@
 from PyInstaller.utils.hooks import collect_data_files, collect_submodules, collect_dynamic_libs
 import sys, os
 
-PACKAGE='Electron-lambda'
-BUNDLE_IDENTIFIER='org.electroncash.' + PACKAGE # Used for info.plist
-PYPKG='electroncash'
+PACKAGE='Electron-Lambda'
+BUNDLE_IDENTIFIER='org.electronlambda.' + PACKAGE # Used for info.plist
+PYPKG='electronlambda'
 MAIN_SCRIPT='electron-lambda'
 ICONS_FILE='electron.icns'
 
@@ -25,16 +25,16 @@ hiddenimports += collect_submodules('satochip')    # Satochip
 hiddenimports += collect_submodules('smartcard')   # Satochip
 
 datas = [
-    (home+'electroncash/currencies.json', PYPKG),
-    (home+'electroncash/servers.json', PYPKG),
-    (home+'electroncash/servers_testnet.json', PYPKG),
-    (home+'electroncash/servers_testnet4.json', PYPKG),
-    (home+'electroncash/servers_scalenet.json', PYPKG),
-    (home+'electroncash/servers_regtest.json', PYPKG),
-    (home+'electroncash/servers_chipnet.json', PYPKG),
-    (home+'electroncash/wordlist/english.txt', PYPKG + '/wordlist'),
-    (home+'electroncash/locale', PYPKG + '/locale'),
-    (home+'electroncash_plugins', PYPKG + '_plugins'),
+    (home+'electronlambda/currencies.json', PYPKG),
+    (home+'electronlambda/servers.json', PYPKG),
+    (home+'electronlambda/servers_testnet.json', PYPKG),
+    (home+'electronlambda/servers_testnet4.json', PYPKG),
+    (home+'electronlambda/servers_scalenet.json', PYPKG),
+    (home+'electronlambda/servers_regtest.json', PYPKG),
+    (home+'electronlambda/servers_chipnet.json', PYPKG),
+    (home+'electronlambda/wordlist/english.txt', PYPKG + '/wordlist'),
+    (home+'electronlambda/locale', PYPKG + '/locale'),
+    (home+'electronlambda_plugins', PYPKG + '_plugins'),
 ]
 datas += collect_data_files('trezorlib')
 datas += collect_data_files('btchip')
@@ -49,33 +49,33 @@ binaries += [(home + "contrib/osx/libsecp256k1.0.dylib", ".")]
 # LibZBar for QR code scanning
 binaries += [(home + "contrib/osx/libzbar.0.dylib", ".")]
 # Add Tor binary
-binaries += [(home + "electroncash/tor/bin/tor", "electroncash/tor/bin")]
+binaries += [(home + "electronlambda/tor/bin/tor", "electronlambda/tor/bin")]
 
 # Workaround for "Retro Look":
 binaries += [b for b in collect_dynamic_libs('PyQt5') if 'macstyle' in b[0]]
 
 # We don't put these files in to actually include them in the script but to make the Analysis method scan them for imports
 a = Analysis([home+MAIN_SCRIPT,
-              home+'electroncash_gui/qt/main_window.py',
-              home+'electroncash_gui/qt/qrreader/camera_dialog.py',
-              home+'electroncash_gui/text.py',
-              home+'electroncash/util.py',
-              home+'electroncash/wallet.py',
-              home+'electroncash/simple_config.py',
-              home+'electroncash/bitcoin.py',
-              home+'electroncash/dnssec.py',
-              home+'electroncash/commands.py',
-              home+'electroncash/tor/controller.py',
-              home+'electroncash_plugins/cosigner_pool/qt.py',
-              home+'electroncash_plugins/email_requests/qt.py',
-              home+'electroncash_plugins/trezor/clientbase.py',
-              home+'electroncash_plugins/trezor/trezor.py',
-              home+'electroncash_plugins/trezor/qt.py',
-              home+'electroncash_plugins/keepkey/qt.py',
-              home+'electroncash_plugins/ledger/qt.py',
-              home+'electroncash_plugins/satochip/qt.py',  # Satochip
-              home+'electroncash_plugins/fusion/fusion.py', # CashFusion
-              home+'electroncash_plugins/fusion/qt.py', # CashFusion
+              home+'electronlambda_gui/qt/main_window.py',
+              home+'electronlambda_gui/qt/qrreader/camera_dialog.py',
+              home+'electronlambda_gui/text.py',
+              home+'electronlambda/util.py',
+              home+'electronlambda/wallet.py',
+              home+'electronlambda/simple_config.py',
+              home+'electronlambda/bitcoin.py',
+              home+'electronlambda/dnssec.py',
+              home+'electronlambda/commands.py',
+              home+'electronlambda/tor/controller.py',
+              home+'electronlambda_plugins/cosigner_pool/qt.py',
+              home+'electronlambda_plugins/email_requests/qt.py',
+              home+'electronlambda_plugins/trezor/clientbase.py',
+              home+'electronlambda_plugins/trezor/trezor.py',
+              home+'electronlambda_plugins/trezor/qt.py',
+              home+'electronlambda_plugins/keepkey/qt.py',
+              home+'electronlambda_plugins/ledger/qt.py',
+              home+'electronlambda_plugins/satochip/qt.py',  # Satochip
+              home+'electronlambda_plugins/fusion/fusion.py', # CashFusion
+              home+'electronlambda_plugins/fusion/qt.py', # CashFusion
               ],
              binaries=binaries,
              datas=datas,

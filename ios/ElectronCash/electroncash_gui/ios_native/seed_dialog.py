@@ -32,8 +32,8 @@ from .uikit_bindings import *
 from . import utils
 from .custom_objc import *
 
-from electroncash.i18n import _
-from electroncash import WalletStorage, Wallet
+from electronlambda.i18n import _
+from electronlambda import WalletStorage, Wallet
        
 
 def Create_SeedDisplayVC(seed : str, passphrase : str) -> ObjCInstance:

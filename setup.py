@@ -25,7 +25,7 @@ def load_source(module_name, module_path):
     spec.loader.exec_module(module)
     return module
 
-version = load_source('version', 'electroncash/version.py')
+version = load_source('version', 'electronlambda/version.py')
 
 if sys.version_info[:3] < (3, 8):
     sys.exit("Error: Electron Cash requires Python version >= 3.8...")
@@ -68,7 +68,7 @@ if platform.system() in ['Linux', 'FreeBSD', 'DragonFly']:
         # Menu entry
         (os.path.join(share_dir, 'applications/'), ['electron-lambda.desktop']),
         # App stream (store) metadata
-        (os.path.join(share_dir, 'metainfo/'), ['org.electroncash.ElectronCash.appdata.xml']),
+        (os.path.join(share_dir, 'metainfo/'), ['org.electronlambda.ElectronCash.appdata.xml']),
     ]
 
 class MakeAllBeforeSdist(setuptools.command.sdist.sdist):
@@ -129,17 +129,17 @@ class MakeAllBeforeSdist(setuptools.command.sdist.sdist):
 
 
 platform_package_data = {
-    'electroncash_gui.qt': [],
+    'electronlambda_gui.qt': [],
 }
 
 if sys.platform in ('linux'):
-    platform_package_data['electroncash_gui.qt'] += [
+    platform_package_data['electronlambda_gui.qt'] += [
             'data/ecsupplemental_lnx.ttf',
             'data/fonts.xml'
     ]
 
 if sys.platform in ('win32', 'cygwin'):
-    platform_package_data['electroncash_gui.qt'] += [
+    platform_package_data['electronlambda_gui.qt'] += [
             'data/ecsupplemental_win.ttf'
     ]
 
@@ -157,33 +157,33 @@ setup(
         'all': requirements_hw + requirements_binaries,
     },
     packages=[
-        'electroncash',
-        'electroncash.qrreaders',
-        'electroncash.slp',
-        'electroncash.rpa',
-        'electroncash.tor',
-        'electroncash.utils',
-        'electroncash_gui',
-        'electroncash_gui.qt',
-        'electroncash_gui.qt.qrreader',
-        'electroncash_gui.qt.utils',
-        'electroncash_gui.qt.utils.darkdetect',
-        'electroncash_plugins',
-        'electroncash_plugins.audio_modem',
-        'electroncash_plugins.cosigner_pool',
-        'electroncash_plugins.email_requests',
-        'electroncash_plugins.hw_wallet',
-        'electroncash_plugins.keepkey',
-        'electroncash_plugins.ledger',
-        'electroncash_plugins.trezor',
-        'electroncash_plugins.digitalbitbox',
-        'electroncash_plugins.virtualkeyboard',
-        'electroncash_plugins.shuffle_deprecated',
-        'electroncash_plugins.satochip',
-        'electroncash_plugins.fusion',
+        'electronlambda',
+        'electronlambda.qrreaders',
+        'electronlambda.slp',
+        'electronlambda.rpa',
+        'electronlambda.tor',
+        'electronlambda.utils',
+        'electronlambda_gui',
+        'electronlambda_gui.qt',
+        'electronlambda_gui.qt.qrreader',
+        'electronlambda_gui.qt.utils',
+        'electronlambda_gui.qt.utils.darkdetect',
+        'electronlambda_plugins',
+        'electronlambda_plugins.audio_modem',
+        'electronlambda_plugins.cosigner_pool',
+        'electronlambda_plugins.email_requests',
+        'electronlambda_plugins.hw_wallet',
+        'electronlambda_plugins.keepkey',
+        'electronlambda_plugins.ledger',
+        'electronlambda_plugins.trezor',
+        'electronlambda_plugins.digitalbitbox',
+        'electronlambda_plugins.virtualkeyboard',
+        'electronlambda_plugins.shuffle_deprecated',
+        'electronlambda_plugins.satochip',
+        'electronlambda_plugins.fusion',
     ],
     package_data={
-        'electroncash': [
+        'electronlambda': [
             'servers.json',
             'servers_testnet.json',
             'servers_testnet4.json',
@@ -198,13 +198,13 @@ setup(
             'locale/*/LC_MESSAGES/electron-lambda.mo',
             'tor/bin/*'
         ],
-        'electroncash_plugins.shuffle_deprecated': [
+        'electronlambda_plugins.shuffle_deprecated': [
             'servers.json'
         ],
-        'electroncash_plugins.fusion': [
+        'electronlambda_plugins.fusion': [
             '*.svg', '*.png'
         ],
-        # On Linux and Windows this means adding electroncash_gui/qt/data/*.ttf
+        # On Linux and Windows this means adding electronlambda_gui/qt/data/*.ttf
         # On Darwin we don't use that font, so we don't add it to save space.
         **platform_package_data
     },

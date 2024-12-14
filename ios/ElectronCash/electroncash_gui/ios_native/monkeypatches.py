@@ -9,16 +9,16 @@
 # MIT LICENSE
 #
 '''
-    Monkey Patches -- mostly to modify electroncash.* package to suit our needs.
+    Monkey Patches -- mostly to modify electronlambda.* package to suit our needs.
     Don't hate me.  (This was needed to keep the iOS stuff self-contained.)
 '''
 import ssl
 import sys
 from .uikit_bindings import *
-from electroncash.util import (InvalidPassword, profiler)
-import electroncash.bitcoin as ec_bitcoin
-from electroncash.simple_config import SimpleConfig
-from electroncash_gui.ios_native.utils import NSLog
+from electronlambda.util import (InvalidPassword, profiler)
+import electronlambda.bitcoin as ec_bitcoin
+from electronlambda.simple_config import SimpleConfig
+from electronlambda_gui.ios_native.utils import NSLog
 
 
 class MonkeyPatches:

@@ -8,7 +8,7 @@ cmdline_name = os.environ.get("ELECTRONCASH_CMDLINE_NAME")
 if not cmdline_name:
     raise RuntimeError('no name')
 
-home = 'C:\\electroncash\\'
+home = 'C:\\electron-lambda\\'
 
 # see https://github.com/pyinstaller/pyinstaller/issues/2005
 hiddenimports = []

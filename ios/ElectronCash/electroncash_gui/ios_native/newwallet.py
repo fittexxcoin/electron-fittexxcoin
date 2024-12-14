@@ -6,17 +6,17 @@
 #
 from . import utils
 from . import gui
-from electroncash.i18n import _, language
-from electroncash import mnemonic
-from electroncash.old_mnemonic import words as old_words
+from electronlambda.i18n import _, language
+from electronlambda import mnemonic
+from electronlambda.old_mnemonic import words as old_words
 from typing import Any
 from .uikit_bindings import *
 from .custom_objc import *
 import sys
 from collections import namedtuple
-import electroncash.bitcoin as bitcoin
-import electroncash.keystore as keystore
-from electroncash.address import Address, PublicKey
+import electronlambda.bitcoin as bitcoin
+import electronlambda.keystore as keystore
+from electronlambda.address import Address, PublicKey
 
 if False:
     # this is here for translate i18n to pick up these strings

@@ -9,20 +9,20 @@ from . import gui
 from .history import HistoryEntry
 from . import txdetail
 from . import contacts
-from electroncash import WalletStorage, Wallet
-from electroncash.util import timestamp_to_datetime, NotEnoughFunds, ExcessiveFee
-from electroncash.transaction import Transaction
-from electroncash.i18n import _
+from electronlambda import WalletStorage, Wallet
+from electronlambda.util import timestamp_to_datetime, NotEnoughFunds, ExcessiveFee
+from electronlambda.transaction import Transaction
+from electronlambda.i18n import _
 from .custom_objc import *
 from .uikit_bindings import *
-from electroncash import networks
-from electroncash.address import Address, ScriptOutput
-from electroncash.paymentrequest import PaymentRequest
-from electroncash.transaction import OPReturn
-from electroncash import bitcoin
+from electronlambda import networks
+from electronlambda.address import Address, ScriptOutput
+from electronlambda.paymentrequest import PaymentRequest
+from electronlambda.transaction import OPReturn
+from electronlambda import bitcoin
 from .feeslider import FeeSlider
 from .amountedit import BTCAmountEdit
-from electroncash.plugins import run_hook
+from electronlambda.plugins import run_hook
 import time, html, re, sys, traceback
 from decimal import Decimal
 

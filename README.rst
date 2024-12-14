@@ -6,10 +6,10 @@ Electron Cash - Lightweight Lambda client
   Licence: MIT Licence
   Author: Electron Cash Developers
   Language: Python
-  Homepage: https://electroncash.org/
+  Homepage: https://electronlambda.org/
 
-.. image:: https://d322cqt584bo4o.cloudfront.net/electron-cash/localized.svg
-    :target: https://crowdin.com/project/electron-cash
+.. image:: https://d322cqt584bo4o.cloudfront.net/electron-lambda/localized.svg
+    :target: https://crowdin.com/project/electron-lambda
     :alt: Help translate Electron Cash online
 
 .. image:: ../../actions/workflows/run-tox.yml/badge.svg?branch=master
@@ -28,10 +28,10 @@ Getting started
 ===============
 
 **Note: If running from source, Python 3.8 or above is required to run Electron Cash.** If your system lacks Python 3.8,
-you have other options, such as the `AppImage / binary releases <https://github.com/lambdablockchain/Electron-lambda/releases/>`_
+you have other options, such as the `AppImage / binary releases <https://github.com/lambdablockchain/Electron-Lambda/releases/>`_
 or running from source using `pyenv` (see section `Running from source on old Linux`_ below).
 
-**macOS:** It is recommended that macOS users run `the binary .dmg <https://github.com/lambdablockchain/Electron-lambda/releases/>`_  as that's simpler to use and has everything included.  Otherwise, if you want to run from source, see section `Running from source on macOS`_ below.
+**macOS:** It is recommended that macOS users run `the binary .dmg <https://github.com/lambdablockchain/Electron-Lambda/releases/>`_  as that's simpler to use and has everything included.  Otherwise, if you want to run from source, see section `Running from source on macOS`_ below.
 
 Electron Cash is a pure python application forked from Electrum. If you want to use the Qt interface, install the Qt dependencies::
 
@@ -52,7 +52,7 @@ You can also install Electron Cash on your system, by running this command::
 Compile the icons file for Qt (normally you can skip this step, run this command if icons are missing)::
 
     sudo apt-get install pyqt5-dev-tools
-    pyrrc5 icons.qrc -o electroncash_gui/qt/icons.py
+    pyrrc5 icons.qrc -o electronlambda_gui/qt/icons.py
 
 This will download and install the Python dependencies used by
 Electron Cash, instead of using the 'packages' directory.
@@ -83,8 +83,8 @@ If you are on macOS, see the `Running from source on macOS`_ section below.
 
 Check out the code from Github::
 
-    git clone https://github.com/lambdablockchain/Electron-lambda
-    cd Electron-lambda
+    git clone https://github.com/lambdablockchain/Electron-Lambda
+    cd Electron-Lambda
 
 Install the python dependencies::
 
@@ -136,7 +136,7 @@ Running from source on macOS
 
 You need to install **either** `MacPorts <https://www.macports.org>`_  **or** `HomeBrew <https://www.brew.sh>`_.  Follow the instructions on either site for installing (Xcode from `Apple's developer site <https://developer.apple.com>`_ is required for either).
 
-1. After installing either HomeBrew or MacPorts, clone this repository and switch to the directory: ``git clone https://github.com/lambdablockchain/Electron-lambda && cd Electron-lambda``
+1. After installing either HomeBrew or MacPorts, clone this repository and switch to the directory: ``git clone https://github.com/lambdablockchain/Electron-Lambda && cd Electron-Lambda``
 2. Install python 3.8 or later. For brew: ``brew install python3`` or if using MacPorts: ``sudo port install python311``
 3. Install PyQt5: ``python3 -m pip install --user pyqt5``
 4. Install Electron Cash requirements: ``python3 -m pip install --user -r contrib/requirements/requirements.txt``

@@ -9,11 +9,11 @@ from . import gui
 from . import private_key_dialog
 from . import sign_decrypt_dialog
 from . import history
-from electroncash import WalletStorage, Wallet
-from electroncash.util import timestamp_to_datetime
-import electroncash.exchange_rate
-from electroncash.i18n import _, language
-from electroncash.address import Address
+from electronlambda import WalletStorage, Wallet
+from electronlambda.util import timestamp_to_datetime
+import electronlambda.exchange_rate
+from electronlambda.i18n import _, language
+from electronlambda.address import Address
 
 import time, html, sys, enum
 from collections import namedtuple
