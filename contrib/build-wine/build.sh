@@ -98,7 +98,7 @@ popd
 
 info "Copying .exe files out of our build directory ..."
 mkdir -p dist/
-files="$FRESH_CLONE_DIR"/contrib/build-wine/dist/*.exe
+files="/mnt/c/Users/DELL/electron-lambda/contrib/build-wine/dist/*.exe"
 for f in $files; do
     bn=`basename "$f"`
     cp -fpv "$f" dist/"$bn" || fail "Failed to copy $bn"

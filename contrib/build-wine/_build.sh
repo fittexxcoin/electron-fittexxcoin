@@ -210,7 +210,7 @@ build_the_app() {
         for i in ./locale/*; do
             dir=$i/LC_MESSAGES
             mkdir -p $dir
-            msgfmt --output-file=$dir/electron-cash.mo $i/electron-cash.po || true
+            msgfmt --output-file=$dir/electron-lambda.mo $i/electron-lambda.po || true
         done
         popd
 
@@ -220,10 +220,11 @@ build_the_app() {
 
         info "Version to release: $VERSION"
         info "Fudging timestamps on all files for determinism ..."
+        chmod +w ./contrib/build-wine/build.sh
         find -exec touch -d '2000-11-11T11:11:11+00:00' {} +
         popd  # go back to $here
 
-        cp -r "$here"/../electrum-locale/locale "$WINEPREFIX"/drive_c/electron-lambda/electroncash/
+        cp -r "$here"/../electrum-locale/locale "$WINEPREFIX"/drive_c/electron-lambda/electronlambda/
 
         # Install frozen dependencies
         info "Installing frozen dependencies ..."
@@ -249,13 +250,13 @@ build_the_app() {
         info "Resetting modification time in C:\Python..."
         # (Because we just installed a bunch of stuff)
         pushd "$WINEPREFIX"/drive_c/python$PYTHON_VERSION
-        find -exec touch -d '2000-11-11T11:11:11+00:00' {} +
+        sudo find -exec touch -d '2000-11-11T11:11:11+00:00' {} +
         ls -l
         popd
 
         # build standalone and portable versions
         info "Running Pyinstaller to build standalone and portable .exe versions ..."
-        ls -la "C:/electron-lambda"
+        ls -la "C:/Users/DELL/electron-lambda"
         ELECTRONCASH_CMDLINE_NAME="$NAME_ROOT" wine "C:/python$PYTHON_VERSION/scripts/pyinstaller.exe" --noconfirm deterministic.spec || fail "Pyinstaller failed"
 
         # rename the output files

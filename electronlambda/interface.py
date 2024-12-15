@@ -477,7 +477,7 @@ class Interface(util.PrintError):
                         # discard the message in that case.
                         #
                         # Electron Cash:
-                        #   https://github.com/Electron-Cash/Electron-Cash/issues/1774
+                        #   https://github.com/lambdablockchain/electron-lambda/issues/1774
                         # Fulcrum:
                         #   https://github.com/cculianu/Fulcrum/issues/20
                         self.print_error("Ignoring spurious error message from server:", response.get('error'))

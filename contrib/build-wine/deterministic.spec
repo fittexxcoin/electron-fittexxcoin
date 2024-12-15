@@ -8,7 +8,7 @@ cmdline_name = os.environ.get("ELECTRONCASH_CMDLINE_NAME")
 if not cmdline_name:
     raise RuntimeError('no name')
 
-home = 'C:\\electron-lambda\\'
+home = '/mnt/c/Users/DELL/electron-lambda/'
 
 # see https://github.com/pyinstaller/pyinstaller/issues/2005
 hiddenimports = []
@@ -20,25 +20,25 @@ hiddenimports += collect_submodules('satochip')    # Satochip
 hiddenimports += collect_submodules('smartcard')   # Satochip
 
 # Add libusb binary
-binaries = [("c:/tmp/libusb-1.0.dll", ".")]
+binaries = [("/mnt/c/tmp/libusb-1.0.dll", ".")]
 
 # Add secp library
-binaries += [('C:/tmp/libsecp256k1-0.dll', '.')]
+binaries += [('/mnt/c/tmp/libsecp256k1-0.dll', '.')]
 
 # Add zbar libraries
-binaries += [('C:/tmp/libzbar-0.dll', '.')]
+binaries += [('/mnt/c/tmp/libzbar-0.dll', '.')]
 
 # Add tor binary
-binaries += [('C:/tmp/tor.exe', '.')]
+binaries += [('/mnt/c/tmp/tor.exe', '.')]
 
 # The below is no longer necessary. PyInstaller 3.4+ picks these up properly
 # now and puts them in the Qt dirs.
 # Add Windows OpenGL and D3D implementation DLLs (see #1255 and #1253)
 #binaries += [
-#    ('C:/python*/libEGL.dll', '.'),
-#    ('C:/python*/libGLESv2.dll', '.'),
-#    ('C:/python*/d3dcompiler_*.dll', '.'),
-#    ('C:/python*/opengl32sw.dll', '.'),
+#    ('/mnt/c/python*/libEGL.dll', '.'),
+#    ('/mnt/c/python*/libGLESv2.dll', '.'),
+#    ('/mnt/c/python*/d3dcompiler_*.dll', '.'),
+#    ('/mnt/c/python*/opengl32sw.dll', '.'),
 #]
 
 # Workaround for "Retro Look":
@@ -47,17 +47,17 @@ binaries += [b for b in collect_dynamic_libs('PyQt5') if 'qwindowsvista' in b[0]
 binaries += [('C:/python*/Lib/site-packages/smartcard/scard/_scard.cp*-win32.pyd', '.')]  # Satochip
 
 datas = [
-    (home+'electroncash/currencies.json', 'electroncash'),
-    (home+'electroncash/servers.json', 'electroncash'),
-    (home+'electroncash/servers_testnet.json', 'electroncash'),
-    (home+'electroncash/servers_testnet4.json', 'electroncash'),
-    (home+'electroncash/servers_scalenet.json', 'electroncash'),
-    (home+'electroncash/servers_regtest.json', 'electroncash'),
-    (home+'electroncash/servers_chipnet.json', 'electroncash'),
-    (home+'electroncash/wordlist/english.txt', 'electroncash/wordlist'),
-    (home+'electroncash/locale', 'electroncash/locale'),
-    (home+'electroncash_gui/qt/data/ecsupplemental_win.ttf', 'electroncash_gui/qt/data'),
-    (home+'electroncash_plugins', 'electroncash_plugins'),
+    (home+'electronlambda/currencies.json', 'electronlambda'),
+    (home+'electronlambda/servers.json', 'electronlambda'),
+    (home+'electronlambda/servers_testnet.json', 'electronlambda'),
+    (home+'electronlambda/servers_testnet4.json', 'electronlambda'),
+    (home+'electronlambda/servers_scalenet.json', 'electronlambda'),
+    (home+'electronlambda/servers_regtest.json', 'electronlambda'),
+    (home+'electronlambda/servers_chipnet.json', 'electronlambda'),
+    (home+'electronlambda/wordlist/english.txt', 'electronlambda/wordlist'),
+    (home+'electronlambda/locale', 'electronlambda/locale'),
+    (home+'electronlambda_gui/qt/data/ecsupplemental_win.ttf', 'electronlambda_gui/qt/data'),
+    (home+'electronlambda_plugins', 'electronlambda_plugins'),
 ]
 datas += collect_data_files('trezorlib')
 datas += collect_data_files('btchip')
@@ -66,26 +66,26 @@ datas += collect_data_files('mnemonic')  # wordlists used by keepkeylib from lib
 
 # We don't put these files in to actually include them in the script but to make the Analysis method scan them for imports
 a = Analysis([home+'electron-lambda',
-              home+'electroncash_gui/qt/main_window.py',
-              home+'electroncash_gui/qt/qrreader/camera_dialog.py',
-              home+'electroncash_gui/text.py',
-              home+'electroncash/util.py',
-              home+'electroncash/wallet.py',
-              home+'electroncash/simple_config.py',
-              home+'electroncash/bitcoin.py',
-              home+'electroncash/dnssec.py',
-              home+'electroncash/commands.py',
-              home+'electroncash/tor/controller.py',
-              home+'electroncash_plugins/cosigner_pool/qt.py',
-              home+'electroncash_plugins/email_requests/qt.py',
-              home+'electroncash_plugins/trezor/clientbase.py',
-              home+'electroncash_plugins/trezor/trezor.py',
-              home+'electroncash_plugins/trezor/qt.py',
-              home+'electroncash_plugins/keepkey/qt.py',
-              home+'electroncash_plugins/ledger/qt.py',
-              home+'electroncash_plugins/satochip/qt.py',  # Satochip
-              home+'electroncash_plugins/fusion/fusion.py', # CashFusion
-              home+'electroncash_plugins/fusion/qt.py', # CashFusion
+              home+'electronlambda_gui/qt/main_window.py',
+              home+'electronlambda_gui/qt/qrreader/camera_dialog.py',
+              home+'electronlambda_gui/text.py',
+              home+'electronlambda/util.py',
+              home+'electronlambda/wallet.py',
+              home+'electronlambda/simple_config.py',
+              home+'electronlambda/bitcoin.py',
+              home+'electronlambda/dnssec.py',
+              home+'electronlambda/commands.py',
+              home+'electronlambda/tor/controller.py',
+              home+'electronlambda_plugins/cosigner_pool/qt.py',
+              home+'electronlambda_plugins/email_requests/qt.py',
+              home+'electronlambda_plugins/trezor/clientbase.py',
+              home+'electronlambda_plugins/trezor/trezor.py',
+              home+'electronlambda_plugins/trezor/qt.py',
+              home+'electronlambda_plugins/keepkey/qt.py',
+              home+'electronlambda_plugins/ledger/qt.py',
+              home+'electronlambda_plugins/satochip/qt.py',  # Satochip
+              home+'electronlambda_plugins/fusion/fusion.py', # CashFusion
+              home+'electronlambda_plugins/fusion/qt.py', # CashFusion
               ],
              binaries=binaries,
              datas=datas,

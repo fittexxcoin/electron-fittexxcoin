@@ -44,7 +44,7 @@ _("Export wallet")
 _("Fan Out")
 _("Filename is too long")
 _("Filenames cannot contain the '/' character")
-_("For support, please visit us on <a href='https://github.com/Electron-Cash/Electron-Cash/issues'>"
+_("For support, please visit us on <a href='https://github.com/lambdablockchain/electron-lambda/issues'>"
   "GitHub</a> or on <a href='https://t.me/electroncashwallet'>Telegram</a>.")
 _("FT amount")
 _("FT balance")
