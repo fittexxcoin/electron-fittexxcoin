@@ -5,17 +5,17 @@ set -x
 
 here=$(dirname "$(realpath "$0" 2> /dev/null || grealpath "$0")")
 
-OUTDIR="$here/../electronlambda/tests/data/testcerts"
+OUTDIR="$here/../electronfittexxcoin/tests/data/testcerts"
 
 test -d "$OUTDIR" || mkdir -p "$OUTDIR"
 
 ROOT_FILENAME="$OUTDIR/rootCA"
-ROOT_NAME="Electron-Lambda Tests Root CA"
+ROOT_NAME="Electron-Fittexxcoin Tests Root CA"
 
 UNTRUSTED_ROOT_FILENAME="$OUTDIR/untrusted-rootCA"
-UNTRUSTED_ROOT_NAME="Electron-Lambda Tests Untrusted Root CA"
+UNTRUSTED_ROOT_NAME="Electron-Fittexxcoin Tests Untrusted Root CA"
 
-BASEDOMAIN="tests.electronlambda.org"
+BASEDOMAIN="tests.electronfittexxcoin.org"
 
 CERT_VALIDITY=1825
 

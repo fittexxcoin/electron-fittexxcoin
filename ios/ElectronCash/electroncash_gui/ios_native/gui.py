@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Electron Cash - lightweight Lambda client
+# Electron Cash - lightweight Fittexxcoin client
 # Copyright (C) 2012 thomasv@gitorious
 #
 # This file is:
@@ -47,12 +47,12 @@ from . import wallets
 from . import newwallet  # Do not remove -- needed to declare NewWalletVC to ObjC runtime  (used by storyboard instantiation)
 from .custom_objc import *
 
-from electronlambda.i18n import _, set_language, languages
-from electronlambda.plugins import run_hook
-from electronlambda import WalletStorage, Wallet, Transaction
-from electronlambda.address import Address
-from electronlambda.util import UserCancelled, print_error, format_satoshis, format_satoshis_plain, PrintError, InvalidPassword, inv_base_units
-import electronlambda.web as web
+from electronfittexxcoin.i18n import _, set_language, languages
+from electronfittexxcoin.plugins import run_hook
+from electronfittexxcoin import WalletStorage, Wallet, Transaction
+from electronfittexxcoin.address import Address
+from electronfittexxcoin.util import UserCancelled, print_error, format_satoshis, format_satoshis_plain, PrintError, InvalidPassword, inv_base_units
+import electronfittexxcoin.web as web
 
 class WalletFileNotFound(Exception):
     pass
@@ -100,7 +100,7 @@ class GuiHelper(NSObject):
     @objc_method
     def init(self):
         self = ObjCInstance(send_super(__class__, self, 'init'))
-        ElectrumGui.gui.sigHelper.connect(lambda: self.doUpdate(), self.ptr.value)
+        ElectrumGui.gui.sigHelper.connect(fittexxcoin: self.doUpdate(), self.ptr.value)
         return self
 
     @objc_method
@@ -160,7 +160,7 @@ class ElectrumGui(PrintError):
 
     def __init__(self, config):
         ElectrumGui.gui = self
-        self.appName = 'Electron-Lambda'
+        self.appName = 'Electron-Fittexxcoin'
         self.appDomain = 'com.c3-soft.ElectronCash'
         self.set_language()
 
@@ -348,7 +348,7 @@ class ElectrumGui(PrintError):
             UIApplicationDidReceiveMemoryWarningNotification,
             UIApplication.sharedApplication,
             None,
-            Block(lambda: self.on_low_memory(), restype=None)
+            Block(fittexxcoin: self.on_low_memory(), restype=None)
         ).retain()
 
         self.window.backgroundColor = UIColor.whiteColor
@@ -372,7 +372,7 @@ class ElectrumGui(PrintError):
             # To avoid leaking references to "self" that prevent the
             # window from being GC-ed when closed, callbacks should be
             # methods of this class only, and specifically not be
-            # partials, lambdas or methods of subobjects.  Hence...
+            # partials, fittexxcoins or methods of subobjects.  Hence...
             self.daemon.network.register_callback(self.on_network, interests)
             # Set the node and server retry interval to more reasonable valus for iOS
             # This is because on mobile we really may have a spotty connection so
@@ -492,7 +492,7 @@ class ElectrumGui(PrintError):
         for a in self.killableAlerts:
             if a.presentingViewController:
                 cb = self.killableAlerts[a]
-                a.dismissViewControllerAnimated_completion_(False, Block(lambda: cb(),restype=None) if callable(cb) else None)
+                a.dismissViewControllerAnimated_completion_(False, Block(fittexxcoin: cb(),restype=None) if callable(cb) else None)
                 ct += 1
         wasLen = len(self.killableAlerts)
         self.killableAlerts = dict()
@@ -1076,7 +1076,7 @@ class ElectrumGui(PrintError):
         if not self.wallet: return
         if self.wallet.is_watching_only():
             self.show_message(title = _("This is a watching-only wallet"),
-                              message = _("This means you will not be able to spend Lambda with it."),
+                              message = _("This means you will not be able to spend Fittexxcoin with it."),
                               vc = vc,
                               onOk = onOk)
 
@@ -1136,7 +1136,7 @@ class ElectrumGui(PrintError):
             if refreshDelay <= 0.0:
                 self.refresh_components('requests')
             else:
-                utils.call_later(refreshDelay, lambda: self.refresh_components('requests'))
+                utils.call_later(refreshDelay, fittexxcoin: self.refresh_components('requests'))
             return True
         return False
 
@@ -1155,9 +1155,9 @@ class ElectrumGui(PrintError):
         key = self.wallet.invoices.add(pr)
         status = self.wallet.invoices.get_status(key)
         #self.invoice_list.update()
-        from electronlambda.paymentrequest import PR_PAID
+        from electronfittexxcoin.paymentrequest import PR_PAID
         if status == PR_PAID:
-            self.show_message("invoice already paid", onOk = lambda: self.do_clear_send())
+            self.show_message("invoice already paid", onOk = fittexxcoin: self.do_clear_send())
             return
         self.sendVC.doChkPR() # freezes UI elements, etc
         if not pr.has_expired():
@@ -1171,7 +1171,7 @@ class ElectrumGui(PrintError):
     def payment_request_error(self):
         #print("Payment request ERROR called")
         pr = send.get_PR(self.sendVC)
-        self.show_message(str(pr.error if pr else _("Payment Request Error")), onOk = lambda: self.do_clear_send())
+        self.show_message(str(pr.error if pr else _("Payment Request Error")), onOk = fittexxcoin: self.do_clear_send())
 
     def on_pr(self, request):
         with self.payment_request_lock:
@@ -1271,7 +1271,7 @@ class ElectrumGui(PrintError):
         qsize = len(self.queued_refresh_components)
         #oldq = self.queued_refresh_components.copy()
         # pick up queued as well as this call's components for refreshing..
-        components = set(map(lambda x: str(x).strip().lower(),args)) | self.queued_refresh_components
+        components = set(map(fittexxcoin x: str(x).strip().lower(),args)) | self.queued_refresh_components
         self.queued_refresh_components = set() # immediately empty queue while we hold the lock
         diff = time.time() - float(self.last_refresh)
         if {dummy} == components: # spurious self-call
@@ -1294,7 +1294,7 @@ class ElectrumGui(PrintError):
             # enqueue a call to this function at most 1 times
             if not qsize:
                 #print("refresh_components: rate limiting.. calling later ",diff,"(",*args,")")
-                utils.call_later((self.refresh_rate_current-diff) + 0.010, lambda: self.refresh_components(dummy))
+                utils.call_later((self.refresh_rate_current-diff) + 0.010, fittexxcoin: self.refresh_components(dummy))
             else:
                 # already had a queue -- this means another call_later() is pending, so do nothing but return and assume subsequent
                 # call_later() will execute this function in the future.
@@ -1491,7 +1491,7 @@ class ElectrumGui(PrintError):
         if self.daemon_is_running(): return
         wd = wallets.WalletsMgr.wallets_dir()
         if wd: utils.cleanup_wallet_dir(wd)  # on newer iOS for some reason *.tmp.PID remain..
-        import electronlambda.daemon as ed
+        import electronfittexxcoin.daemon as ed
         try:
             # Force remove of lock file so the code below cuts to the chase and starts a new daemon without
             # uselessly trying to connect to one that doesn't exist anyway.
@@ -1536,8 +1536,8 @@ class ElectrumGui(PrintError):
                             vc : UIViewController = None,
                             message : str = None,
                             wants_touchid : bool = True) -> None:
-        if not onSuccess: onSuccess = lambda: None
-        if not onFailure: onFailure = lambda x: None
+        if not onSuccess: onSuccess = fittexxcoin: None
+        if not onFailure: onFailure = fittexxcoin x: None
         if not vc: vc = self.get_presented_viewcontroller()
         if self.check_wallet_exists(wallet_name):
             onFailure("A wallet with the same name already exists")
@@ -1562,8 +1562,8 @@ class ElectrumGui(PrintError):
         def DoIt_Seed_Or_Keystore() -> None:
             nonlocal waitDlg
             try:
-                from electronlambda import keystore
-                from electronlambda.wallet import Standard_Wallet
+                from electronfittexxcoin import keystore
+                from electronfittexxcoin.wallet import Standard_Wallet
 
                 k = have_keystore
 
@@ -1571,7 +1571,7 @@ class ElectrumGui(PrintError):
                     k = keystore.from_seed(wallet_seed, seed_ext, False)
                     has_xpub = isinstance(k, keystore.Xpub)
                     if has_xpub:
-                        from electronlambda.bitcoin import xpub_type
+                        from electronfittexxcoin.bitcoin import xpub_type
                         t1 = xpub_type(k.xpub)
                     if has_xpub and t1 not in ['standard']:
                         def compl() -> None: onFailure(_('Wrong key type') + ": '%s'"%t1)
@@ -1609,8 +1609,8 @@ class ElectrumGui(PrintError):
         def DoIt_Imported() -> None:
             nonlocal waitDlg
             try:
-                from electronlambda import keystore
-                from electronlambda.wallet import ImportedAddressWallet, ImportedPrivkeyWallet
+                from electronfittexxcoin import keystore
+                from electronfittexxcoin.wallet import ImportedAddressWallet, ImportedPrivkeyWallet
 
                 path = os.path.join(wallets.WalletsMgr.wallets_dir(), wallet_name)
                 storage = WalletStorage(path, manual_upgrades=True)
@@ -1670,9 +1670,9 @@ class ElectrumGui(PrintError):
             utils.NSLog("Switch wallets but no daemon running!")
             return
         if not vc: vc = self.get_presented_viewcontroller()
-        if not onFailure: onFailure = lambda x: utils.NSLog("Failure: %s", str(x))
-        if not onSuccess: onSuccess = lambda: None
-        if not onCancel: onCancel = lambda: print("User Cancel")
+        if not onFailure: onFailure = fittexxcoin x: utils.NSLog("Failure: %s", str(x))
+        if not onSuccess: onSuccess = fittexxcoin: None
+        if not onCancel: onCancel = fittexxcoin: print("User Cancel")
         wallet_name = os.path.split(wallet_name)[1]
         path = os.path.join(wallets.WalletsMgr.wallets_dir(), wallet_name)
         storage = WalletStorage(path, manual_upgrades=True)
@@ -1750,7 +1750,7 @@ class ElectrumGui(PrintError):
                     if not w.is_watching_only() and not w.has_password():
                         self.question(title = _("Potentially Unsafe Operation"),
                                       message = _("This spending wallet is not encrypted and not password protected. Sharing it over the internet could result in others intercepting the data and for you to potentially lose funds.\n\nContinue anyway?"), yesno = True, vc = vc,
-                                      onOk = lambda: self.show_wallet_share_actions(info = info, vc = vc, ipadAnchor = ipadAnchor, warnIfUnsafe = False))
+                                      onOk = fittexxcoin: self.show_wallet_share_actions(info = info, vc = vc, ipadAnchor = ipadAnchor, warnIfUnsafe = False))
                         return
             except:
                 self.show_error(str(sys.exc_info()[1]), vc = vc)
@@ -1768,7 +1768,7 @@ class ElectrumGui(PrintError):
                 if fn:
                     print("copied wallet to:", fn)
                     utils.show_share_actions(vc = waitDlg, fileName = fn, ipadAnchor = ipadAnchor, objectName = _('Wallet file'),
-                                             finishedCompletion = lambda x: Dismiss())
+                                             finishedCompletion = fittexxcoin x: Dismiss())
                 else:
                     def MyCompl() -> None: self.show_error(_("Could not copy wallet file"), vc = vc)
                     Dismiss(MyCompl, False)
@@ -1848,7 +1848,7 @@ class ElectrumGui(PrintError):
                             # Full stop.. will proceed with DoPromptPW (calling self recursively) after msg box is dismissed
                             self.show_error(title=_('Secure Enclave Key Reset'),
                                             message=_('Your biometrics-based key for this wallet was reset. This means you will need to enter your password for this wallet again.\n\n(Then, you can optionally re-enable Touch/Face ID as before.)'),
-                                            onOk = lambda: DoPromptPW(my_callback))
+                                            onOk = fittexxcoin: DoPromptPW(my_callback))
                         else:
                             # Some other error occurred with touch id besides a lost key (perhaps they hit "cancel" on
                             # the touchid prompt), so call self recursively to try again!
@@ -1872,7 +1872,7 @@ class ElectrumGui(PrintError):
                     storage.decrypt(pw)
                     GotAPasswordCallback(pw)
                 except Exception as e:
-                    self.show_error(str(e), onOk = lambda: DoPromptPW(cb), vc = vc)
+                    self.show_error(str(e), onOk = fittexxcoin: DoPromptPW(cb), vc = vc)
             return DoPromptPW(cb)
         else:
             if self.wallet is None: return None
@@ -1886,7 +1886,7 @@ class ElectrumGui(PrintError):
                     self.wallet.check_password(pw)
                     GotAPasswordCallback(pw)
                 except Exception as e:
-                    self.show_error(str(e), onOk = lambda: DoPromptPW(cb), vc = vc)
+                    self.show_error(str(e), onOk = fittexxcoin: DoPromptPW(cb), vc = vc)
             return DoPromptPW(cb)
 
     def open_last_wallet(self) -> None:
@@ -1924,7 +1924,7 @@ class ElectrumGui(PrintError):
                     except:
                         import traceback
                         traceback.print_exc(file=sys.stdout)
-                        self.show_error(str(sys.exc_info()[1]), onOk = lambda: self.on_open_last_wallet_fail())
+                        self.show_error(str(sys.exc_info()[1]), onOk = fittexxcoin: self.on_open_last_wallet_fail())
                 def forciblyDismissed() -> None:
                     #self.on_open_last_wallet_fail()
                     # the assumption here is it was dimmissed because they exited app, then it backgrounded, then they came back.
@@ -2263,7 +2263,7 @@ class ElectrumGui(PrintError):
         if isinstance(txn, bytes):
             txn = txn.decode('utf-8')
             print("Warning: show_ext_txn got bytes instead of a str for the txn.. this may be bad...")
-        from electronlambda.transaction import tx_from_str, Transaction
+        from electronfittexxcoin.transaction import tx_from_str, Transaction
         from . import txdetail
         try:
             if not self.wallet:
@@ -2336,14 +2336,14 @@ class ElectrumGui(PrintError):
                                                      "Your wallet password will still be used as a backup mechanism for when " +
                                                      "Touch/Face ID fails or is unavailable.\n\n" +
                                                      "Your wallet will continue to be protected and secure.") )
-                self.register_killable_alert(alert, lambda: completion(wallet_name, password))
+                self.register_killable_alert(alert, fittexxcoin: completion(wallet_name, password))
         else:
             completion(wallet_name, password)
 
 
     def set_wallet_use_touchid(self, wallet_name : str, wallet_pass_or_none : str, completion : Callable[[bool],None] = None,
                                clear_asked : bool = False) -> None:
-        if not callable(completion): completion = lambda x: None
+        if not callable(completion): completion = fittexxcoin x: None
         if wallet_pass_or_none is None:
             self.encPasswords.pop(wallet_name)
             if clear_asked:
@@ -2451,4 +2451,4 @@ class ElectrumGui(PrintError):
     def main(self):
         self.createAndShowUI()
 
-        self.setup_key_enclave(lambda: self.start_daemon())
+        self.setup_key_enclave(fittexxcoin: self.start_daemon())

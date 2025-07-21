@@ -4,14 +4,14 @@
 #
 # MIT License
 #
-from electronlambda.i18n import _
+from electronfittexxcoin.i18n import _
 from .custom_objc import *
 from .uikit_bindings import *
 from . import utils
 from . import gui
 
 from decimal import Decimal
-from electronlambda.util import format_satoshis_plain, format_satoshis
+from electronfittexxcoin.util import format_satoshis_plain, format_satoshis
 
 def parent():
     return gui.ElectrumGui.gui

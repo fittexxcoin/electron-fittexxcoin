@@ -10,7 +10,7 @@ pkgname="zbar"
 info "Building $pkgname..."
 
 # Ensure dos2unix is run
-dos2unix /mnt/c/Users/DELL/electron-lambda/contrib/build-wine/../make_zbar
+dos2unix /mnt/c/Users/DELL/electron-fittexxcoin/contrib/build-wine/../make_zbar
 
 # Set up PKG_CONFIG_PATH for cross-compilation
 export PKG_CONFIG_PATH=/usr/x86_64-w64-mingw32/lib/pkgconfig
@@ -66,11 +66,11 @@ fi
 # Strip the binary for size
 host_strip "$lib_path" || fail "Could not strip $libname"
 
-# Copy the binary to the electronlambda folder
-cp -fpv "$lib_path" "$here/../electronlambda/." || fail "Could not copy $pkgname binary to its destination"
+# Copy the binary to the electronfittexxcoin folder
+cp -fpv "$lib_path" "$here/../electronfittexxcoin/." || fail "Could not copy $pkgname binary to its destination"
 
 # Notify user of the successful installation
-info "$libname has been placed in the 'electronlambda' folder."
+info "$libname has been placed in the 'electronfittexxcoin' folder."
 
 # Return to the original directory
 popd

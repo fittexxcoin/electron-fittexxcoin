@@ -9,11 +9,11 @@ from . import gui
 from . import private_key_dialog
 from . import sign_decrypt_dialog
 from . import history
-from electronlambda import WalletStorage, Wallet
-from electronlambda.util import timestamp_to_datetime
-import electronlambda.exchange_rate
-from electronlambda.i18n import _, language
-from electronlambda.address import Address
+from electronfittexxcoin import WalletStorage, Wallet
+from electronfittexxcoin.util import timestamp_to_datetime
+import electronfittexxcoin.exchange_rate
+from electronfittexxcoin.i18n import _, language
+from electronfittexxcoin.address import Address
 
 import time, html, sys, enum
 from collections import namedtuple
@@ -56,8 +56,8 @@ class AddressDetail(AddressDetailBase):
             self.optionsBarBut = UIBarButtonItem.alloc().initWithImage_style_target_action_(UIImage.imageNamed_("barbut_options"), UIBarButtonItemStylePlain, self, SEL(b'onOptions')).autorelease()
             self.navigationItem.rightBarButtonItem = self.optionsBarBut
 
-            gui.ElectrumGui.gui.sigAddresses.connect(lambda:self.refresh(), self)
-            gui.ElectrumGui.gui.sigHistory.connect(lambda:self.refresh(), self)
+            gui.ElectrumGui.gui.sigAddresses.connect(fittexxcoin:self.refresh(), self)
+            gui.ElectrumGui.gui.sigHistory.connect(fittexxcoin:self.refresh(), self)
 
             bb = UIBarButtonItem.new().autorelease()
             bb.title = _("Back")
@@ -332,7 +332,7 @@ class AddressesVC(AddressesVCBase):
             bb.title = _("Back")
             self.navigationItem.backBarButtonItem = bb
 
-            gui.ElectrumGui.gui.sigAddresses.connect(lambda:self.refresh(), self)
+            gui.ElectrumGui.gui.sigAddresses.connect(fittexxcoin:self.refresh(), self)
 
         return self
 
@@ -762,7 +762,7 @@ class AddressData:
         # sort addresses by balance, num_tx, and index, descending
         for i,l1 in enumerate(self.master):
             for j,l2 in enumerate(l1):
-                l2.sort(key=lambda x: [x.balance,x.num_tx,0-x.addr_idx], reverse=True )
+                l2.sort(key=fittexxcoin x: [x.balance,x.num_tx,0-x.addr_idx], reverse=True )
                 #print(_TYPES[i],_STATUSES[j],"len",len(l2))
 
         utils.NSLog("fetched %d addresses from wallet in %f ms",numAddresses,(time.time()-t0)*1e3)
@@ -885,7 +885,7 @@ def _ShowAddressContextMenu(entry, parentvc, ipadAnchor, toggleFreezeCallback = 
         actions.insert(2, [_('Show Coins (UTXOs)'), PushCoinsVC, [entry.address], parentvc.navigationController])
 
     if isinstance(parentvc, AddressDetail):
-        actions.insert(2, [ _('Share/Save QR...'), lambda: parentvc.onQRImgTap() ])
+        actions.insert(2, [ _('Share/Save QR...'), fittexxcoin: parentvc.onQRImgTap() ])
 
     if not watch_only:
 
@@ -893,7 +893,7 @@ def _ShowAddressContextMenu(entry, parentvc, ipadAnchor, toggleFreezeCallback = 
             pubkey = parent.wallet.get_public_key(entry.address)
             pubkey = pubkey.to_ui_string() if pubkey and not isinstance(pubkey, str) else pubkey
             if pubkey:
-                actions.insert(2, [ _('Copy Public key'), lambda: parent.copy_to_clipboard(pubkey, _('Public key')) ] )
+                actions.insert(2, [ _('Copy Public key'), fittexxcoin: parent.copy_to_clipboard(pubkey, _('Public key')) ] )
         except:
             pass
 
@@ -904,7 +904,7 @@ def _ShowAddressContextMenu(entry, parentvc, ipadAnchor, toggleFreezeCallback = 
         actions.append([ _('Freeze') if not entry.is_frozen else _('Unfreeze'), onToggleFreeze ])
 
     if not watch_only and not entry.is_frozen and entry.balance > 0:
-        actions.append([ _('Spend from this Address'), lambda: _SpendFrom(entry, vc = parentvc) ] )
+        actions.append([ _('Spend from this Address'), fittexxcoin: _SpendFrom(entry, vc = parentvc) ] )
 
 
     actions.append([ _("View on block explorer"), on_block_explorer ])

@@ -8,7 +8,7 @@ from . import utils
 from . import gui
 from . import history
 from . import newwallet
-from electronlambda.i18n import _, pgettext, language
+from electronfittexxcoin.i18n import _, pgettext, language
 
 from .uikit_bindings import *
 from .custom_objc import *
@@ -74,9 +74,9 @@ class WalletsVC(WalletsVCBase):
         # Can't set this property from IB, so we do it here programmatically to create the stroke around the receive button
         self.receiveBut.layer.borderColor = self.sendBut.backgroundColor.CGColor
 
-        gui.ElectrumGui.gui.sigHistory.connect(lambda: self.refresh(), self)
-        gui.ElectrumGui.gui.sigRequests.connect(lambda: self.refresh(), self)
-        gui.ElectrumGui.gui.sigWallets.connect(lambda: self.refresh(), self)
+        gui.ElectrumGui.gui.sigHistory.connect(fittexxcoin: self.refresh(), self)
+        gui.ElectrumGui.gui.sigRequests.connect(fittexxcoin: self.refresh(), self)
+        gui.ElectrumGui.gui.sigWallets.connect(fittexxcoin: self.refresh(), self)
 
         noViews = [ self.noTXsView, self.noReqsView ]
         font = UIFont.italicSystemFontOfSize_(14.0)
@@ -315,7 +315,7 @@ class WalletsDrawerVC(WalletsDrawerVCBase):
         self.tv.tableFooterView = self.tableFooter
         nib = UINib.nibWithNibName_bundle_("WalletsDrawerCell", None)
         self.tv.registerNib_forCellReuseIdentifier_(nib, "WalletsDrawerCell")
-        gui.ElectrumGui.gui.sigWallets.connect(lambda: self.refresh(), self)
+        gui.ElectrumGui.gui.sigWallets.connect(fittexxcoin: self.refresh(), self)
 
     @objc_method
     def refresh(self) -> None:
@@ -421,7 +421,7 @@ class WalletsDrawerVC(WalletsDrawerVCBase):
             name = _Get()[indexPath.row].name
             if name == CurrentWalletName(): return
             gui.ElectrumGui.gui.switch_wallets(vc = self, wallet_name = name,
-                                               onSuccess = lambda: utils.call_later(0.2, self.vc.toggleDrawer),
+                                               onSuccess = fittexxcoin: utils.call_later(0.2, self.vc.toggleDrawer),
                                                onFailure = showErr)
         except:
             import sys
@@ -516,7 +516,7 @@ class WalletsMgr(utils.DataMgr):
                     if st and not os.path.isdir(wf):
                         info = WalletsMgr.Info(fn, st.st_size, wf)
                         ret.append(info)
-        ret.sort(key=lambda x: [x.name, 0-x.size], reverse=False)
+        ret.sort(key=fittexxcoin x: [x.name, 0-x.size], reverse=False)
         return ret
 
 
@@ -618,7 +618,7 @@ def _ShowOptionsForWalletAtIndex(index : int, vc : UIViewController, ipadAnchor 
                          actions = [ [ _("Cancel"), Release ], [ _("Delete"), DeleteChk ]], cancel = _("Cancel"), destructive = _('Delete'),
                          uiTextFieldHandlers = [ TfHandler ])
     def DoOpen() -> None:
-        parent.switch_wallets(vc = vc, wallet_name = info.name, onFailure = lambda x: parent.show_error(str(x)))
+        parent.switch_wallets(vc = vc, wallet_name = info.name, onFailure = fittexxcoin x: parent.show_error(str(x)))
     def DoSeed() -> None:
         def gotPW(pw) -> None:
             parent.show_seed_dialog(pw)

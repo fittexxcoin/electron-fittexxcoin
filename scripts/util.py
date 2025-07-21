@@ -1,7 +1,7 @@
 import select, time, queue
-from electronlambda import Connection, Interface, SimpleConfig
+from electronfittexxcoin import Connection, Interface, SimpleConfig
 
-from electronlambda.network import parse_servers
+from electronfittexxcoin.network import parse_servers
 from collections import defaultdict
 
 # electrum.util.set_verbosity(1)

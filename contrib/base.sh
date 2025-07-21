@@ -196,7 +196,7 @@ export SOURCE_DATE_EPOCH=1530212462
 # If the manifest changed, contrib/build-wine/manifest.xml needs to be updated.
 export PYTHON_VERSION=3.11.8  # Windows, OSX & Linux AppImage use this to determine what to download/build
 export PYTHON_SRC_TARBALL_HASH="9e06008c8901924395bc1da303eac567a729ae012baa182ab39269f650383bb3"  # If you change PYTHON_VERSION above, update this by downloading the tarball manually and doing a sha256sum on it.
-export DEFAULT_GIT_REPO=https://github.com/lambdablockchain/electron-lambda
+export DEFAULT_GIT_REPO=https://github.com/fittexxcoinblockchain/electron-fittexxcoin
 if [ -z "$GIT_REPO" ] ; then
     # If no override from env is present, use default. Support for overrides
     # for the GIT_REPO has been added to allows contributors to test containers
@@ -210,7 +210,7 @@ if [ "$GIT_REPO" != "$DEFAULT_GIT_REPO" ]; then
     info "Picked up override from env: GIT_REPO=${GIT_REPO}"
 fi
 export GIT_DIR_NAME=`basename $GIT_REPO`
-export PACKAGE="Electron-Lambda"  # Modify this if you like -- Windows, MacOS & Linux srcdist build scripts read this, while AppImage has it hard-coded
+export PACKAGE="Electron-Fittexxcoin"  # Modify this if you like -- Windows, MacOS & Linux srcdist build scripts read this, while AppImage has it hard-coded
 export PYI_SKIP_TAG="${PYI_SKIP_TAG:-0}" # Set this to non-zero to make PyInstaller skip tagging the bootloader
 export DEFAULT_UBUNTU_MIRROR="http://archive.ubuntu.com/ubuntu/"
 export UBUNTU_MIRROR="${UBUNTU_MIRROR:-$DEFAULT_UBUNTU_MIRROR}"

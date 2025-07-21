@@ -26,7 +26,7 @@ val libTransaction by lazy { libMod("transaction") }
 
 
 // This provides a dialog to allow users to input a string, which is then broadcast
-// on the Lambda network. Strings are not validated,
+// on the Fittexxcoin network. Strings are not validated,
 // but broadcast_transaction should throw error which is toasted.
 // Valid transaction quickly show up in transactions.
 

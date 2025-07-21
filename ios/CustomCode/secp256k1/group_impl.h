@@ -530,9 +530,9 @@ static void secp256k1_gej_add_ge(secp256k1_gej *r, const secp256k1_gej *a, const
      *    Eric Brier and Marc Joye, Weierstrass Elliptic Curves and Side-Channel Attacks.
      *    In D. Naccache and P. Paillier, Eds., Public Key Cryptography, vol. 2274 of Lecture Notes in Computer Science, pages 335-345. Springer-Verlag, 2002.
      *  we find as solution for a unified addition/doubling formula:
-     *    lambda = ((x1 + x2)^2 - x1 * x2 + a) / (y1 + y2), with a = 0 for secp256k1's curve equation.
-     *    x3 = lambda^2 - (x1 + x2)
-     *    2*y3 = lambda * (x1 + x2 - 2 * x3) - (y1 + y2).
+     *    fittexxcoin = ((x1 + x2)^2 - x1 * x2 + a) / (y1 + y2), with a = 0 for secp256k1's curve equation.
+     *    x3 = fittexxcoin^2 - (x1 + x2)
+     *    2*y3 = fittexxcoin * (x1 + x2 - 2 * x3) - (y1 + y2).
      *
      *  Substituting x_i = Xi / Zi^2 and yi = Yi / Zi^3, for i=1,2,3, gives:
      *    U1 = X1*Z2^2, U2 = X2*Z1^2
@@ -568,8 +568,8 @@ static void secp256k1_gej_add_ge(secp256k1_gej *r, const secp256k1_gej *a, const
      *      roots in our field, and the curve equation has no x coefficient)
      *      then the answer is not infinity but also not given by the above
      *      equation. In this case, we cmov in place an alternate expression
-     *      for lambda. Specifically (y1 - y2)/(x1 - x2). Where both these
-     *      expressions for lambda are defined, they are equal, and can be
+     *      for fittexxcoin. Specifically (y1 - y2)/(x1 - x2). Where both these
+     *      expressions for fittexxcoin are defined, they are equal, and can be
      *      obtained from each other by multiplication by (y1 + y2)/(y1 + y2)
      *      then substitution of x^3 + 7 for y^2 (using the curve equation).
      *      For all pairs of nonzero points (a, b) at least one is defined,
@@ -588,14 +588,14 @@ static void secp256k1_gej_add_ge(secp256k1_gej *r, const secp256k1_gej *a, const
     secp256k1_fe_negate(&m_alt, &u2, 1);                /* Malt = -X2*Z1^2 */
     secp256k1_fe_mul(&tt, &u1, &m_alt);                 /* tt = -U1*U2 (2) */
     secp256k1_fe_add(&rr, &tt);                         /* rr = R = T^2-U1*U2 (3) */
-    /** If lambda = R/M = 0/0 we have a problem (except in the "trivial"
+    /** If fittexxcoin = R/M = 0/0 we have a problem (except in the "trivial"
      *  case that Z = z1z2 = 0, and this is special-cased later on). */
     degenerate = secp256k1_fe_normalizes_to_zero(&m) &
                  secp256k1_fe_normalizes_to_zero(&rr);
     /* This only occurs when y1 == -y2 and x1^3 == x2^3, but x1 != x2.
      * This means either x1 == beta*x2 or beta*x1 == x2, where beta is
      * a nontrivial cube root of one. In either case, an alternate
-     * non-indeterminate expression for lambda is (y1 - y2)/(x1 - x2),
+     * non-indeterminate expression for fittexxcoin is (y1 - y2)/(x1 - x2),
      * so we set R/M equal to this. */
     rr_alt = s1;
     secp256k1_fe_mul_int(&rr_alt, 2);       /* rr = Y1*Z2^3 - Y2*Z1^3 (2) */
@@ -603,9 +603,9 @@ static void secp256k1_gej_add_ge(secp256k1_gej *r, const secp256k1_gej *a, const
 
     secp256k1_fe_cmov(&rr_alt, &rr, !degenerate);
     secp256k1_fe_cmov(&m_alt, &m, !degenerate);
-    /* Now Ralt / Malt = lambda and is guaranteed not to be 0/0.
+    /* Now Ralt / Malt = fittexxcoin and is guaranteed not to be 0/0.
      * From here on out Ralt and Malt represent the numerator
-     * and denominator of lambda; R and M represent the explicit
+     * and denominator of fittexxcoin; R and M represent the explicit
      * expressions x1^2 + x2^2 + x1x2 and y1 + y2. */
     secp256k1_fe_sqr(&n, &m_alt);                       /* n = Malt^2 (1) */
     secp256k1_fe_mul(&q, &n, &t);                       /* q = Q = T*Malt^2 (1) */
@@ -673,7 +673,7 @@ static SECP256K1_INLINE void secp256k1_ge_storage_cmov(secp256k1_ge_storage *r, 
 }
 
 #ifdef USE_ENDOMORPHISM
-static void secp256k1_ge_mul_lambda(secp256k1_ge *r, const secp256k1_ge *a) {
+static void secp256k1_ge_mul_fittexxcoin(secp256k1_ge *r, const secp256k1_ge *a) {
     static const secp256k1_fe beta = SECP256K1_FE_CONST(
         0x7ae96a2bul, 0x657c0710ul, 0x6e64479eul, 0xac3434e9ul,
         0x9cf04975ul, 0x12f58995ul, 0xc1396c28ul, 0x719501eeul

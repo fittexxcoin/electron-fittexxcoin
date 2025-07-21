@@ -7,10 +7,10 @@
 ;--------------------------------
 ;Variables
 
-  !define PRODUCT_NAME "Electron lambda"
-  !define INTERNAL_NAME "Electron-Lambda"
-  !define PRODUCT_WEB_SITE "https://github.com/lambdablockchain/Electron-Lambda"
-  !define PRODUCT_PUBLISHER "Electron lambda LLC"
+  !define PRODUCT_NAME "Electron fittexxcoin"
+  !define INTERNAL_NAME "Electron-Fittexxcoin"
+  !define PRODUCT_WEB_SITE "https://github.com/fittexxcoinblockchain/Electron-Fittexxcoin"
+  !define PRODUCT_PUBLISHER "Electron fittexxcoin LLC"
   !define INSTDIR_REG_ROOT "HKCU"
   !define INSTDIR_REG_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 
@@ -87,7 +87,7 @@
   !define MUI_ABORTWARNING
   !define MUI_ABORTWARNING_TEXT "Are you sure you wish to abort the installation of ${PRODUCT_NAME}?"
 
-  !define MUI_ICON "/mnt/c/Users/DELL/Electron-lambda/electronlambda/icons/electron.ico"
+  !define MUI_ICON "/mnt/c/Users/DELL/Electron-fittexxcoin/electronfittexxcoin/icons/electron.ico"
 
 ;--------------------------------
 ;Pages

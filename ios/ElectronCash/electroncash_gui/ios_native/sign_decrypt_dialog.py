@@ -9,9 +9,9 @@ from .custom_objc import *
 from . import utils
 from . import gui
 from . import addresses
-from electronlambda.i18n import _, language
-from electronlambda import bitcoin
-from electronlambda.address import Address
+from electronfittexxcoin.i18n import _, language
+from electronfittexxcoin import bitcoin
+from electronfittexxcoin.address import Address
 import sys, traceback, base64
 from collections import namedtuple
 
@@ -73,7 +73,7 @@ class SignDecryptVC(SignDecryptBase):
     def viewWillAppear_(self, animated : bool) -> None:
         send_super(__class__, self, 'viewWillAppear:', animated, argtypes=[c_bool])
         self.refresh()
-        parent().cash_addr_sig.connect(lambda: self.refresh(), self)
+        parent().cash_addr_sig.connect(fittexxcoin: self.refresh(), self)
         self.kbas = utils.register_keyboard_autoscroll(self.view)
         
         
@@ -231,7 +231,7 @@ class SignDecryptVC(SignDecryptBase):
             print ("address = ", address)
             addr = Address.from_string(address)
         except:
-            parent().show_error(_('Invalid Lambda address.'))
+            parent().show_error(_('Invalid Fittexxcoin address.'))
             return
         if addr.kind != addr.ADDR_P2PKH:
             msg_sign = _("Signing with an address actually means signing with the corresponding "
@@ -275,7 +275,7 @@ class SignDecryptVC(SignDecryptBase):
         try:
             address = Address.from_string(address_str)
         except:
-            parent().show_error(_('Invalid Lambda address.'))
+            parent().show_error(_('Invalid Fittexxcoin address.'))
             return
         message = message.encode('utf-8')
         try:

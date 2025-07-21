@@ -63,8 +63,8 @@ $SUDO docker build --progress plain -t $IMGNAME \
     || fail "Failed to create docker image"
 
 # This is the place where we checkout and put the exact revision we want to work
-# on. Docker will run mapping this directory to /homedir/wine/drive_c/electronlambda
-# which inside wine will look like c:\electronlambda.
+# on. Docker will run mapping this directory to /homedir/wine/drive_c/electronfittexxcoin
+# which inside wine will look like c:\electronfittexxcoin.
 FRESH_CLONE=`pwd`/contrib/build-wine/fresh_clone
 FRESH_CLONE_DIR="$FRESH_CLONE/$GIT_DIR_NAME"
 
@@ -86,9 +86,9 @@ FRESH_CLONE_DIR="$FRESH_CLONE/$GIT_DIR_NAME"
     -e BUILD_DEBUG="$BUILD_DEBUG" \
     -e PYI_SKIP_TAG="$PYI_SKIP_TAG" \
     --name ec-wine-builder-cont \
-    -v "$FRESH_CLONE_DIR":/homedir/wine/drive_c/electronlambda:delegated \
+    -v "$FRESH_CLONE_DIR":/homedir/wine/drive_c/electronfittexxcoin:delegated \
     --rm \
-    --workdir /homedir/wine/drive_c/electronlambda/contrib/build-wine \
+    --workdir /homedir/wine/drive_c/electronfittexxcoin/contrib/build-wine \
     $IMGNAME \
     dos2unix ./contrib/build-wine/_build.sh
     ./contrib/build-wine/_build.sh $REV
@@ -98,7 +98,7 @@ popd
 
 info "Copying .exe files out of our build directory ..."
 mkdir -p dist/
-files="/mnt/c/Users/DELL/electron-lambda/contrib/build-wine/dist/*.exe"
+files="/mnt/c/Users/DELL/electron-fittexxcoin/contrib/build-wine/dist/*.exe"
 for f in $files; do
     bn=`basename "$f"`
     cp -fpv "$f" dist/"$bn" || fail "Failed to copy $bn"

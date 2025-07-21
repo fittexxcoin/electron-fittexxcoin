@@ -177,7 +177,7 @@ def cleanup_possible_bg_task_stuff() -> (str, callable):
     global bgTask
     global bgTimer
 
-    func = lambda: False
+    func = fittexxcoin: False
 
     msg = ""
 

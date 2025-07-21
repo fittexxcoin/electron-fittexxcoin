@@ -127,7 +127,7 @@ EOF
             git checkout -b pinned "${PYINSTALLER_COMMIT}^{commit}"
             rm -fv PyInstaller/bootloader/Windows-*/run*.exe || true  # Make sure EXEs that came with repo are deleted -- we rebuild them and need to detect if build failed
             if [ ${PYI_SKIP_TAG:-0} -eq 0 ] ; then
-                echo "const char *ec_tag = \"tagged by Electron-lambda@$GIT_COMMIT_HASH\";" >> ./bootloader/src/pyi_main.c
+                echo "const char *ec_tag = \"tagged by Electron-fittexxcoin@$GIT_COMMIT_HASH\";" >> ./bootloader/src/pyi_main.c
             else
                 warn "Skipping PyInstaller tag"
             fi
@@ -208,7 +208,7 @@ build_the_app() {
         for i in ./locale/*; do
             dir=$i/LC_MESSAGES
             mkdir -p $dir
-            msgfmt --output-file=$dir/electron-lambda.mo $i/electron-lambda.po || true
+            msgfmt --output-file=$dir/electron-fittexxcoin.mo $i/electron-fittexxcoin.po || true
         done
         popd
 
@@ -264,7 +264,7 @@ build_the_app() {
         # build NSIS installer
         info "Running makensis to build setup .exe version ..."
         # $VERSION could be passed to the electron-cash.nsi script, but this would require some rewriting in the script iself.
-        wine "$WINEPREFIX/drive_c/Program Files/NSIS/makensis.exe" /DPRODUCT_VERSION=$VERSION electron-lambda.nsi || fail "makensis failed"
+        wine "$WINEPREFIX/drive_c/Program Files/NSIS/makensis.exe" /DPRODUCT_VERSION=$VERSION electron-fittexxcoin.nsi || fail "makensis failed"
 
         cd dist
         mv $NAME_ROOT-setup.exe $NAME_ROOT-$VERSION-setup.exe  || fail "Failed to move $NAME_ROOT-$VERSION-setup.exe to the output dist/ directory"

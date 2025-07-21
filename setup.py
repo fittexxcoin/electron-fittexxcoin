@@ -25,7 +25,7 @@ def load_source(module_name, module_path):
     spec.loader.exec_module(module)
     return module
 
-version = load_source('version', 'electronlambda/version.py')
+version = load_source('version', 'electronfittexxcoin/version.py')
 
 if sys.version_info[:3] < (3, 8):
     sys.exit("Error: Electron Cash requires Python version >= 3.8...")
@@ -62,13 +62,13 @@ if platform.system() in ['Linux', 'FreeBSD', 'DragonFly']:
         share_dir = user_share
     data_files += [
         # Menu icon
-        (os.path.join(share_dir, 'icons/hicolor/256x256/apps/'),   ['icons/electron-lambda.png']),
-        (os.path.join(share_dir, 'pixmaps/'),                      ['icons/electron-lambda.png']),
-        (os.path.join(share_dir, 'icons/hicolor/scalable/apps/'),  ['icons/electron-lambda.svg']),
+        (os.path.join(share_dir, 'icons/hicolor/256x256/apps/'),   ['icons/electron-fittexxcoin.png']),
+        (os.path.join(share_dir, 'pixmaps/'),                      ['icons/electron-fittexxcoin.png']),
+        (os.path.join(share_dir, 'icons/hicolor/scalable/apps/'),  ['icons/electron-fittexxcoin.svg']),
         # Menu entry
-        (os.path.join(share_dir, 'applications/'), ['electron-lambda.desktop']),
+        (os.path.join(share_dir, 'applications/'), ['electron-fittexxcoin.desktop']),
         # App stream (store) metadata
-        (os.path.join(share_dir, 'metainfo/'), ['org.electronlambda.ElectronCash.appdata.xml']),
+        (os.path.join(share_dir, 'metainfo/'), ['org.electronfittexxcoin.FittexxcoinCash.appdata.xml']),
     ]
 
 class MakeAllBeforeSdist(setuptools.command.sdist.sdist):
@@ -129,17 +129,17 @@ class MakeAllBeforeSdist(setuptools.command.sdist.sdist):
 
 
 platform_package_data = {
-    'electronlambda_gui.qt': [],
+    'electronfittexxcoin_gui.qt': [],
 }
 
 if sys.platform in ('linux'):
-    platform_package_data['electronlambda_gui.qt'] += [
+    platform_package_data['electronfittexxcoin_gui.qt'] += [
             'data/ecsupplemental_lnx.ttf',
             'data/fonts.xml'
     ]
 
 if sys.platform in ('win32', 'cygwin'):
-    platform_package_data['electronlambda_gui.qt'] += [
+    platform_package_data['electronfittexxcoin_gui.qt'] += [
             'data/ecsupplemental_win.ttf'
     ]
 
@@ -157,33 +157,33 @@ setup(
         'all': requirements_hw + requirements_binaries,
     },
     packages=[
-        'electronlambda',
-        'electronlambda.qrreaders',
-        'electronlambda.slp',
-        'electronlambda.rpa',
-        'electronlambda.tor',
-        'electronlambda.utils',
-        'electronlambda_gui',
-        'electronlambda_gui.qt',
-        'electronlambda_gui.qt.qrreader',
-        'electronlambda_gui.qt.utils',
-        'electronlambda_gui.qt.utils.darkdetect',
-        'electronlambda_plugins',
-        'electronlambda_plugins.audio_modem',
-        'electronlambda_plugins.cosigner_pool',
-        'electronlambda_plugins.email_requests',
-        'electronlambda_plugins.hw_wallet',
-        'electronlambda_plugins.keepkey',
-        'electronlambda_plugins.ledger',
-        'electronlambda_plugins.trezor',
-        'electronlambda_plugins.digitalbitbox',
-        'electronlambda_plugins.virtualkeyboard',
-        'electronlambda_plugins.shuffle_deprecated',
-        'electronlambda_plugins.satochip',
-        'electronlambda_plugins.fusion',
+        'electronfittexxcoin',
+        'electronfittexxcoin.qrreaders',
+        'electronfittexxcoin.slp',
+        'electronfittexxcoin.rpa',
+        'electronfittexxcoin.tor',
+        'electronfittexxcoin.utils',
+        'electronfittexxcoin_gui',
+        'electronfittexxcoin_gui.qt',
+        'electronfittexxcoin_gui.qt.qrreader',
+        'electronfittexxcoin_gui.qt.utils',
+        'electronfittexxcoin_gui.qt.utils.darkdetect',
+        'electronfittexxcoin_plugins',
+        'electronfittexxcoin_plugins.audio_modem',
+        'electronfittexxcoin_plugins.cosigner_pool',
+        'electronfittexxcoin_plugins.email_requests',
+        'electronfittexxcoin_plugins.hw_wallet',
+        'electronfittexxcoin_plugins.keepkey',
+        'electronfittexxcoin_plugins.ledger',
+        'electronfittexxcoin_plugins.trezor',
+        'electronfittexxcoin_plugins.digitalbitbox',
+        'electronfittexxcoin_plugins.virtualkeyboard',
+        'electronfittexxcoin_plugins.shuffle_deprecated',
+        'electronfittexxcoin_plugins.satochip',
+        'electronfittexxcoin_plugins.fusion',
     ],
     package_data={
-        'electronlambda': [
+        'electronfittexxcoin': [
             'servers.json',
             'servers_testnet.json',
             'servers_testnet4.json',
@@ -195,25 +195,25 @@ setup(
             'wordlist/*.txt',
             'libsecp256k1*',
             'libzbar*',
-            'locale/*/LC_MESSAGES/electron-lambda.mo',
+            'locale/*/LC_MESSAGES/electron-fittexxcoin.mo',
             'tor/bin/*'
         ],
-        'electronlambda_plugins.shuffle_deprecated': [
+        'electronfittexxcoin_plugins.shuffle_deprecated': [
             'servers.json'
         ],
-        'electronlambda_plugins.fusion': [
+        'electronfittexxcoin_plugins.fusion': [
             '*.svg', '*.png'
         ],
-        # On Linux and Windows this means adding electronlambda_gui/qt/data/*.ttf
+        # On Linux and Windows this means adding electronfittexxcoin_gui/qt/data/*.ttf
         # On Darwin we don't use that font, so we don't add it to save space.
         **platform_package_data
     },
-    scripts=['electron-lambda'],
+    scripts=['electron-fittexxcoin'],
     data_files=data_files,
-    description="Lightweight Lambda Wallet",
-    author="The Lambda core Developers",
+    description="Lightweight Fittexxcoin Wallet",
+    author="The Fittexxcoin core Developers",
     author_email="sylondata25@gmail.com",
     license="MIT Licence",
-    url="http://lambdablockchain.com",
-    long_description="""Lightweight lambda Wallet"""
+    url="http://fittexxcoinblockchain.com",
+    long_description="""Lightweight fittexxcoin Wallet"""
 )

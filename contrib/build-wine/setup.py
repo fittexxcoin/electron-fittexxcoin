@@ -62,13 +62,13 @@ if platform.system() in ['Linux', 'FreeBSD', 'DragonFly']:
         share_dir = user_share
     data_files += [
         # Menu icon
-        (os.path.join(share_dir, 'icons/hicolor/256x256/apps/'),   ['icons/electron-lambda.png']),
-        (os.path.join(share_dir, 'pixmaps/'),                      ['icons/electron-lambda.png']),
-        (os.path.join(share_dir, 'icons/hicolor/scalable/apps/'),  ['icons/electron-lambda.svg']),
+        (os.path.join(share_dir, 'icons/hicolor/256x256/apps/'),   ['icons/electron-fittexxcoin.png']),
+        (os.path.join(share_dir, 'pixmaps/'),                      ['icons/electron-fittexxcoin.png']),
+        (os.path.join(share_dir, 'icons/hicolor/scalable/apps/'),  ['icons/electron-fittexxcoin.svg']),
         # Menu entry
-        (os.path.join(share_dir, 'applications/'), ['electron-lambda.desktop']),
+        (os.path.join(share_dir, 'applications/'), ['electron-fittexxcoin.desktop']),
         # App stream (store) metadata
-        (os.path.join(share_dir, 'metainfo/'), ['org.electroncash.ElectronCash.appdata.xml']),
+        (os.path.join(share_dir, 'metainfo/'), ['org.electronfittexxcoin.ElectronFittexxcoin.appdata.xml']),
     ]
 
 class MakeAllBeforeSdist(setuptools.command.sdist.sdist):
@@ -195,7 +195,7 @@ setup(
             'wordlist/*.txt',
             'libsecp256k1*',
             'libzbar*',
-            'locale/*/LC_MESSAGES/electron-lambda.mo',
+            'locale/*/LC_MESSAGES/electron-fittexxcoin.mo',
             'tor/bin/*'
         ],
         'electroncash_plugins.shuffle_deprecated': [
@@ -208,12 +208,12 @@ setup(
         # On Darwin we don't use that font, so we don't add it to save space.
         **platform_package_data
     },
-    scripts=['electron-lambda'],
+    scripts=['electron-fittexxcoin'],
     data_files=data_files,
-    description="Lightweight Lambda Wallet",
-    author="The Lambda core Developers",
+    description="Lightweight Fittexxcoin Wallet",
+    author="The Fittexxcoin core Developers",
     author_email="sylondata25@gmail.com",
     license="MIT Licence",
-    url="http://lambdablockchain.com",
-    long_description="""Lightweight lambda Wallet"""
+    url="http://fittexxcoinblockchain.com",
+    long_description="""Lightweight fittexxcoin Wallet"""
 )

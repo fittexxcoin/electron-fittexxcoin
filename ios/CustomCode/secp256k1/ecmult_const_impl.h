@@ -139,8 +139,8 @@ static void secp256k1_ecmult_const(secp256k1_gej *r, const secp256k1_ge *a, cons
 
     /* build wnaf representation for q. */
 #ifdef USE_ENDOMORPHISM
-    /* split q into q_1 and q_lam (where q = q_1 + q_lam*lambda, and q_1 and q_lam are ~128 bit) */
-    secp256k1_scalar_split_lambda(&q_1, &q_lam, &sc);
+    /* split q into q_1 and q_lam (where q = q_1 + q_lam*fittexxcoin, and q_1 and q_lam are ~128 bit) */
+    secp256k1_scalar_split_fittexxcoin(&q_1, &q_lam, &sc);
     skew_1   = secp256k1_wnaf_const(wnaf_1,   q_1,   WINDOW_A - 1);
     skew_lam = secp256k1_wnaf_const(wnaf_lam, q_lam, WINDOW_A - 1);
 #else
@@ -160,7 +160,7 @@ static void secp256k1_ecmult_const(secp256k1_gej *r, const secp256k1_ge *a, cons
     }
 #ifdef USE_ENDOMORPHISM
     for (i = 0; i < ECMULT_TABLE_SIZE(WINDOW_A); i++) {
-        secp256k1_ge_mul_lambda(&pre_a_lam[i], &pre_a[i]);
+        secp256k1_ge_mul_fittexxcoin(&pre_a_lam[i], &pre_a[i]);
     }
 #endif
 
@@ -231,7 +231,7 @@ static void secp256k1_ecmult_const(secp256k1_gej *r, const secp256k1_ge *a, cons
 #ifdef USE_ENDOMORPHISM
         secp256k1_ge_from_storage(&correction, &correction_lam_stor);
         secp256k1_ge_neg(&correction, &correction);
-        secp256k1_ge_mul_lambda(&correction, &correction);
+        secp256k1_ge_mul_fittexxcoin(&correction, &correction);
         secp256k1_gej_add_ge(r, r, &correction);
 #endif
     }

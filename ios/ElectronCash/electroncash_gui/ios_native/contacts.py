@@ -6,11 +6,11 @@
 #
 from . import utils
 from . import gui
-from electronlambda import WalletStorage, Wallet
-from electronlambda.util import timestamp_to_datetime
-from electronlambda.i18n import _, language
-from electronlambda.address import Address, PublicKey
-from electronlambda.contacts import Contact
+from electronfittexxcoin import WalletStorage, Wallet
+from electronfittexxcoin.util import timestamp_to_datetime
+from electronfittexxcoin.i18n import _, language
+from electronfittexxcoin.address import Address, PublicKey
+from electronfittexxcoin.contacts import Contact
 from .uikit_bindings import *
 from .custom_objc import *
 from collections import namedtuple
@@ -151,8 +151,8 @@ class ContactsVC(ContactsVCBase):
     @objc_method
     def viewDidLoad(self) -> None:
         send_super(__class__, self, 'viewDidLoad')
-        gui.ElectrumGui.gui.sigContacts.connect(lambda:self.refresh(), self)
-        gui.ElectrumGui.gui.contactHistSync.connect(lambda:self.refresh(), self)
+        gui.ElectrumGui.gui.sigContacts.connect(fittexxcoin:self.refresh(), self)
+        gui.ElectrumGui.gui.contactHistSync.connect(fittexxcoin:self.refresh(), self)
         self.refresh()
 
     @objc_method
@@ -389,7 +389,7 @@ class ContactsVC(ContactsVCBase):
             contact = _Get()[view.tag]
         except:
             return
-        show_contact_options_actionsheet(contact, self, view, onEdit = lambda x: utils.show_notification(_("Contact saved")))
+        show_contact_options_actionsheet(contact, self, view, onEdit = fittexxcoin x: utils.show_notification(_("Contact saved")))
 
 
     @objc_method
@@ -433,7 +433,7 @@ class ContactsVC(ContactsVCBase):
             contacts = _Get()
             if contacts and index < len(contacts):
                 contact = contacts[index]
-        show_new_edit_contact(contact, self, onEdit = lambda x: utils.show_notification(_("Contact saved")))
+        show_new_edit_contact(contact, self, onEdit = fittexxcoin x: utils.show_notification(_("Contact saved")))
 
 
     @objc_method
@@ -526,12 +526,12 @@ class NewContactVC(NewContactBase):
         result = cleanup_address_remove_colon(result)
         if not Address.is_valid(result):
             title = _("Invalid QR Code")
-            message = _("The QR code does not appear to be a valid LMC address.\nPlease try again.")
+            message = _("The QR code does not appear to be a valid FXX address.\nPlease try again.")
             reader.stopScanning()
             gui.ElectrumGui.gui.show_error(
                 title = title,
                 message = message,
-                onOk = lambda: reader.startScanning(),
+                onOk = fittexxcoin: reader.startScanning(),
                 vc = self.qrvc
             )
         else:
@@ -724,7 +724,7 @@ def get_contacts(wallet = None, sort = True) -> list:
             entry = ContactsEntry(name, address, addr)
             contacts.append(entry)
     if sort:
-        contacts.sort(key=lambda x: [x.name, x.address_str], reverse=False)
+        contacts.sort(key=fittexxcoin x: [x.name, x.address_str], reverse=False)
     #utils.NSLog("get_contacts: fetched %d contacts in %f ms",len(contacts), (time.time()-t0)*1000.0)
     return contacts
 
@@ -875,7 +875,7 @@ def show_contact_options_actionsheet(contact : ContactsEntry, vc : ObjCInstance,
             actions.pop(3)
 
         if isinstance(vc, ContactDetailVC):
-            actions.insert(2, [ _('Share/Save QR...'), lambda: vc.onQRImgTap() ])
+            actions.insert(2, [ _('Share/Save QR...'), fittexxcoin: vc.onQRImgTap() ])
 
         utils.show_alert(
             vc = vc,

@@ -210,7 +210,7 @@ build_the_app() {
         for i in ./locale/*; do
             dir=$i/LC_MESSAGES
             mkdir -p $dir
-            msgfmt --output-file=$dir/electron-lambda.mo $i/electron-lambda.po || true
+            msgfmt --output-file=$dir/electron-fittexxcoin.mo $i/electron-fittexxcoin.po || true
         done
         popd
 
@@ -224,7 +224,7 @@ build_the_app() {
         find -exec touch -d '2000-11-11T11:11:11+00:00' {} +
         popd  # go back to $here
 
-        cp -r "$here"/../electrum-locale/locale "$WINEPREFIX"/drive_c/electron-lambda/electronlambda/
+        cp -r "$here"/../electrum-locale/locale "$WINEPREFIX"/drive_c/electron-fittexxcoin/electronfittexxcoin/
 
         # Install frozen dependencies
         info "Installing frozen dependencies ..."
@@ -235,7 +235,7 @@ build_the_app() {
         # like the isolated build environment pip uses for dependencies.
         PIP_CONSTRAINT="$here/../requirements/build-constraint.txt" $PYTHON -m pip install --no-deps --no-warn-script-location -r "$here"/../deterministic-build/requirements-hw.txt || fail "Failed to install requirements-hw"
 
-        pushd "$WINEPREFIX"/drive_c/electron-lambda
+        pushd "$WINEPREFIX"/drive_c/electron-fittexxcoin
         export WINEPREFIX="$HOME/.wine"
         ls "$WINEPREFIX/drive_c"
         wget https://www.python.org/ftp/python/3.11.8/python-3.11.8-amd64.exe
@@ -256,7 +256,7 @@ build_the_app() {
 
         # build standalone and portable versions
         info "Running Pyinstaller to build standalone and portable .exe versions ..."
-        ls -la "C:/Users/DELL/electron-lambda"
+        ls -la "C:/Users/DELL/electron-fittexxcoin"
         ELECTRONCASH_CMDLINE_NAME="$NAME_ROOT" wine "C:/python$PYTHON_VERSION/scripts/pyinstaller.exe" --noconfirm deterministic.spec || fail "Pyinstaller failed"
 
         # rename the output files
@@ -274,7 +274,7 @@ build_the_app() {
         # build NSIS installer
         info "Running makensis to build setup .exe version ..."
         # $VERSION could be passed to the electron-cash.nsi script, but this would require some rewriting in the script iself.
-        wine "$WINEPREFIX/drive_c/Program Files/NSIS/makensis.exe" /DPRODUCT_VERSION=$VERSION electron-lambda.nsi || fail "makensis failed"
+        wine "$WINEPREFIX/drive_c/Program Files/NSIS/makensis.exe" /DPRODUCT_VERSION=$VERSION electron-fittexxcoin.nsi || fail "makensis failed"
 
         cd dist
         mv $NAME_ROOT-setup.exe $NAME_ROOT-$VERSION-setup.exe  || fail "Failed to move $NAME_ROOT-$VERSION-setup.exe to the output dist/ directory"

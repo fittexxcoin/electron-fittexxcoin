@@ -2,9 +2,9 @@
 
 import sys
 import time
-from electronlambda import SimpleConfig, Network
-from electronlambda.util import print_msg, json_encode
-from electronlambda.address import Address
+from electronfittexxcoin import SimpleConfig, Network
+from electronfittexxcoin.util import print_msg, json_encode
+from electronfittexxcoin.address import Address
 
 try:
     addr = Address.from_string(sys.argv[1])
@@ -27,7 +27,7 @@ if not network.is_connected():
 
 # 2. send the subscription
 sh = addr.to_scripthash_hex()
-callback = lambda response: print_msg(json_encode(response.get('result')))
+callback = fittexxcoin response: print_msg(json_encode(response.get('result')))
 network.send([('blockchain.scripthash.subscribe',[sh])], callback)
 
 # 3. wait for results

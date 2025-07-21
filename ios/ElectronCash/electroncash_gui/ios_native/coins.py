@@ -8,9 +8,9 @@ from . import utils
 from . import gui
 from . import txdetail
 from . import addresses
-from electronlambda import WalletStorage, Wallet
-from electronlambda.util import timestamp_to_datetime
-from electronlambda.i18n import _, language
+from electronfittexxcoin import WalletStorage, Wallet
+from electronfittexxcoin.util import timestamp_to_datetime
+from electronfittexxcoin.i18n import _, language
 import time
 from .uikit_bindings import *
 from .custom_objc import *
@@ -35,8 +35,8 @@ class CoinsDetail(CoinsDetailBase):
             bb = UIBarButtonItem.new().autorelease()
             bb.title = _("Back")
             self.navigationItem.backBarButtonItem = bb
-            gui.ElectrumGui.gui.sigCoins.connect(lambda: self.refresh(), self)
-            gui.ElectrumGui.gui.cash_addr_sig.connect(lambda: self.refresh(), self)
+            gui.ElectrumGui.gui.sigCoins.connect(fittexxcoin: self.refresh(), self)
+            gui.ElectrumGui.gui.cash_addr_sig.connect(fittexxcoin: self.refresh(), self)
         return self
 
     @objc_method
@@ -186,7 +186,7 @@ class CoinsDetail(CoinsDetailBase):
         actions = _BuildGenericOptionsList(entry, self.navigationController)
         if not actions: return
 
-        actions.insert(2, [_('Share/Save QR...'), lambda: self.onQRImgTap()])
+        actions.insert(2, [_('Share/Save QR...'), fittexxcoin: self.onQRImgTap()])
 
         utils.show_alert(
             vc = self,
@@ -261,7 +261,7 @@ class CoinsTableVC(UITableViewController):
         bb.title = _("Back")
         self.navigationItem.backBarButtonItem = bb
 
-        gui.ElectrumGui.gui.sigCoins.connect(lambda: self.refresh(), self)
+        gui.ElectrumGui.gui.sigCoins.connect(fittexxcoin: self.refresh(), self)
 
         return self
 
@@ -282,7 +282,7 @@ class CoinsTableVC(UITableViewController):
     def viewDidLoad(self) -> None:
         send_super(__class__, self, 'viewDidLoad')
         objs = NSBundle.mainBundle.loadNibNamed_owner_options_("Misc", None, None)
-        objs = tuple(filter(lambda x: isinstance(x, UIView) and x.tag==6000, objs)) if objs else None
+        objs = tuple(filter(fittexxcoin x: isinstance(x, UIView) and x.tag==6000, objs)) if objs else None
         if objs:
             self.noCoins = objs[0]
             lbl = self.noCoins.viewWithTag_(6061)
@@ -475,7 +475,7 @@ class CoinsTableVC(UITableViewController):
 
             if not watch_only and not entry.is_frozen and not entry.is_slp:
                 if len(list(self.updateSelectionButtons())):
-                    actions.insert(-1,[ _('Spend from this UTXO + Selected'), lambda: spend_from2([entry.utxo]) ] )
+                    actions.insert(-1,[ _('Spend from this UTXO + Selected'), fittexxcoin: spend_from2([entry.utxo]) ] )
 
 
             utils.show_alert(
@@ -641,10 +641,10 @@ def _BuildGenericOptionsList(entry : CoinsEntry, navController : UINavigationCon
     watch_only = False if parent.wallet and not parent.wallet.is_watching_only() else True
 
     if not watch_only and not entry.is_slp:
-        actions.append([ _('Freeze') if not entry.is_frozen else _('Unfreeze'), lambda: toggle_freeze(entry) ])
+        actions.append([ _('Freeze') if not entry.is_frozen else _('Unfreeze'), fittexxcoin: toggle_freeze(entry) ])
 
     if not watch_only and not entry.is_frozen and not entry.is_slp:
-        actions.append([ _('Spend from this UTXO'), lambda: spend_from([entry.utxo]) ] )
+        actions.append([ _('Spend from this UTXO'), fittexxcoin: spend_from([entry.utxo]) ] )
 
     # make sure this is last
     actions.append([ _("View on block explorer"), on_block_explorer ] )
@@ -746,7 +746,7 @@ def get_coins(domain : list = None, exclude_frozen : bool = False, mature : bool
         entry = CoinsEntry(x, tx_hash, address, address_str, height, name, label, amount, amount_str, is_frozen, is_change, base_unit, is_slp)
         coins.append(entry)
 
-    coins.sort(key=lambda x: [x.address_str, x.amount, x.height], reverse=True)
+    coins.sort(key=fittexxcoin x: [x.address_str, x.amount, x.height], reverse=True)
 
     return coins
 

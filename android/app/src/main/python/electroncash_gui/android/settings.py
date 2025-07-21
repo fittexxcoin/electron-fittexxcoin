@@ -1,6 +1,6 @@
 import json
 
-from electronlambda import simple_config
+from electronfittexxcoin import simple_config
 
 
 SP_SET_METHODS = {

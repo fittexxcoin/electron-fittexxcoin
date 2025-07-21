@@ -46,7 +46,7 @@ cd $build_dir/../..
 VERSION=`git_describe_filtered`
 
 # Paramterize
-BUILDDIR=/tmp/electron-lambda-build
+BUILDDIR=/tmp/electron-fittexxcoin-build
 LIBSECP_COMMIT="69ccf0d2f758b1a4df9cde8222459381e08fc1dc"
 # Compute major.minor Python version from above using Bash array magic
 MAJ_MIN=(${PYTHON_VERSION//./ })
@@ -168,7 +168,7 @@ PYINSTALLER_COMMIT="90256f93ed943daf6de53c7dd39710a415f705cb"
     # add reproducible randomness. this ensures we build a different bootloader for each commit.
     # if we built the same one for all releases, that might also get anti-virus false positives
     echo "extern const char * const electron_cash_tag;" >> ./bootloader/src/pyi_main.c
-    echo "const char * const electron_cash_tag = \"tagged by Electron-Lambda@$EC_COMMIT_HASH\";" >> ./bootloader/src/pyi_main.c
+    echo "const char * const electron_cash_tag = \"tagged by Electron-Fittexxcoin@$EC_COMMIT_HASH\";" >> ./bootloader/src/pyi_main.c
     pushd bootloader
     # compile bootloader
     python3 ./waf all CFLAGS="-static"
@@ -203,7 +203,7 @@ verify_hash $BUILDDIR/libusb/1.0.21/lib/libusb-1.0.dylib d147e7382dfa676d93e8b17
 cp -fp $BUILDDIR/libusb/1.0.21/lib/libusb-1.0.dylib contrib/osx || fail "Could not copy libusb"
 
 # Build ZBar
-contrib/make_zbar && mv -vf electronlambda/libzbar.0.dylib contrib/osx/. || fail "Could not build ZBar"
+contrib/make_zbar && mv -vf electronfittexxcoin/libzbar.0.dylib contrib/osx/. || fail "Could not build ZBar"
 
 info "Building libsecp256k1"
 pushd contrib/secp256k1 || fail "Could not chdir to contrib/secp256k1"
@@ -283,7 +283,7 @@ if ((DARWIN_VER >= 18 && FORCE_MOJAVE_DARK)); then
 fi
 
 # Sign the Tor binary separately
-DoCodeSignMaybe "tor binary" "dist/${PACKAGE}.app/Contents/Frameworks/electronlambda/tor/bin/tor" "$APP_SIGN"
+DoCodeSignMaybe "tor binary" "dist/${PACKAGE}.app/Contents/Frameworks/electronfittexxcoin/tor/bin/tor" "$APP_SIGN"
 # Finally, codesign the whole thing
 DoCodeSignMaybe ".app bundle" "dist/${PACKAGE}.app" "$APP_SIGN"
 

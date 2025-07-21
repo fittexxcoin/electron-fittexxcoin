@@ -3,7 +3,7 @@
 
 set -e
 
-venv_dir=~/.electron-lambda-venv
+venv_dir=~/.electron-fittexxcoin-venv
 contrib=$(dirname "$0")
 
 . $contrib/base.sh || { echo "Cannot find base.sh" && exit 1; }

@@ -3,10 +3,10 @@
 from PyInstaller.utils.hooks import collect_data_files, collect_submodules, collect_dynamic_libs
 import sys, os
 
-PACKAGE='Electron-Lambda'
-BUNDLE_IDENTIFIER='org.electronlambda.' + PACKAGE # Used for info.plist
-PYPKG='electronlambda'
-MAIN_SCRIPT='electron-lambda'
+PACKAGE='Electron-Fittexxcoin'
+BUNDLE_IDENTIFIER='org.electronfittexxcoin.' + PACKAGE # Used for info.plist
+PYPKG='electronfittexxcoin'
+MAIN_SCRIPT='electron-fittexxcoin'
 ICONS_FILE='electron.icns'
 
 VERSION = os.environ.get("ELECTRONCASH_VERSION")
@@ -25,16 +25,16 @@ hiddenimports += collect_submodules('satochip')    # Satochip
 hiddenimports += collect_submodules('smartcard')   # Satochip
 
 datas = [
-    (home+'electronlambda/currencies.json', PYPKG),
-    (home+'electronlambda/servers.json', PYPKG),
-    (home+'electronlambda/servers_testnet.json', PYPKG),
-    (home+'electronlambda/servers_testnet4.json', PYPKG),
-    (home+'electronlambda/servers_scalenet.json', PYPKG),
-    (home+'electronlambda/servers_regtest.json', PYPKG),
-    (home+'electronlambda/servers_chipnet.json', PYPKG),
-    (home+'electronlambda/wordlist/english.txt', PYPKG + '/wordlist'),
-    (home+'electronlambda/locale', PYPKG + '/locale'),
-    (home+'electronlambda_plugins', PYPKG + '_plugins'),
+    (home+'electronfittexxcoin/currencies.json', PYPKG),
+    (home+'electronfittexxcoin/servers.json', PYPKG),
+    (home+'electronfittexxcoin/servers_testnet.json', PYPKG),
+    (home+'electronfittexxcoin/servers_testnet4.json', PYPKG),
+    (home+'electronfittexxcoin/servers_scalenet.json', PYPKG),
+    (home+'electronfittexxcoin/servers_regtest.json', PYPKG),
+    (home+'electronfittexxcoin/servers_chipnet.json', PYPKG),
+    (home+'electronfittexxcoin/wordlist/english.txt', PYPKG + '/wordlist'),
+    (home+'electronfittexxcoin/locale', PYPKG + '/locale'),
+    (home+'electronfittexxcoin_plugins', PYPKG + '_plugins'),
 ]
 datas += collect_data_files('trezorlib')
 datas += collect_data_files('btchip')
@@ -49,33 +49,33 @@ binaries += [(home + "contrib/osx/libsecp256k1.0.dylib", ".")]
 # LibZBar for QR code scanning
 binaries += [(home + "contrib/osx/libzbar.0.dylib", ".")]
 # Add Tor binary
-binaries += [(home + "electronlambda/tor/bin/tor", "electronlambda/tor/bin")]
+binaries += [(home + "electronfittexxcoin/tor/bin/tor", "electronfittexxcoin/tor/bin")]
 
 # Workaround for "Retro Look":
 binaries += [b for b in collect_dynamic_libs('PyQt5') if 'macstyle' in b[0]]
 
 # We don't put these files in to actually include them in the script but to make the Analysis method scan them for imports
 a = Analysis([home+MAIN_SCRIPT,
-              home+'electronlambda_gui/qt/main_window.py',
-              home+'electronlambda_gui/qt/qrreader/camera_dialog.py',
-              home+'electronlambda_gui/text.py',
-              home+'electronlambda/util.py',
-              home+'electronlambda/wallet.py',
-              home+'electronlambda/simple_config.py',
-              home+'electronlambda/bitcoin.py',
-              home+'electronlambda/dnssec.py',
-              home+'electronlambda/commands.py',
-              home+'electronlambda/tor/controller.py',
-              home+'electronlambda_plugins/cosigner_pool/qt.py',
-              home+'electronlambda_plugins/email_requests/qt.py',
-              home+'electronlambda_plugins/trezor/clientbase.py',
-              home+'electronlambda_plugins/trezor/trezor.py',
-              home+'electronlambda_plugins/trezor/qt.py',
-              home+'electronlambda_plugins/keepkey/qt.py',
-              home+'electronlambda_plugins/ledger/qt.py',
-              home+'electronlambda_plugins/satochip/qt.py',  # Satochip
-              home+'electronlambda_plugins/fusion/fusion.py', # CashFusion
-              home+'electronlambda_plugins/fusion/qt.py', # CashFusion
+              home+'electronfittexxcoin_gui/qt/main_window.py',
+              home+'electronfittexxcoin_gui/qt/qrreader/camera_dialog.py',
+              home+'electronfittexxcoin_gui/text.py',
+              home+'electronfittexxcoin/util.py',
+              home+'electronfittexxcoin/wallet.py',
+              home+'electronfittexxcoin/simple_config.py',
+              home+'electronfittexxcoin/bitcoin.py',
+              home+'electronfittexxcoin/dnssec.py',
+              home+'electronfittexxcoin/commands.py',
+              home+'electronfittexxcoin/tor/controller.py',
+              home+'electronfittexxcoin_plugins/cosigner_pool/qt.py',
+              home+'electronfittexxcoin_plugins/email_requests/qt.py',
+              home+'electronfittexxcoin_plugins/trezor/clientbase.py',
+              home+'electronfittexxcoin_plugins/trezor/trezor.py',
+              home+'electronfittexxcoin_plugins/trezor/qt.py',
+              home+'electronfittexxcoin_plugins/keepkey/qt.py',
+              home+'electronfittexxcoin_plugins/ledger/qt.py',
+              home+'electronfittexxcoin_plugins/satochip/qt.py',  # Satochip
+              home+'electronfittexxcoin_plugins/fusion/fusion.py', # CashFusion
+              home+'electronfittexxcoin_plugins/fusion/qt.py', # CashFusion
               ],
              binaries=binaries,
              datas=datas,

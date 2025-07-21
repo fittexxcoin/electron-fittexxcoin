@@ -9,20 +9,20 @@ from . import gui
 from .history import HistoryEntry
 from . import txdetail
 from . import contacts
-from electronlambda import WalletStorage, Wallet
-from electronlambda.util import timestamp_to_datetime, NotEnoughFunds, ExcessiveFee
-from electronlambda.transaction import Transaction
-from electronlambda.i18n import _
+from electronfittexxcoin import WalletStorage, Wallet
+from electronfittexxcoin.util import timestamp_to_datetime, NotEnoughFunds, ExcessiveFee
+from electronfittexxcoin.transaction import Transaction
+from electronfittexxcoin.i18n import _
 from .custom_objc import *
 from .uikit_bindings import *
-from electronlambda import networks
-from electronlambda.address import Address, ScriptOutput
-from electronlambda.paymentrequest import PaymentRequest
-from electronlambda.transaction import OPReturn
-from electronlambda import bitcoin
+from electronfittexxcoin import networks
+from electronfittexxcoin.address import Address, ScriptOutput
+from electronfittexxcoin.paymentrequest import PaymentRequest
+from electronfittexxcoin.transaction import OPReturn
+from electronfittexxcoin import bitcoin
 from .feeslider import FeeSlider
 from .amountedit import BTCAmountEdit
-from electronlambda.plugins import run_hook
+from electronfittexxcoin.plugins import run_hook
 import time, html, re, sys, traceback
 from decimal import Decimal
 
@@ -121,12 +121,12 @@ class SendVC(SendBase):
                 message = _("The QR code contains multiple outputs. At this time only a single output is supported.\nPlease try again.")
             else:
                 title = _("Invalid QR Code")
-                message = _("The QR code does not appear to be a valid LMC address or payment request.\nPlease try again.")
+                message = _("The QR code does not appear to be a valid FXX address or payment request.\nPlease try again.")
             reader.stopScanning()
             parent().show_error(
                 title = title,
                 message = message,
-                onOk = lambda: reader.startScanning()
+                onOk = fittexxcoin: reader.startScanning()
             )
             self.qrScanErr = False
         else:
@@ -314,7 +314,7 @@ class SendVC(SendBase):
         if c is not None:
             c.constant = 25.0 if doFX else -28.0
 
-        parent().cash_addr_sig.connect(lambda: self.reformatSpendFrom(), self)
+        parent().cash_addr_sig.connect(fittexxcoin: self.reformatSpendFrom(), self)
         self.reformatSpendFrom()
 
         pay_to = utils.nspy_get_byname(self, 'pay_to')
@@ -334,7 +334,7 @@ class SendVC(SendBase):
     def viewDidAppear_(self, animated : bool) -> None:
         send_super(__class__, self, 'viewDidAppear:', animated, argtypes=[c_bool])
         parent().show_warning_if_watching_only(vc = self,
-                                               onOk = lambda: self.presentingViewController.dismissViewControllerAnimated_completion_(True, None))
+                                               onOk = fittexxcoin: self.presentingViewController.dismissViewControllerAnimated_completion_(True, None))
         if not self.tv.isHidden(): self.tv.flashScrollIndicators()
 
     @objc_method
@@ -393,7 +393,7 @@ class SendVC(SendBase):
 
     @objc_method
     def onMaxBut_(self, but) -> None:
-        utils.boilerplate.vc_highlight_button_then_do(self, but, lambda:self.spendMax())
+        utils.boilerplate.vc_highlight_button_then_do(self, but, fittexxcoin:self.spendMax())
 
     @objc_method
     def textFieldShouldEndEditing_(self, tf : ObjCInstance) -> bool:
@@ -834,7 +834,7 @@ class SendVC(SendBase):
             parent().show_error(str(e))
             return
 
-        amount = tx.output_value() if self.isMax else sum(map(lambda x:x[2], outputs))
+        amount = tx.output_value() if self.isMax else sum(map(fittexxcoin x:x[2], outputs))
         fee = tx.get_fee()
 
         #if fee < self.wallet.relayfee() * tx.estimated_size() / 1000 and tx.requires_fee(self.wallet):
@@ -879,7 +879,7 @@ class SendVC(SendBase):
             parent().prompt_password_if_needed_asynch(callBack = DoSign, prompt = '\n'.join(msg), vc = self)
         else:
             msg.append(_('Proceed?'))
-            parent().question(message = '\n'.join(msg), title = _("Confirm Send"), onOk = lambda: DoSign(None), vc = self)
+            parent().question(message = '\n'.join(msg), title = _("Confirm Send"), onOk = fittexxcoin: DoSign(None), vc = self)
 
     #### UITableView delegate/dataSource methods...
     @objc_method
@@ -945,7 +945,7 @@ class SendVC(SendBase):
             but = hdr.viewWithTag_(2)
             def clearfun(but : objc_id) -> None:
                 but = ObjCInstance(but)
-                utils.boilerplate.vc_highlight_button_then_do(self, but, lambda: self.clearSpendFrom())
+                utils.boilerplate.vc_highlight_button_then_do(self, but, fittexxcoin: self.clearSpendFrom())
             but.handleControlEvent_withBlock_(UIControlEventPrimaryActionTriggered, clearfun)
         else:
             hdr = UIView.alloc().initWithFrame_(CGRectMake(0,0,0,0)).autorelease()
@@ -975,7 +975,7 @@ class SendVC(SendBase):
         if editingStyle == UITableViewCellEditingStyleDelete:
             self.removeSpendFromAtIndex_(indexPath.row)
             self.retain()
-            utils.call_later(0.4, lambda: self.autorelease().spendFromWasDeleted())
+            utils.call_later(0.4, fittexxcoin: self.autorelease().spendFromWasDeleted())
             tv.deleteRowsAtIndexPaths_withRowAnimation_([indexPath],UITableViewRowAnimationFade)
 
     @objc_method
@@ -992,7 +992,7 @@ class SendVC(SendBase):
                 try:
                     self.removeSpendFromAtIndex_(row)
                     self.retain()
-                    utils.call_later(0.4, lambda: self.autorelease().spendFromWasDeleted())
+                    utils.call_later(0.4, fittexxcoin: self.autorelease().spendFromWasDeleted())
                     result = True
                 except:
                     traceback.print_exc(file=sys.stderr)

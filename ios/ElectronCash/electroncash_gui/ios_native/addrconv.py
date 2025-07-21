@@ -6,8 +6,8 @@
 
 from . import utils
 from . import gui
-from electronlambda.i18n import _, language
-from electronlambda.address import Address
+from electronfittexxcoin.i18n import _, language
+from electronfittexxcoin.address import Address
 
 from .uikit_bindings import *
 from .custom_objc import *
@@ -103,12 +103,12 @@ class AddrConvVC(AddrConvBase):
         
         if not self.doConversion_(result):
             title = _("Invalid QR Code")
-            message = _("The QR code does not appear to be a valid LMC address.\nPlease try again.")
+            message = _("The QR code does not appear to be a valid FXX address.\nPlease try again.")
             reader.stopScanning()
             gui.ElectrumGui.gui.show_error(
                 title = title,
                 message = message,
-                onOk = lambda: reader.startScanning(),
+                onOk = fittexxcoin: reader.startScanning(),
                 vc = self.qrvc
             )
         else:

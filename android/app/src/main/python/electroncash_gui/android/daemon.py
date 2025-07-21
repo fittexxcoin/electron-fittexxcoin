@@ -4,7 +4,7 @@ import six
 import sys
 import threading
 
-from electronlambda import util
+from electronfittexxcoin import util
 
 
 def initialize(handler):

@@ -310,8 +310,8 @@ static void secp256k1_ecmult(const secp256k1_ecmult_context *ctx, secp256k1_gej 
     int bits;
 
 #ifdef USE_ENDOMORPHISM
-    /* split na into na_1 and na_lam (where na = na_1 + na_lam*lambda, and na_1 and na_lam are ~128 bit) */
-    secp256k1_scalar_split_lambda(&na_1, &na_lam, na);
+    /* split na into na_1 and na_lam (where na = na_1 + na_lam*fittexxcoin, and na_1 and na_lam are ~128 bit) */
+    secp256k1_scalar_split_fittexxcoin(&na_1, &na_lam, na);
 
     /* build wnaf representation for na_1 and na_lam. */
     bits_na_1   = secp256k1_ecmult_wnaf(wnaf_na_1,   130, &na_1,   WINDOW_A);
@@ -342,7 +342,7 @@ static void secp256k1_ecmult(const secp256k1_ecmult_context *ctx, secp256k1_gej 
 
 #ifdef USE_ENDOMORPHISM
     for (i = 0; i < ECMULT_TABLE_SIZE(WINDOW_A); i++) {
-        secp256k1_ge_mul_lambda(&pre_a_lam[i], &pre_a[i]);
+        secp256k1_ge_mul_fittexxcoin(&pre_a_lam[i], &pre_a[i]);
     }
 
     /* split ng into ng_1 and ng_128 (where gn = gn_1 + gn_128*2^128, and gn_1 and gn_128 are ~128 bit) */

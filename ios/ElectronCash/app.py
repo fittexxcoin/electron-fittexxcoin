@@ -5,12 +5,12 @@
 # MIT License
 #
 import os
-from electronlambda_gui.ios_native.monkeypatches import MonkeyPatches, PatchedSimpleConfig
-from electronlambda.util import set_verbosity
-from electronlambda_gui.ios_native import ElectrumGui
-from electronlambda_gui.ios_native.utils import call_later, get_user_dir, cleanup_tmp_dir, is_debug_build, NSLogSuppress, NSLog
-from electronlambda.simple_config import SimpleConfig
-from electronlambda.networks import set_mainnet, set_testnet
+from electronfittexxcoin_gui.ios_native.monkeypatches import MonkeyPatches, PatchedSimpleConfig
+from electronfittexxcoin.util import set_verbosity
+from electronfittexxcoin_gui.ios_native import ElectrumGui
+from electronfittexxcoin_gui.ios_native.utils import call_later, get_user_dir, cleanup_tmp_dir, is_debug_build, NSLogSuppress, NSLog
+from electronfittexxcoin.simple_config import SimpleConfig
+from electronfittexxcoin.networks import set_mainnet, set_testnet
 
 # NB: This is called from appdelegate.py "application_didFinishLaunchingWithOptions_"
 def main():
@@ -41,14 +41,14 @@ def main():
 
     _printStats(config_options)  # Prints some startup/debug stats such as Python version and SSL version (this is done in another thread to hopefully not impact startup overhead too much, as importing ssl may be a bit heavy)
 
-    return "Lambda FTW!"
+    return "Fittexxcoin FTW!"
 
 def _printStats(config_options):
     import threading
     def thrdfunc(config_options):
         # lazy init of SSL
         import ssl, sys
-        from electronlambda import version, ecc_fast, schnorr
+        from electronfittexxcoin import version, ecc_fast, schnorr
         NSLog("Electron Cash lib version: %s (using server protocol: %s)", version.PACKAGE_VERSION, version.PROTOCOL_VERSION)
         NSLog("Python version: %s", ' '.join(sys.version.split('\n')))
         NSLog("OpenSSL version: %s", ssl.OPENSSL_VERSION)

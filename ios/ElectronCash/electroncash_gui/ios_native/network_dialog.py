@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Electron Cash - lightweight Lambda client
+# Electron Cash - lightweight Fittexxcoin client
 # Copyright (C) 2012 thomasv@gitorious
 #
 # This file is:
@@ -31,12 +31,12 @@ from . import utils
 from . import gui
 from .custom_objc import *
 
-from electronlambda.i18n import _, pgettext
+from electronfittexxcoin.i18n import _, pgettext
 
 import socket
 from collections import namedtuple
 
-from electronlambda.network import serialize_server, deserialize_server
+from electronfittexxcoin.network import serialize_server, deserialize_server
 
 TAG_HELP_STATUS = 112
 TAG_HELP_SERVER = 122
@@ -101,7 +101,7 @@ class NetworkDialogVC(UIViewController):
 
     @objc_method
     def loadView(self) -> None:
-        parent().sigNetwork.connect(lambda:self.refresh(), self)
+        parent().sigNetwork.connect(fittexxcoin:self.refresh(), self)
         self.protocol = 't'
         self.cellIdentifier = "ServerPortCell22px"
         uinib = UINib.nibWithNibName_bundle_(self.cellIdentifier, None)

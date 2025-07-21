@@ -55,11 +55,11 @@ For more information, see this stackoverflow post: https://stackoverflow.com/que
 
 Connecting to TestNet
 ---------------------
-If you want to run the app to point to the LMC TestNet network:
+If you want to run the app to point to the FXX TestNet network:
 
   * Edit / Duplicate the Xcode "Scheme" for Electron Cash and set the envronment variable: `EC_TESTNET`
 
 
 Additional Notes
 ----------------
-The app built by this Xcode project is a fully running standalone Electron Cash as an iPhone app.  It pulls in sources from `../electronlambda` and other places when generating the Xcode project, but everything that is needed (.py files, Python interpreter, etc) ends up packaged in the generated iOS .app!
+The app built by this Xcode project is a fully running standalone Electron Cash as an iPhone app.  It pulls in sources from `../electronfittexxcoin` and other places when generating the Xcode project, but everything that is needed (.py files, Python interpreter, etc) ends up packaged in the generated iOS .app!

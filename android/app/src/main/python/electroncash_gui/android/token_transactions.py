@@ -1,6 +1,6 @@
 from collections import namedtuple
-from electronlambda.simple_config import SimpleConfig
-from electronlambda.token import OutputData
+from electronfittexxcoin.simple_config import SimpleConfig
+from electronfittexxcoin.token import OutputData
 from electroncash_gui.android.tokens import ConcreteTokenMeta, get_token_name
 
 TokenHistory = namedtuple("TokenHistory",

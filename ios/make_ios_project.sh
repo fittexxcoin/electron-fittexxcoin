@@ -49,22 +49,22 @@ if [ -d iOS ]; then
 	rm -fr iOS
 fi
 
-if [ -d ${compact_name}/electronlambda ]; then
-	echo "Deleting old ${compact_name}/electronlambda..."
-	rm -fr ${compact_name}/electronlambda
+if [ -d ${compact_name}/electronfittexxcoin ]; then
+	echo "Deleting old ${compact_name}/electronfittexxcoin..."
+	rm -fr ${compact_name}/electronfittexxcoin
 fi
 
-echo "Pulling 'electronlambda' libs into project from ../electronlambda ..."
-if [ ! -d ../electronlambda/locale ]; then
+echo "Pulling 'electronfittexxcoin' libs into project from ../electronfittexxcoin ..."
+if [ ! -d ../electronfittexxcoin/locale ]; then
 	(cd .. && contrib/make_locale && cd ios)
 	if [ "$?" != 0 ]; then
 		echo ERROR: Could not build locales
 		exit 1
 	fi
 fi
-cp -fpR ../electronlambda ${compact_name}/electronlambda
-echo "Removing electronlambda/tests..."
-rm -fr ${compact_name}/electronlambda/tests
+cp -fpR ../electronfittexxcoin ${compact_name}/electronfittexxcoin
+echo "Removing electronfittexxcoin/tests..."
+rm -fr ${compact_name}/electronfittexxcoin/tests
 find ${compact_name} -name \*.pyc -exec rm -f {} \;
 
 echo ""
@@ -246,13 +246,13 @@ fi
 echo ""
 echo "Copying google protobuf paymentrequests.proto to app lib dir..."
 echo ""
-cp -fva ${compact_name}/electronlambda/*.proto iOS/app/${compact_name}/electronlambda
+cp -fva ${compact_name}/electronfittexxcoin/*.proto iOS/app/${compact_name}/electronfittexxcoin
 if [ "$?" != "0" ]; then
 	echo "** WARNING: Failed to copy google protobuf .proto file to app lib dir!"
 fi
 
-# Clean up no-longer-needed electronlambda/ dir that is outside of Xcode project
-rm -fr ${compact_name}/electronlambda/*
+# Clean up no-longer-needed electronfittexxcoin/ dir that is outside of Xcode project
+rm -fr ${compact_name}/electronfittexxcoin/*
 
 # Can add this back when it works uniformly without issues
 # /usr/bin/env ruby update_project.rb

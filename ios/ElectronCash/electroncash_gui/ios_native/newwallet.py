@@ -6,17 +6,17 @@
 #
 from . import utils
 from . import gui
-from electronlambda.i18n import _, language
-from electronlambda import mnemonic
-from electronlambda.old_mnemonic import words as old_words
+from electronfittexxcoin.i18n import _, language
+from electronfittexxcoin import mnemonic
+from electronfittexxcoin.old_mnemonic import words as old_words
 from typing import Any
 from .uikit_bindings import *
 from .custom_objc import *
 import sys
 from collections import namedtuple
-import electronlambda.bitcoin as bitcoin
-import electronlambda.keystore as keystore
-from electronlambda.address import Address, PublicKey
+import electronfittexxcoin.bitcoin as bitcoin
+import electronfittexxcoin.keystore as keystore
+from electronfittexxcoin.address import Address, PublicKey
 
 if False:
     # this is here for translate i18n to pick up these strings
@@ -26,7 +26,7 @@ if False:
         _("Please write your seed phrase down, as it's the only way to recover your funds if you forget your password or your device is stolen."),
         _("Reenter your seed phrase"),
         # On-Boarding text...
-        _("Welcome to"), _("Electron Cash is an SPV wallet for Lambda"),
+        _("Welcome to"), _("Electron Cash is an SPV wallet for Fittexxcoin"),
         _("Control your own private keys"), _("Easily back up your wallet with a mnemonic seed phrase."),
         _("Enjoy high security"), _("without downloading the blockchain or running a full node."),
         _("Get Started"),
@@ -593,7 +593,7 @@ class RestoreWallet1(NewWalletSeed2):
                 self.kvcContainerView.setHidden_(False)
                 self.seedtv.selectedRange = NSRange(len(self.seedtv.text) if self.seedtv.text else 0, 0);
                 self.kvc.textInput = self.seedtv
-                utils.call_later(0.2, lambda:(self.seedtv.becomeFirstResponder(),self.doSuggestions()))
+                utils.call_later(0.2, fittexxcoin:(self.seedtv.becomeFirstResponder(),self.doSuggestions()))
             else:
                 self.clearSugButs()
                 self.kvc.textInput = None
@@ -607,7 +607,7 @@ class RestoreWallet1(NewWalletSeed2):
                     self.errMsgView.setHidden_(True)
                     self.infoView.setHidden_(False)
                 self.tvdel.didChange = undoErrMsgs
-                utils.call_later(0.2, lambda:self.seedtv.becomeFirstResponder())
+                utils.call_later(0.2, fittexxcoin:self.seedtv.becomeFirstResponder())
         self.bip39.handleControlEvent_withBlock_(UIControlEventPrimaryActionTriggered,onBip39)
         send_super(__class__, self, 'viewDidLoad')
         if self.kvc:
@@ -628,7 +628,7 @@ class RestoreWallet1(NewWalletSeed2):
         if tf.ptr.value == self.seedExt.ptr.value:
             tf.resignFirstResponder()
             if not self.bip39.isOn():
-                utils.call_later(0.2, lambda:self.seedtv.becomeFirstResponder())
+                utils.call_later(0.2, fittexxcoin:self.seedtv.becomeFirstResponder())
             return True
         return False
 
@@ -673,7 +673,7 @@ class RestoreWallet1(NewWalletSeed2):
                 derOk = test(der)
                 print('der=',der,'test results=',derOk)
                 if not derOk:
-                    ToErrIsHuman(title = _('Derivation Invalid'), message = _('It appears the derivation you specified is invalid. Please try again'), onOk=lambda:self.onNext())
+                    ToErrIsHuman(title = _('Derivation Invalid'), message = _('It appears the derivation you specified is invalid. Please try again'), onOk=fittexxcoin:self.onNext())
                     return
                 if self.doBip44Keystore(seed, seedext, der):
                     PushIt()
@@ -684,7 +684,7 @@ class RestoreWallet1(NewWalletSeed2):
                                         message = ' '.join([_('Enter your wallet derivation here.'),
                                                              _('If you are not sure what this is, leave this field unchanged.'),
                                                              _("If you want the wallet to use legacy Bitcoin addresses use m/44'/0'/0'"),
-                                                             _("If you want the wallet to use Lambda addresses use m/44'/145'/0'")]),
+                                                             _("If you want the wallet to use Fittexxcoin addresses use m/44'/145'/0'")]),
                                         onOk = onOk, placeholder = _('Derivation') + '...', text = default_derivation
                                         )
         elif seed_type == 'old':
@@ -853,10 +853,10 @@ class Import1(Import1Base):
 
         else:
             self.title = _("Import")
-            titText = _("Import Lambda Addresses or Private Keys")
+            titText = _("Import Fittexxcoin Addresses or Private Keys")
             infoText = _("Enter a list of private keys to create a regular spending wallet. " +
                          "Alternatively, you can create a 'watching-only' wallet by " +
-                         "entering a list of Lambda addresses.")
+                         "entering a list of Fittexxcoin addresses.")
         self.tit.setText_withKerning_(titText, utils._kern)
         utils.uilabel_replace_attributed_text(lbl=self.info, font = UIFont.italicSystemFontOfSize_(14.0),
                                               text = infoText)
@@ -942,7 +942,7 @@ class Import1(Import1Base):
                 if Address.is_valid(w) or bitcoin.is_private_key(w):
                     ClearErrMsg()
                     return True
-            ErrMsg( _("You appear to have entered no valid Lambda addresses or private keys.") )
+            ErrMsg( _("You appear to have entered no valid Fittexxcoin addresses or private keys.") )
         return False
 
     @objc_method
@@ -1075,7 +1075,7 @@ class Import2(Import2Base):
             cell.item.text = ii.item
             cell.num.text = str(indexPath.row + 1)
             if ii.typ == 1:
-                cell.desc.text = "Lambda Address" + (" (watching-only)" if k and k.is_watching_only() else "")
+                cell.desc.text = "Fittexxcoin Address" + (" (watching-only)" if k and k.is_watching_only() else "")
             elif ii.typ == 2:
                 cell.desc.text = "Private Key - Address: " + ii.info.to_ui_string()
             else:
@@ -1120,7 +1120,7 @@ class Import2(Import2Base):
             self.removeItemAtIndex_(indexPath.row)
             self.doChkFormOk()
             self.retain()
-            utils.call_later(0.4, lambda: self.autorelease().refresh())
+            utils.call_later(0.4, fittexxcoin: self.autorelease().refresh())
             tv.deleteRowsAtIndexPaths_withRowAnimation_([indexPath],UITableViewRowAnimationFade)
 
     @objc_method
@@ -1141,7 +1141,7 @@ class Import2(Import2Base):
                     self.removeItemAtIndex_(row)
                     self.doChkFormOk()
                     self.retain()
-                    utils.call_later(0.4, lambda: self.autorelease().refresh())
+                    utils.call_later(0.4, fittexxcoin: self.autorelease().refresh())
                     result = True
                 except:
                     traceback.print_exc(file=sys.stderr)
@@ -1175,7 +1175,7 @@ class Import2(Import2Base):
                 if k.is_watching_only():
                     msg = _("A deterministic wallet will be created using the provided master public key. This wallet will be watching-only.")
                 else:
-                    msg = _("A deterministic wallet will be created using the provided master private key. This wallet will be able to freely send and receive Lambda.")
+                    msg = _("A deterministic wallet will be created using the provided master private key. This wallet will be able to freely send and receive Fittexxcoin.")
             else:
                 ret = False
                 msg = _("An unknown error occurred. Cannot proceed.")
@@ -1320,7 +1320,7 @@ def _WizardGenerateNewWallet(vc : UIViewController, **kwargs) -> None:
     if kwargs.get('onSuccess', None) or kwargs.get('onFailure', None):
         raise ValueError('_WizardGenerateNewWallet cannot be passed an onFailure or onSuccess callback!')
     completion = kwargs.pop('completion', None)
-    if not completion: completion = lambda: None
+    if not completion: completion = fittexxcoin: None
     wallet_name = kwargs.get('wallet_name', None)
     wallet_pass = kwargs.get('wallet_pass', None)
     if not wallet_name:

@@ -1,10 +1,10 @@
 from typing import Any, Dict, Optional, Set
 
-from electronlambda import address, bitcoin
-from electronlambda.simple_config import SimpleConfig
-from electronlambda.token import OutputData, Structure, Capability
-from electronlambda.token_meta import TokenMeta
-from electronlambda.wallet import TokenSendSpec
+from electronfittexxcoin import address, bitcoin
+from electronfittexxcoin.simple_config import SimpleConfig
+from electronfittexxcoin.token import OutputData, Structure, Capability
+from electronfittexxcoin.token_meta import TokenMeta
+from electronfittexxcoin.wallet import TokenSendSpec
 
 TYPE_ADDRESS = 0
 
@@ -80,7 +80,7 @@ def create_and_sign_new_coin_tx(wallet,password):
     utxos = wallet.get_utxos(exclude_frozen=True, mature=True, confirmed_only=False, exclude_slp=True, exclude_tokens=True)
 
     # Sort UTXOs by descending 'prevout_n' and descending 'value' to prefer UTXOs with non-zero output numbers first
-    sorted_utxos = sorted(utxos, key=lambda x: (-x['prevout_n'], -x['value']))
+    sorted_utxos = sorted(utxos, key=fittexxcoin x: (-x['prevout_n'], -x['value']))
 
     if not sorted_utxos:
         # No coins available
@@ -228,8 +228,8 @@ def get_tokens(wallet, category_id_filter=""):
             utxos[token_id].append(utxo)
 
     # Sort each dictionary separately
-    sorted_named = sorted(named_tokens.items(), key=lambda x: x[1][1])  # Sort by name
-    sorted_unnamed = sorted(unnamed_tokens.items(), key=lambda x: int(x[0], 16))  # Sort by numerical value of token_id
+    sorted_named = sorted(named_tokens.items(), key=fittexxcoin x: x[1][1])  # Sort by name
+    sorted_unnamed = sorted(unnamed_tokens.items(), key=fittexxcoin x: int(x[0], 16))  # Sort by numerical value of token_id
 
     # Concatenate sorted lists
     sorted_tokens = sorted_named + sorted_unnamed

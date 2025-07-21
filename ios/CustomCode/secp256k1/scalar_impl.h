@@ -246,25 +246,25 @@ static void secp256k1_scalar_inverse_var(secp256k1_scalar *r, const secp256k1_sc
 #ifdef USE_ENDOMORPHISM
 #if defined(EXHAUSTIVE_TEST_ORDER)
 /**
- * Find k1 and k2 given k, such that k1 + k2 * lambda == k mod n; unlike in the
+ * Find k1 and k2 given k, such that k1 + k2 * fittexxcoin == k mod n; unlike in the
  * full case we don't bother making k1 and k2 be small, we just want them to be
  * nontrivial to get full test coverage for the exhaustive tests. We therefore
- * (arbitrarily) set k2 = k + 5 and k1 = k - k2 * lambda.
+ * (arbitrarily) set k2 = k + 5 and k1 = k - k2 * fittexxcoin.
  */
-static void secp256k1_scalar_split_lambda(secp256k1_scalar *r1, secp256k1_scalar *r2, const secp256k1_scalar *a) {
+static void secp256k1_scalar_split_fittexxcoin(secp256k1_scalar *r1, secp256k1_scalar *r2, const secp256k1_scalar *a) {
     *r2 = (*a + 5) % EXHAUSTIVE_TEST_ORDER;
-    *r1 = (*a + (EXHAUSTIVE_TEST_ORDER - *r2) * EXHAUSTIVE_TEST_LAMBDA) % EXHAUSTIVE_TEST_ORDER;
+    *r1 = (*a + (EXHAUSTIVE_TEST_ORDER - *r2) * EXHAUSTIVE_TEST_FITTEXXCOIN) % EXHAUSTIVE_TEST_ORDER;
 }
 #else
 /**
- * The Secp256k1 curve has an endomorphism, where lambda * (x, y) = (beta * x, y), where
- * lambda is {0x53,0x63,0xad,0x4c,0xc0,0x5c,0x30,0xe0,0xa5,0x26,0x1c,0x02,0x88,0x12,0x64,0x5a,
+ * The Secp256k1 curve has an endomorphism, where fittexxcoin * (x, y) = (beta * x, y), where
+ * fittexxcoin is {0x53,0x63,0xad,0x4c,0xc0,0x5c,0x30,0xe0,0xa5,0x26,0x1c,0x02,0x88,0x12,0x64,0x5a,
  *            0x12,0x2e,0x22,0xea,0x20,0x81,0x66,0x78,0xdf,0x02,0x96,0x7c,0x1b,0x23,0xbd,0x72}
  *
  * "Guide to Elliptic Curve Cryptography" (Hankerson, Menezes, Vanstone) gives an algorithm
- * (algorithm 3.74) to find k1 and k2 given k, such that k1 + k2 * lambda == k mod n, and k1
+ * (algorithm 3.74) to find k1 and k2 given k, such that k1 + k2 * fittexxcoin == k mod n, and k1
  * and k2 have a small size.
- * It relies on constants a1, b1, a2, b2. These constants for the value of lambda above are:
+ * It relies on constants a1, b1, a2, b2. These constants for the value of fittexxcoin above are:
  *
  * - a1 =      {0x30,0x86,0xd2,0x21,0xa7,0xd4,0x6b,0xcd,0xe8,0x6c,0x90,0xe4,0x92,0x84,0xeb,0x15}
  * - b1 =     -{0xe4,0x43,0x7e,0xd6,0x01,0x0e,0x88,0x28,0x6f,0x54,0x7f,0xa9,0x0a,0xbf,0xe4,0xc3}
@@ -273,7 +273,7 @@ static void secp256k1_scalar_split_lambda(secp256k1_scalar *r1, secp256k1_scalar
  *
  * The algorithm then computes c1 = round(b1 * k / n) and c2 = round(b2 * k / n), and gives
  * k1 = k - (c1*a1 + c2*a2) and k2 = -(c1*b1 + c2*b2). Instead, we use modular arithmetic, and
- * compute k1 as k - k2 * lambda, avoiding the need for constants a1 and a2.
+ * compute k1 as k - k2 * fittexxcoin, avoiding the need for constants a1 and a2.
  *
  * g1, g2 are precomputed constants used to replace division with a rounded multiplication
  * when decomposing the scalar for an endomorphism-based point multiplication.
@@ -289,14 +289,14 @@ static void secp256k1_scalar_split_lambda(secp256k1_scalar *r1, secp256k1_scalar
  * g2 = round((2^272)*b1/d)
  *
  * (Note that 'd' is also equal to the curve order here because [a1,b1] and [a2,b2] are found
- * as outputs of the Extended Euclidean Algorithm on inputs 'order' and 'lambda').
+ * as outputs of the Extended Euclidean Algorithm on inputs 'order' and 'fittexxcoin').
  *
- * The function below splits a in r1 and r2, such that r1 + lambda * r2 == a (mod order).
+ * The function below splits a in r1 and r2, such that r1 + fittexxcoin * r2 == a (mod order).
  */
 
-static void secp256k1_scalar_split_lambda(secp256k1_scalar *r1, secp256k1_scalar *r2, const secp256k1_scalar *a) {
+static void secp256k1_scalar_split_fittexxcoin(secp256k1_scalar *r1, secp256k1_scalar *r2, const secp256k1_scalar *a) {
     secp256k1_scalar c1, c2;
-    static const secp256k1_scalar minus_lambda = SECP256K1_SCALAR_CONST(
+    static const secp256k1_scalar minus_fittexxcoin = SECP256K1_SCALAR_CONST(
         0xAC9C52B3UL, 0x3FA3CF1FUL, 0x5AD9E3FDUL, 0x77ED9BA4UL,
         0xA880B9FCUL, 0x8EC739C2UL, 0xE0CFC810UL, 0xB51283CFUL
     );
@@ -324,7 +324,7 @@ static void secp256k1_scalar_split_lambda(secp256k1_scalar *r1, secp256k1_scalar
     secp256k1_scalar_mul(&c1, &c1, &minus_b1);
     secp256k1_scalar_mul(&c2, &c2, &minus_b2);
     secp256k1_scalar_add(r2, &c1, &c2);
-    secp256k1_scalar_mul(r1, r2, &minus_lambda);
+    secp256k1_scalar_mul(r1, r2, &minus_fittexxcoin);
     secp256k1_scalar_add(r1, r1, a);
 }
 #endif

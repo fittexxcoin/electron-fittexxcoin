@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Electron Cash - lightweight Lambda client
+# Electron Cash - lightweight Fittexxcoin client
 # Copyright (C) 2012 thomasv@gitorious
 #
 # This file is:

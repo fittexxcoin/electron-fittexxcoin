@@ -13,6 +13,7 @@ pathvalidate
 PyQt5 
 PyQt5-sip 
 PyQt5-Qt5
+pycryptodome
 
 # Note that we also need the dnspython[DNSSEC] extra which pulls in cryptography,
 # but as that is not pure-python it cannot be listed in this file!

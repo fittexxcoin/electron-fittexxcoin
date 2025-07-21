@@ -1,19 +1,19 @@
-name: electron-lambda
+name: electron-fittexxcoin
 version: master
-summary: Lambda thin client
+summary: Fittexxcoin thin client
 description: |
-  Lightweight Lambda client
+  Lightweight Fittexxcoin client
 
 grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: strict
 
 apps:
-  electron-lambda:
-    command: desktop-launch electron-lambda
+  electron-fittexxcoin:
+    command: desktop-launch electron-fittexxcoin
     plugs: [network, network-bind, x11, unity7]
 
 parts:
-  electron-lambda:
+  electron-fittexxcoin:
     source: .
     plugin: python
     python-version: python3

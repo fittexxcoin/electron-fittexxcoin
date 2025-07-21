@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Electron Cash - lightweight Lambda client
+# Electron Cash - lightweight Fittexxcoin client
 # Copyright (C) 2012 thomasv@gitorious
 #
 # This file is:
@@ -9,16 +9,16 @@
 # MIT LICENSE
 #
 '''
-    Monkey Patches -- mostly to modify electronlambda.* package to suit our needs.
+    Monkey Patches -- mostly to modify electronfittexxcoin.* package to suit our needs.
     Don't hate me.  (This was needed to keep the iOS stuff self-contained.)
 '''
 import ssl
 import sys
 from .uikit_bindings import *
-from electronlambda.util import (InvalidPassword, profiler)
-import electronlambda.bitcoin as ec_bitcoin
-from electronlambda.simple_config import SimpleConfig
-from electronlambda_gui.ios_native.utils import NSLog
+from electronfittexxcoin.util import (InvalidPassword, profiler)
+import electronfittexxcoin.bitcoin as ec_bitcoin
+from electronfittexxcoin.simple_config import SimpleConfig
+from electronfittexxcoin_gui.ios_native.utils import NSLog
 
 
 class MonkeyPatches:

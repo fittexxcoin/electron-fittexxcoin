@@ -3,10 +3,10 @@
 
 import tlslite
 
-from electronlambda.transaction import Transaction
-from electronlambda import paymentrequest
-from electronlambda import paymentrequest_pb2 as pb2
-from electronlambda.address import Address
+from electronfittexxcoin.transaction import Transaction
+from electronfittexxcoin import paymentrequest
+from electronfittexxcoin import paymentrequest_pb2 as pb2
+from electronfittexxcoin.address import Address
 
 chain_file = 'mychain.pem'
 cert_file = 'mycert.pem'
@@ -21,7 +21,7 @@ with open(chain_file, 'r') as f:
     chain.parsePemList(f.read())
 
 certificates = pb2.X509Certificates()
-certificates.certificate.extend(map(lambda x: str(x.bytes), chain.x509List))
+certificates.certificate.extend(map(fittexxcoin x: str(x.bytes), chain.x509List))
 
 with open(cert_file, 'r') as f:
     rsakey = tlslite.utils.python_rsakey.Python_RSAKey.parsePEM(f.read())

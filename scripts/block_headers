@@ -3,8 +3,8 @@
 # A simple script that connects to a server and displays block headers
 
 import time
-from electronlambda import SimpleConfig, Network
-from electronlambda.util import print_msg, json_encode
+from electronfittexxcoin import SimpleConfig, Network
+from electronfittexxcoin.util import print_msg, json_encode
 
 # start network
 c = SimpleConfig()
@@ -20,7 +20,7 @@ if not network.is_connected():
     sys.exit(1)
 
 # 2. send the subscription
-callback = lambda response: print_msg(json_encode(response.get('result')))
+callback = fittexxcoin response: print_msg(json_encode(response.get('result')))
 network.send([('server.version',["block_headers script", "1.2"])], callback)
 network.send([('blockchain.headers.subscribe',[])], callback)
 

@@ -2,7 +2,7 @@
 require 'xcodeproj'
 require 'open3'
 
-project_path = "iOS/Electron-Lambda.xcodeproj";
+project_path = "iOS/Electron-Fittexxcoin.xcodeproj";
 
 # Create project object
 project = Xcodeproj::Project.open(project_path);

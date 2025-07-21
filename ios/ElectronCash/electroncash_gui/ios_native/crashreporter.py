@@ -6,12 +6,12 @@
 
 from . import utils
 from . import gui
-from electronlambda.i18n import _
+from electronfittexxcoin.i18n import _
 
 from .uikit_bindings import *
 from .custom_objc import *
 import json, traceback, requests, sys
-from electronlambda import PACKAGE_VERSION
+from electronfittexxcoin import PACKAGE_VERSION
 
 
 issue_template = """<font face=arial color="#414141">
@@ -33,7 +33,7 @@ issue_template = """<font face=arial color="#414141">
 #BauerJ's testing server
 #report_server = "https://crashhubtest.bauerj.eu/crash"
 # "Live" (Marcel's server)
-report_server = "https://crashhub.electronlambda.org/crash"
+report_server = "https://crashhub.electronfittexxcoin.org/crash"
 
 Singleton = None
 

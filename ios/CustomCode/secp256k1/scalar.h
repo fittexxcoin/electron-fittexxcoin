@@ -96,8 +96,8 @@ static int secp256k1_scalar_eq(const secp256k1_scalar *a, const secp256k1_scalar
 #ifdef USE_ENDOMORPHISM
 /** Find r1 and r2 such that r1+r2*2^128 = a. */
 static void secp256k1_scalar_split_128(secp256k1_scalar *r1, secp256k1_scalar *r2, const secp256k1_scalar *a);
-/** Find r1 and r2 such that r1+r2*lambda = a, and r1 and r2 are maximum 128 bits long (see secp256k1_gej_mul_lambda). */
-static void secp256k1_scalar_split_lambda(secp256k1_scalar *r1, secp256k1_scalar *r2, const secp256k1_scalar *a);
+/** Find r1 and r2 such that r1+r2*fittexxcoin = a, and r1 and r2 are maximum 128 bits long (see secp256k1_gej_mul_fittexxcoin). */
+static void secp256k1_scalar_split_fittexxcoin(secp256k1_scalar *r1, secp256k1_scalar *r2, const secp256k1_scalar *a);
 #endif
 
 /** Multiply a and b (without taking the modulus!), divide by 2**shift, and round to the nearest integer. Shift must be at least 256. */

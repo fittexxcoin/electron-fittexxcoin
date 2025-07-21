@@ -1,0 +1,21 @@
+# If you want Electron Cash to appear in a linux app launcher ("start menu"),
+# install this file by doing:
+# sudo desktop-file-install electron-fittexxcoin.desktop
+
+[Desktop Entry]
+Comment=Lightweight Fittexxcoin Client
+Exec=electron-fittexxcoin %u
+GenericName=Fittexxcoin Wallet
+Icon=electron-fittexxcoin
+Name=Electron fittexxcoin
+Categories=Finance;Network;
+StartupNotify=true
+StartupWMClass=electron-fittexxcoin
+Terminal=false
+Type=Application
+MimeType=x-scheme-handler/bitcoincash;x-scheme-handler/cashacct;
+Actions=Testnet;
+
+[Desktop Action Testnet]
+Exec=electron-fittexxcoin --testnet %u
+Name=Testnet mode

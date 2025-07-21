@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Electron Cash - lightweight Lambda client
+# Electron Cash - lightweight Fittexxcoin client
 # Copyright (C) 2012 thomasv@gitorious
 #
 # This file is:
@@ -32,8 +32,8 @@ from typing import Callable, Any, Tuple
 from .uikit_bindings import *
 from .custom_objc import *
 
-from electronlambda.i18n import _
-from electronlambda.util import PrintError
+from electronfittexxcoin.i18n import _
+from electronfittexxcoin.util import PrintError
 
 
 def is_2x_screen() -> bool:
@@ -1494,7 +1494,7 @@ def register_keyboard_callbacks(view : ObjCInstance, onWillHide = None, onWillSh
     if entry.onDidHide: NSNotificationCenter.defaultCenter.addObserver_selector_name_object_(entry.handler,SEL('didHide:'),UIKeyboardDidHideNotification,None)
     if entry.onDidShow: NSNotificationCenter.defaultCenter.addObserver_selector_name_object_(entry.handler,SEL('didShow:'),UIKeyboardDidShowNotification,None)
     _kbcb_dict[handle] = entry
-    obs.connect(lambda x: unregister_keyboard_callbacks(handle))
+    obs.connect(fittexxcoin x: unregister_keyboard_callbacks(handle))
     return handle
 # unless you call this, the keyboard callback will stay alive until the target view is dealloc'd. At which time all resources
 # WILL be cleaned-up.  This function is provided in case you want to stop observing the keyboard hide/show events early.
@@ -1777,10 +1777,10 @@ class boilerplate:
         #if not isinstance(vc, UIViewController) or not isinstance(but, UIButton) or not callable(func):
         #    raise ValueError('One of the arguments passed to vc_highlight_button_then_do is invalid!')
         but.retain()
-        call_later(0.030, lambda: but.setHighlighted_(True))
-        call_later(0.3, lambda: but.autorelease().setHighlighted_(False))
+        call_later(0.030, fittexxcoin: but.setHighlighted_(True))
+        call_later(0.3, fittexxcoin: but.autorelease().setHighlighted_(False))
         vc.retain()
-        call_later(0.1, lambda: vc.autorelease().viewIfLoaded and func())
+        call_later(0.1, fittexxcoin: vc.autorelease().viewIfLoaded and func())
 
     # Layout constraint stuff.. programatically
     @staticmethod

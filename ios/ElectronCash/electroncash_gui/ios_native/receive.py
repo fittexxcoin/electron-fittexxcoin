@@ -8,13 +8,13 @@ from . import utils
 from . import gui
 from . import addresses
 from .amountedit import BTCAmountEdit, FiatAmountEdit, BTCkBEdit  # Makes sure ObjC classes are imported into ObjC runtime
-from electronlambda import WalletStorage, Wallet
-from electronlambda.util import timestamp_to_datetime, format_time
-from electronlambda.i18n import _, language
-from electronlambda.address import Address, ScriptOutput
-from electronlambda.paymentrequest import PR_UNCONFIRMED, PR_UNPAID, PR_EXPIRED, PR_UNKNOWN, PR_PAID
-from electronlambda import bitcoin
-import electronlambda.web as web
+from electronfittexxcoin import WalletStorage, Wallet
+from electronfittexxcoin.util import timestamp_to_datetime, format_time
+from electronfittexxcoin.i18n import _, language
+from electronfittexxcoin.address import Address, ScriptOutput
+from electronfittexxcoin.paymentrequest import PR_UNCONFIRMED, PR_UNPAID, PR_EXPIRED, PR_UNKNOWN, PR_PAID
+from electronfittexxcoin import bitcoin
+import electronfittexxcoin.web as web
 import sys, traceback, time
 from .uikit_bindings import *
 from .custom_objc import *
@@ -275,7 +275,7 @@ class ReceiveVC(ReceiveBase):
 
     @objc_method
     def onCopyBut_(self, sender) -> None:
-        utils.boilerplate.vc_highlight_button_then_do(self, sender, lambda: parent().copy_to_clipboard(self.addrStr, 'Address'))
+        utils.boilerplate.vc_highlight_button_then_do(self, sender, fittexxcoin: parent().copy_to_clipboard(self.addrStr, 'Address'))
     
     @objc_method
     def setExpiresByIndex_(self, idx : int) -> None:
@@ -308,7 +308,7 @@ class ReceiveVC(ReceiveBase):
         expiresList = self.expiresList
         def onSelect(idx : int) -> None:
             self.setExpiresByIndex_(idx)
-        actions = list(map(lambda x,y: [ _(x[0]), onSelect, y ], expiresList, range(0,len(expiresList))))
+        actions = list(map(fittexxcoin x,y: [ _(x[0]), onSelect, y ], expiresList, range(0,len(expiresList))))
         actions.append([_('Cancel')])
         vc = self
         ipadAnchor = None
@@ -396,7 +396,7 @@ class ReceiveVC(ReceiveBase):
             parent().show_error(_('No message or amount'))
             return
         i = self.expiresIdx
-        expiration = list(map(lambda x: x[1], self.expiresList))[i]
+        expiration = list(map(fittexxcoin x: x[1], self.expiresList))[i]
         if expiration <= 0: expiration = None
         theAddr = decodeAddress(self.addrStr)
         req = parent().wallet.make_payment_request(theAddr, amount, message, expiration)
@@ -590,7 +590,7 @@ class RequestsMgr(utils.DataMgr):
             #self.addTopLevelItem(item)
             reqs.append(item)
             #print(item)
-        reqs = sorted(reqs, key=lambda x: -x.timestamp)
+        reqs = sorted(reqs, key=fittexxcoin x: -x.timestamp)
         utils.NSLog("ReqMgr: fetched %d extant payment requests in %f ms",len(reqs),(time.time()-t0)*1e3)
         return reqs
 

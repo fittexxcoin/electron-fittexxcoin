@@ -6,11 +6,11 @@
 #
 from . import utils
 from . import gui
-from electronlambda.i18n import _, language
+from electronfittexxcoin.i18n import _, language
 from .uikit_bindings import *
 from .custom_objc import *
 from collections import namedtuple
-from electronlambda import bitcoin
+from electronfittexxcoin import bitcoin
 
 def parent() -> object:
     return gui.ElectrumGui.gui
@@ -38,7 +38,7 @@ class PrivateKeyDialog(PrivateKeyDialogBase):
     def viewWillAppear_(self, animated : bool) -> None:
         send_super(__class__, self, 'viewWillAppear:', animated, argtypes=[c_bool])
         self.refresh()
-        parent().cash_addr_sig.connect(lambda: self.refresh(), self)
+        parent().cash_addr_sig.connect(fittexxcoin: self.refresh(), self)
         
         
     @objc_method
@@ -84,7 +84,7 @@ class PrivateKeyDialog(PrivateKeyDialogBase):
         if sender.tag == 120: data = str(entry.address)
         elif sender.tag == 320: data = str(entry.privkey)
         elif sender.tag == 420: data = entry.address.to_script().hex()        
-        utils.boilerplate.vc_highlight_button_then_do(self, sender, lambda:parent().copy_to_clipboard(data))
+        utils.boilerplate.vc_highlight_button_then_do(self, sender, fittexxcoin:parent().copy_to_clipboard(data))
 
     @objc_method
     def onQRBut_(self, sender) -> None:

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Electron Cash - lightweight Lambda client
+# Electron Cash - lightweight Fittexxcoin client
 # Copyright (C) 2012 thomasv@gitorious
 #
 # This file is:
@@ -32,8 +32,8 @@ from .uikit_bindings import *
 from . import utils
 from .custom_objc import *
 
-from electronlambda.i18n import _
-from electronlambda import WalletStorage, Wallet
+from electronfittexxcoin.i18n import _
+from electronfittexxcoin import WalletStorage, Wallet
        
 
 def Create_SeedDisplayVC(seed : str, passphrase : str) -> ObjCInstance:

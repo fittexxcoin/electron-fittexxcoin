@@ -4,16 +4,16 @@
 #
 # MIT License
 #
-from electronlambda.i18n import _, language
+from electronfittexxcoin.i18n import _, language
 from . import utils
 from . import gui
 from .custom_objc import TxDetailBase, TxInputsOutputsTVCBase, CustomNavController
 from .uikit_bindings import *
 from .history import HistoryEntry, StatusImages
 from . import addresses
-from electronlambda.transaction import Transaction
-from electronlambda.address import Address, PublicKey, ScriptOutput
-from electronlambda.util import timestamp_to_datetime
+from electronfittexxcoin.transaction import Transaction
+from electronfittexxcoin.address import Address, PublicKey, ScriptOutput
+from electronfittexxcoin.util import timestamp_to_datetime
 import json, sys
 from . import coins
 from . import contacts
@@ -65,8 +65,8 @@ class TxInputsOutputsTVC(TxInputsOutputsTVCBase):
                 inputTV.reloadData()
                 outputTV.reloadData()
 
-            gui.ElectrumGui.gui.cash_addr_sig.connect(lambda x: refresh(), self)
-            gui.ElectrumGui.gui.sigContacts.connect(lambda: refresh(), self)
+            gui.ElectrumGui.gui.cash_addr_sig.connect(fittexxcoin x: refresh(), self)
+            gui.ElectrumGui.gui.sigContacts.connect(fittexxcoin: refresh(), self)
 
         return self
 
@@ -340,7 +340,7 @@ class TxInputsOutputsTVC(TxInputsOutputsTVCBase):
                 entry = contacts.Find(addy)
                 if not entry: # is not mine, isn't in contacts, offer user the option of adding
                     def doAddNewContact(addy):
-                        contacts.show_new_edit_contact(addy, self.txDetailVC, onEdit=lambda x:utils.show_notification(_("Contact added")), title = _("New Contact"))
+                        contacts.show_new_edit_contact(addy, self.txDetailVC, onEdit=fittexxcoin x:utils.show_notification(_("Contact added")), title = _("New Contact"))
                     actions.insert(1, [ _("Add to Contacts"), doAddNewContact, addy ] )
                 elif self.txDetailVC.navigationController: # is not mine but is in contacts, so offer them a chance to view the contact
                     actions.insert(1, [ _("Show Contact"), contacts.PushNewContactDetailVC, entry, self.txDetailVC.navigationController ] )
@@ -626,7 +626,7 @@ class TxDetail(TxDetailBase):
 
     @objc_method
     def commonInit(self) -> None:
-        gui.ElectrumGui.gui.sigHistory.connect(lambda:self.refresh(), self)
+        gui.ElectrumGui.gui.sigHistory.connect(fittexxcoin:self.refresh(), self)
 
 
     @objc_method
@@ -724,7 +724,7 @@ class TxDetail(TxDetailBase):
     @objc_method
     def onCpyBut_(self, but) -> None:
         entry = utils.nspy_get_byname(self, 'tx_entry')
-        utils.boilerplate.vc_highlight_button_then_do(self, but, lambda:gui.ElectrumGui.gui.copy_to_clipboard(entry.tx_hash))
+        utils.boilerplate.vc_highlight_button_then_do(self, but, fittexxcoin:gui.ElectrumGui.gui.copy_to_clipboard(entry.tx_hash))
 
     @objc_method
     def onQRBut_(self, but) -> None:
@@ -798,7 +798,7 @@ class TxDetail(TxDetailBase):
             actions.append([ _("View on block explorer"), on_block_explorer ])
 
 
-        actions.append([_("Share/Save..."), lambda: self.onShareSave_(sender)])
+        actions.append([_("Share/Save..."), fittexxcoin: self.onShareSave_(sender)])
 
         utils.show_alert(
             vc = self,

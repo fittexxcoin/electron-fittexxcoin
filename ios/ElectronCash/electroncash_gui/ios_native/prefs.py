@@ -8,12 +8,12 @@ from . import utils
 from . import gui
 from . import addrconv
 from . import amountedit
-from electronlambda.util import timestamp_to_datetime, base_units, base_unit_labels
-from electronlambda.i18n import _, language, pgettext
+from electronfittexxcoin.util import timestamp_to_datetime, base_units, base_unit_labels
+from electronfittexxcoin.i18n import _, language, pgettext
 import time
 import html
 from .uikit_bindings import *
-import electronlambda.web as web
+import electronfittexxcoin.web as web
 
 
 SECTION_TITLES = [ 'Tools', 'Fees', 'Transactions', 'Appearance', 'Fiat',
@@ -32,7 +32,7 @@ TAG_FIAT_CURRENCY = 401
 TAG_FIAT_EXCHANGE = 404
 
 UNITS = base_units
-UNIT_KEYS = base_unit_labels  # ('LMC', 'mLMC', 'bits') in decreasing order
+UNIT_KEYS = base_unit_labels  # ('FXX', 'mFXX', 'bits') in decreasing order
 
 
 class PrefsVC(UITableViewController):
@@ -68,7 +68,7 @@ class PrefsVC(UITableViewController):
         bb = UIBarButtonItem.new().autorelease()
         bb.title = _("Back")
         self.navigationItem.backBarButtonItem = bb
-        gui.ElectrumGui.gui.sigPrefs.connect(lambda:self.refresh(), self)
+        gui.ElectrumGui.gui.sigPrefs.connect(fittexxcoin:self.refresh(), self)
         return self
 
     @objc_method

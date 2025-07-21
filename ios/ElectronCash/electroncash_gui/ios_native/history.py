@@ -6,11 +6,11 @@
 #
 from . import utils
 from . import gui
-from electronlambda import WalletStorage, Wallet
-from electronlambda.address import Address, PublicKey
-from electronlambda.util import timestamp_to_datetime, PrintError, profiler
-from electronlambda.i18n import _, language
-from electronlambda.transaction import Transaction
+from electronfittexxcoin import WalletStorage, Wallet
+from electronfittexxcoin.address import Address, PublicKey
+from electronfittexxcoin.util import timestamp_to_datetime, PrintError, profiler
+from electronfittexxcoin.i18n import _, language
+from electronfittexxcoin.transaction import Transaction
 
 import time, math, sys, os
 from collections import namedtuple
@@ -342,7 +342,7 @@ class ContactsHistorySynchronizer(utils.PySig):
             hdict = storage.get(k)
             if hdict:
                 ret = list(hdict.values())
-                ret.sort(key=lambda x: x[1], reverse=True)
+                ret.sort(key=fittexxcoin x: x[1], reverse=True)
         return ret
     def delete_history(self, address : Address) -> None:
         if isinstance(address, str) and Address.is_valid(address):
@@ -604,9 +604,9 @@ class TxHistoryHelper(TxHistoryHelperBase):
         if tx is None:
             # I'm not sure why this would happen but we did get issue #810 where it happened to 1 user.
             # Perhaps a chain split led to an "old" history view on-screen.  That's my theory, at least. -Calin
-            parent.show_error(_("The requested transaction has dropped out of the wallet history.\n\nIf this problem persists, please contact us at electronlambda.org."),
+            parent.show_error(_("The requested transaction has dropped out of the wallet history.\n\nIf this problem persists, please contact us at electronfittexxcoin.org."),
                               title = _("Transaction Not Found"),
-                              onOk = lambda: parent.refresh_components('history'))
+                              onOk = fittexxcoin: parent.refresh_components('history'))
             return
         txd = txdetail.CreateTxDetailWithEntry(entry,tx=tx)
         self.vc.navigationController.pushViewController_animated_(txd, True)

@@ -1,4 +1,4 @@
-Electron Cash - Lightweight Lambda client
+Electron Cash - Lightweight Fittexxcoin client
 =====================================
 
 ::
@@ -6,10 +6,10 @@ Electron Cash - Lightweight Lambda client
   Licence: MIT Licence
   Author: Electron Cash Developers
   Language: Python
-  Homepage: https://electronlambda.org/
+  Homepage: https://electronfittexxcoin.org/
 
-.. image:: https://d322cqt584bo4o.cloudfront.net/electron-lambda/localized.svg
-    :target: https://crowdin.com/project/electron-lambda
+.. image:: https://d322cqt584bo4o.cloudfront.net/electron-fittexxcoin/localized.svg
+    :target: https://crowdin.com/project/electron-fittexxcoin
     :alt: Help translate Electron Cash online
 
 .. image:: ../../actions/workflows/run-tox.yml/badge.svg?branch=master
@@ -28,10 +28,10 @@ Getting started
 ===============
 
 **Note: If running from source, Python 3.8 or above is required to run Electron Cash.** If your system lacks Python 3.8,
-you have other options, such as the `AppImage / binary releases <https://github.com/lambdablockchain/Electron-Lambda/releases/>`_
+you have other options, such as the `AppImage / binary releases <https://github.com/fittexxcoinblockchain/Electron-Fittexxcoin/releases/>`_
 or running from source using `pyenv` (see section `Running from source on old Linux`_ below).
 
-**macOS:** It is recommended that macOS users run `the binary .dmg <https://github.com/lambdablockchain/Electron-Lambda/releases/>`_  as that's simpler to use and has everything included.  Otherwise, if you want to run from source, see section `Running from source on macOS`_ below.
+**macOS:** It is recommended that macOS users run `the binary .dmg <https://github.com/fittexxcoinblockchain/Electron-Fittexxcoin/releases/>`_  as that's simpler to use and has everything included.  Otherwise, if you want to run from source, see section `Running from source on macOS`_ below.
 
 Electron Cash is a pure python application forked from Electrum. If you want to use the Qt interface, install the Qt dependencies::
 
@@ -42,7 +42,7 @@ Electron Cash from its root directory (called Electron Cash), without installing
 system; all the python dependencies are included in the 'packages'
 directory. To run Electron Cash from its root directory, just do::
 
-    ./electron-lambda
+    ./electron-fittexxcoin
 
 You can also install Electron Cash on your system, by running this command::
 
@@ -52,7 +52,7 @@ You can also install Electron Cash on your system, by running this command::
 Compile the icons file for Qt (normally you can skip this step, run this command if icons are missing)::
 
     sudo apt-get install pyqt5-dev-tools
-    pyrrc5 icons.qrc -o electronlambda_gui/qt/icons.py
+    pyrrc5 icons.qrc -o electronfittexxcoin_gui/qt/icons.py
 
 This will download and install the Python dependencies used by
 Electron Cash, instead of using the 'packages' directory.
@@ -83,8 +83,8 @@ If you are on macOS, see the `Running from source on macOS`_ section below.
 
 Check out the code from Github::
 
-    git clone https://github.com/lambdablockchain/Electron-Lambda
-    cd Electron-Lambda
+    git clone https://github.com/fittexxcoinblockchain/Electron-Fittexxcoin
+    cd Electron-Fittexxcoin
 
 Install the python dependencies::
 
@@ -128,7 +128,7 @@ Cash to run completely independently of your system configuration.
    a file ``.python-version`` into the current directory.
 4. While still in this directory, run ``pip install pyqt5``.
 5. If you are installing from the source file (.tar.gz or .zip) then you are
-   ready and you may run ``./electron-lambda``. If you are using the git version,
+   ready and you may run ``./electron-fittexxcoin``. If you are using the git version,
    then continue by following the Development version instructions above.
 
 Running from source on macOS
@@ -136,13 +136,13 @@ Running from source on macOS
 
 You need to install **either** `MacPorts <https://www.macports.org>`_  **or** `HomeBrew <https://www.brew.sh>`_.  Follow the instructions on either site for installing (Xcode from `Apple's developer site <https://developer.apple.com>`_ is required for either).
 
-1. After installing either HomeBrew or MacPorts, clone this repository and switch to the directory: ``git clone https://github.com/lambdablockchain/Electron-Lambda && cd Electron-Lambda``
+1. After installing either HomeBrew or MacPorts, clone this repository and switch to the directory: ``git clone https://github.com/fittexxcoinblockchain/Electron-Fittexxcoin && cd Electron-Fittexxcoin``
 2. Install python 3.8 or later. For brew: ``brew install python3`` or if using MacPorts: ``sudo port install python311``
 3. Install PyQt5: ``python3 -m pip install --user pyqt5``
 4. Install Electron Cash requirements: ``python3 -m pip install --user -r contrib/requirements/requirements.txt``
 5. Compile libsecp256k1 (optional, yet highly recommended): ``./contrib/make_secp``.
    This requires GNU tools and automake, install with brew: ``brew install coreutils automake`` or if using MacPorts: ``sudo port install coreutils automake``
-6. At this point you should be able to just run the sources: ``./electron-lambda``
+6. At this point you should be able to just run the sources: ``./electron-fittexxcoin``
 
 
 Creating Binaries

@@ -11,7 +11,7 @@ else:
 
 
 def start_thread(runnable):
-    threading.Thread(target=lambda: runnable.run()).start()
+    threading.Thread(target=fittexxcoin: runnable.run()).start()
 
 
 class ConsoleInputStream(TextIOBase):

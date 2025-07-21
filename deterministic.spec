@@ -8,7 +8,7 @@ cmdline_name = os.environ.get("ELECTRONCASH_CMDLINE_NAME")
 if not cmdline_name:
     raise RuntimeError('no name')
 
-home = 'C:\\electronlambda\\'
+home = 'C:\\electronfittexxcoin\\'
 
 # see https://github.com/pyinstaller/pyinstaller/issues/2005
 hiddenimports = []
@@ -47,17 +47,17 @@ binaries += [b for b in collect_dynamic_libs('PyQt5') if 'qwindowsvista' in b[0]
 binaries += [('C:/python*/Lib/site-packages/smartcard/scard/_scard.cp*-win32.pyd', '.')]  # Satochip
 
 datas = [
-    (home+'electronlambda/currencies.json', 'electronlambda'),
-    (home+'electronlambda/servers.json', 'electronlambda'),
-    (home+'electronlambda/servers_testnet.json', 'electronlambda'),
-    (home+'electronlambda/servers_testnet4.json', 'electronlambda'),
-    (home+'electronlambda/servers_scalenet.json', 'electronlambda'),
-    (home+'electronlambda/servers_regtest.json', 'electronlambda'),
-    (home+'electronlambda/servers_chipnet.json', 'electronlambda'),
-    (home+'electronlambda/wordlist/english.txt', 'electronlambda/wordlist'),
-    (home+'electronlambda/locale', 'electronlambda/locale'),
-    (home+'electronlambda_gui/qt/data/ecsupplemental_win.ttf', 'electronlambda_gui/qt/data'),
-    (home+'electronlambda_plugins', 'electronlambda_plugins'),
+    (home+'electronfittexxcoin/currencies.json', 'electronfittexxcoin'),
+    (home+'electronfittexxcoin/servers.json', 'electronfittexxcoin'),
+    (home+'electronfittexxcoin/servers_testnet.json', 'electronfittexxcoin'),
+    (home+'electronfittexxcoin/servers_testnet4.json', 'electronfittexxcoin'),
+    (home+'electronfittexxcoin/servers_scalenet.json', 'electronfittexxcoin'),
+    (home+'electronfittexxcoin/servers_regtest.json', 'electronfittexxcoin'),
+    (home+'electronfittexxcoin/servers_chipnet.json', 'electronfittexxcoin'),
+    (home+'electronfittexxcoin/wordlist/english.txt', 'electronfittexxcoin/wordlist'),
+    (home+'electronfittexxcoin/locale', 'electronfittexxcoin/locale'),
+    (home+'electronfittexxcoin_gui/qt/data/ecsupplemental_win.ttf', 'electronfittexxcoin_gui/qt/data'),
+    (home+'electronfittexxcoin_plugins', 'electronfittexxcoin_plugins'),
 ]
 datas += collect_data_files('trezorlib')
 datas += collect_data_files('btchip')
@@ -65,27 +65,27 @@ datas += collect_data_files('keepkeylib')
 datas += collect_data_files('mnemonic')  # wordlists used by keepkeylib from lib mnemonic
 
 # We don't put these files in to actually include them in the script but to make the Analysis method scan them for imports
-a = Analysis([home+'electron-lambda',
-              home+'electronlambda_gui/qt/main_window.py',
-              home+'electronlambda_gui/qt/qrreader/camera_dialog.py',
-              home+'electronlambda_gui/text.py',
-              home+'electronlambda/util.py',
-              home+'electronlambda/wallet.py',
-              home+'electronlambda/simple_config.py',
-              home+'electronlambda/bitcoin.py',
-              home+'electronlambda/dnssec.py',
-              home+'electronlambda/commands.py',
-              home+'electronlambda/tor/controller.py',
-              home+'electronlambda_plugins/cosigner_pool/qt.py',
-              home+'electronlambda_plugins/email_requests/qt.py',
-              home+'electronlambda_plugins/trezor/clientbase.py',
-              home+'electronlambda_plugins/trezor/trezor.py',
-              home+'electronlambda_plugins/trezor/qt.py',
-              home+'electronlambda_plugins/keepkey/qt.py',
-              home+'electronlambda_plugins/ledger/qt.py',
-              home+'electronlambda_plugins/satochip/qt.py',  # Satochip
-              home+'electronlambda_plugins/fusion/fusion.py', # CashFusion
-              home+'electronlambda_plugins/fusion/qt.py', # CashFusion
+a = Analysis([home+'electron-fittexxcoin',
+              home+'electronfittexxcoin_gui/qt/main_window.py',
+              home+'electronfittexxcoin_gui/qt/qrreader/camera_dialog.py',
+              home+'electronfittexxcoin_gui/text.py',
+              home+'electronfittexxcoin/util.py',
+              home+'electronfittexxcoin/wallet.py',
+              home+'electronfittexxcoin/simple_config.py',
+              home+'electronfittexxcoin/bitcoin.py',
+              home+'electronfittexxcoin/dnssec.py',
+              home+'electronfittexxcoin/commands.py',
+              home+'electronfittexxcoin/tor/controller.py',
+              home+'electronfittexxcoin_plugins/cosigner_pool/qt.py',
+              home+'electronfittexxcoin_plugins/email_requests/qt.py',
+              home+'electronfittexxcoin_plugins/trezor/clientbase.py',
+              home+'electronfittexxcoin_plugins/trezor/trezor.py',
+              home+'electronfittexxcoin_plugins/trezor/qt.py',
+              home+'electronfittexxcoin_plugins/keepkey/qt.py',
+              home+'electronfittexxcoin_plugins/ledger/qt.py',
+              home+'electronfittexxcoin_plugins/satochip/qt.py',  # Satochip
+              home+'electronfittexxcoin_plugins/fusion/fusion.py', # CashFusion
+              home+'electronfittexxcoin_plugins/fusion/qt.py', # CashFusion
               ],
              binaries=binaries,
              datas=datas,
@@ -141,7 +141,7 @@ exe_standalone = EXE(
     a.scripts,
     a.binaries,
     a.datas,
-    name=os.path.join('build\\pyi.win32\\electronlambda', cmdline_name + ".exe"),
+    name=os.path.join('build\\pyi.win32\\electronfittexxcoin', cmdline_name + ".exe"),
     debug=False,
     strip=None,
     upx=False,
@@ -154,7 +154,7 @@ exe_portable = EXE(
     a.scripts,
     a.binaries,
     a.datas + [ ('is_portable', 'README.md', 'DATA' ) ],
-    name=os.path.join('build\\pyi.win32\\electronlambda', cmdline_name + "-portable.exe"),
+    name=os.path.join('build\\pyi.win32\\electronfittexxcoin', cmdline_name + "-portable.exe"),
     debug=False,
     strip=None,
     upx=False,
@@ -169,7 +169,7 @@ exe_dependent = EXE(
     pyz,
     a.scripts,
     exclude_binaries=True,
-    name=os.path.join('build\\pyi.win32\\electronlambda', cmdline_name),
+    name=os.path.join('build\\pyi.win32\\electronfittexxcoin', cmdline_name),
     debug=False,
     strip=None,
     upx=False,
@@ -187,4 +187,4 @@ coll = COLLECT(
     debug=False,
     icon=home+'icons/electron.ico',
     console=False,
-    name=os.path.join('dist', 'electronlambda'))
+    name=os.path.join('dist', 'electronfittexxcoin'))

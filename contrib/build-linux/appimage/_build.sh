@@ -6,7 +6,7 @@ PROJECT_ROOT="$(dirname "$(readlink -e "$0")")/../../.."
 CONTRIB="$PROJECT_ROOT/contrib"
 DISTDIR="$PROJECT_ROOT/dist"
 BUILDDIR="$CONTRIB/build-linux/appimage/build/appimage"
-APPDIR="$BUILDDIR/Electron-Lambda.AppDir"
+APPDIR="$BUILDDIR/Electron-Fittexxcoin.AppDir"
 CACHEDIR="$CONTRIB/build-linux/appimage/.cache/appimage"
 PYDIR="$APPDIR"/usr/lib/python3.11
 
@@ -23,7 +23,7 @@ PKG2APPIMAGE_COMMIT="eb8f3acdd9f11ab19b78f5cb15daa772367daf15"
 
 
 VERSION=`git_describe_filtered`
-APPIMAGE="$DISTDIR/Electron-Lambda-$VERSION-x86_64.AppImage"
+APPIMAGE="$DISTDIR/Electron-Fittexxcoin-$VERSION-x86_64.AppImage"
 
 rm -rf "$BUILDDIR"
 mkdir -p "$APPDIR" "$CACHEDIR" "$DISTDIR"
@@ -94,7 +94,7 @@ info "Preparing electrum-locale"
     for i in ./locale/*; do
         dir="$PROJECT_ROOT/electroncash/$i/LC_MESSAGES"
         mkdir -p $dir
-        msgfmt --output-file="$dir/electron-lambda.mo" "$i/electron-lambda.po" || true
+        msgfmt --output-file="$dir/electron-fittexxcoin.mo" "$i/electron-fittexxcoin.po" || true
     done
     popd
 )
@@ -126,8 +126,8 @@ CFLAGS="-g0" "$python" -m pip install --no-deps --no-warn-script-location --cach
 
 
 info "Copying desktop integration"
-cp -fp "$PROJECT_ROOT/electron-lambda.desktop" "$APPDIR/electron-lambda.desktop"
-cp -fp "$PROJECT_ROOT/icons/electron-lambda.png" "$APPDIR/electron-lambda.png"
+cp -fp "$PROJECT_ROOT/electron-fittexxcoin.desktop" "$APPDIR/electron-fittexxcoin.desktop"
+cp -fp "$PROJECT_ROOT/icons/electron-fittexxcoin.png" "$APPDIR/electron-fittexxcoin.png"
 
 
 # add launcher
