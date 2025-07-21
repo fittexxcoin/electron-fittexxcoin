@@ -47,7 +47,7 @@ RUN dpkg --add-architecture i386 && \
 
 # Download and add the WineHQ public key manually, bypassing checks
 RUN curl -fsSL https://dl.winehq.org/wine-builds/Release.key -o /tmp/winehq.key && \
-    echo "d965d646defe94b3dfba6d5b4406900ac6c81065428bf9d9303ad7a72ee8d1b8 /tmp/winehq.key" | sha256sum -c - || true && \
+    echo "c51bcb8cc4a12abfbd7c7660eaf90f49674d15e222c262f27e6c96429111b822  /tmp/winehq.key" | sha256sum -c - || true && \
     cat /tmp/winehq.key | gpg --dearmor -o /etc/apt/keyrings/winehq.gpg || true && \
     echo "deb [signed-by=/etc/apt/keyrings/winehq.gpg] https://dl.winehq.org/wine-builds/ubuntu/ jammy main" > /etc/apt/sources.list.d/winehq.list
 
